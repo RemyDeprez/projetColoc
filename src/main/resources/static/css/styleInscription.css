@@ -1,0 +1,35 @@
+
+
+.departement{
+	margin-top: 15px;
+}
+
+.jeSuis{
+margin-top : 15px;
+margin-bottom: -2px;
+}
+
+.button {
+    background-color: #f06347;
+    width: 500px;
+  
+   display:inline-block;
+   border : none;
+    line-height: 60px;
+    border-radius: 8px;
+}
+
+body:after {
+background: url("friendss.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+  content: "";
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;   
+}
+

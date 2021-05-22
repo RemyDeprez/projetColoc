@@ -1,0 +1,121 @@
+/*search box css start here*/
+
+nav {
+    width : 100%;
+    margin : 0 auto;
+    padding : 10px;
+    background-color: #f06347;
+}
+
+nav button {
+
+text-decoration: none;
+color : black;
+background-color: #f06347;
+border : none;
+
+
+}
+
+nav button:hover{
+    color : #fca08e;
+
+}
+
+nav button:focus{
+    border-style: none;
+}
+
+nav ul li {
+align-items: center;
+display : inline;
+width: 25%;   
+list-style-type: none;
+margin: 100px;
+}
+
+
+
+.background{
+    background-color : #f06347;
+}
+
+.button {
+    background-color: #f06347;
+    width: 500px;
+    margin:0 20px;
+   display:inline-block;
+   border : none;
+    line-height: 60px;
+    border-radius: 8px;
+}
+
+.image-heigth{
+    height: 100%;
+    width:100%;
+}
+
+.row{
+  text-align:center;
+
+  /*the same margin which is every button have, it is for small screen, and if you have many buttons.*/
+  margin-left:-20px;
+  margin-right:-20px;
+
+}
+
+
+.search-sec{
+    padding: 2rem;
+
+
+}
+
+@media (min-width: 992px){
+    .search-sec{
+        position: relative;
+       
+        background: rgba(26, 70, 104, 0.51);
+          text-align:center;
+    }
+}
+
+@media (max-width: 992px){
+    .search-sec{
+        background: #1A4668;
+    }
+}
+
+.search-slt{
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}
+
+.textPresentation{
+    color :red;
+    float: left;
+       position: absolute;
+       right: 25%;
+       top: 25%;
+       z-index: 1000;
+        padding: 5px;
+        opacity: 0.5;
+}
+
+
+.wrn-btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    height: calc(3rem + 2px) !important;
+    border-radius:0;
+}

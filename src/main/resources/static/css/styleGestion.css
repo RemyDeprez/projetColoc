@@ -1,0 +1,35 @@
+.tabColoc{
+	background :#fad9d2;
+	width: 90%;
+	margin-left : 5%;
+	margin-top: 5%;
+
+	border-radius: 5%;
+	padding: 5%;
+}
+
+.infos{
+	background-color: #db9c8f;
+	margin: 1%;
+
+	display: inline-flex;
+	border : solid;
+	width: 100%;
+	text-align: : center;
+}
+
+.buttonStyle{
+height: 75px;
+width: 500px;
+display: inline;
+margin-left: 5%;
+}
+
+.image{
+width:100%;
+
+}
+
+h1{
+	text-align: center;
+}
