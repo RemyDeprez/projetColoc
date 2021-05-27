@@ -23,4 +23,5 @@ public class NavigationController {
 		return "gestionColoc";
 	}
 
+
 }

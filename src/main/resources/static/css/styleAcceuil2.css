@@ -1,28 +1,40 @@
 /*search box css start here*/
-
-.navbar-default .navbar-brand{
-        background-color:#f06347;
-        font-size:30px;
-        font-weight:bold;
-    }
-    
-    @media (min-width: 992px){
-    .aDroite{
-        margin-left : 55em;
-     
-    }
-    
-    .aDroite:hover{
-    background-color: #f06347; 
-    }
-    @media all and (min-width: 992px) {
-    .navbar .nav-item .dropdown-menu{  display:block; opacity: 0;  visibility: hidden; transition:.3s; margin-top:0;  }
-    .navbar .nav-item:hover .nav-link{ background-color: #f06347;  }
-    .navbar .dropdown-menu.fade-down{ top:80%; transform: rotateX(-75deg); transform-origin: 0% 0%; }
-    .navbar .dropdown-menu.fade-up{ top:180%;  }
-    .navbar .nav-item:hover .dropdown-menu{ transition: .3s; opacity:1; visibility:visible; top:100%; transform: rotateX(0deg); }
-}   
+/*
+nav {
+    width : 100%;
+    margin : 0 auto;
+    padding : 10px;
+    background-color: #f06347;
 }
+
+nav button {
+
+text-decoration: none;
+color : black;
+background-color: #fca08e;
+border : none;
+height: 50px;
+
+
+}
+
+nav button:hover{
+    background-color : #fca08e;
+
+}
+
+nav button:focus{
+    border-style: none;
+}
+
+nav ul li {
+align-items: center;
+display : inline;
+width: 25%;   
+list-style-type: none;
+margin: 100px;
+}*/
+
 
 
 .background{
@@ -39,17 +51,12 @@
     border-radius: 8px;
 }
 
-.image-heigth{
-    height: 100%;
-    width:100%;
-}
 
 .row{
   text-align:center;
 
   /*the same margin which is every button have, it is for small screen, and if you have many buttons.*/
-  margin-left:-20px;
-  margin-right:-20px;
+ 
 
 }
 

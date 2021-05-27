@@ -50,8 +50,7 @@ padding-bottom : 15px;
 }
 	.footer {
 	background-color : #f06347;
-	position : absolute;
-	bottom : 0;
+	position : relative;
 	width : 100%;
 
 	}

@@ -1,9 +1,11 @@
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<meta charset="ISO-8859-1">
-    <link rel="stylesheet" href="../static/css/w3.css" th:href="@{/css/w3.css}">
+
+<meta charset="UTF-8">
+  <link href="styleAccueil.css"  rel="stylesheet" type="text/css"/>
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -12,18 +14,77 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <title>Accueil</title>
 </head>
-<body> 
+<body>
   <header >
-<div style="text-align: center">
-    <nav >
-        <ul>
-            <li><a th:href="@{/}">Chercher une colocation</a></li>
-            <li><a href="gestionColoc">G�rer ses colocations</a></li>
-            <li><a href="#">Se connecter</a></li>
-            <li><a th:href="@{/getform}">S'inscrire</a></li>
+
+
+
+
+
+</head>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light"  aria-label="Third navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand " style="background-color: #f06347" href="accueil">GTColocRP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample03">
+        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        
+          
+          <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que locataire -->
+          <li class="nav-item">
+          <!-- le lien renverra vers la page "liste" -->
+            <a class="nav-link" href="rechercheLocation.html">Chercher une colocation</a>
+          </li>
+          
+           
+         
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Compte
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="messagerie.html">Messagerie</a>
+          
+          <!-- Le lien renverra vers la page "Edition profil" -->
+           <a class="dropdown-item" href="modif.html">Editer le profil</a>
+          <div class="dropdown-divider"></div>
+          
+          <!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
+          <a class="dropdown-item" href="accueil.html">(De)connexion</a>
+        </div>
+        </li>
+        
+         <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que propriétaire -->
+         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+         Biens immobiliers
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="ajout.html">Ajouter un bien</a>
+          
+          <!-- Le lien renverra vers la page "Edition profil" -->
+           <a class="dropdown-item" href="modif.html">Modifier un bien</a>
+       
+          
+          <!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
+ <a class="dropdown-item" href="gestionColoc.html">Gérer ses biens immobilier</a>
+        </div>
+        </li>
+        <!-- Dans l'idéal, ne doit pas apparaître si session en cours. -->
+          <li>
+            <a class="nav-link aDroite" href="/getform">Inscription</a>
+          </li>
+
+      
         </ul>
-    </nav>
-</div>
+     
+      </div>
+    </div>
+  </nav>
 
 </header>
 
@@ -35,16 +96,19 @@
         <div class="carousel-inner">
              
             <div class="carousel-item active">
-                <img src="https://pbs.twimg.com/media/EGHYvttU4AAYKb7?format=jpg&name=large" class="image-heigth" alt="...">
-                <h2 class="textPresentation">Trouvez la colocation de vos r�ves<br>
-                Trouvez les locataires de vos r�ves</h2>
+                <img src="caroussel1.jpg" class="image-heigth" alt="...">
+                <h2 class="textPresentation">Trouvez la colocation de vos rêves<br>
+                Trouvez les locataires de vos rêves</h2>
             </div>
             <div class="carousel-item">
-                <img src="https://pbs.twimg.com/media/EGHYvtkUcAAuc8T?format=jpg&name=large" class="d-block w-100" alt="...">
-
+                <img src="caroussel2.jpg" class="d-block w-100" alt="...">
+  <h2 class="textPresentation">Trouvez la colocation de vos rêves<br>
+                Trouvez les locataires de vos rêves</h2>
             </div>
             <div class="carousel-item">
-                <img src="https://pbs.twimg.com/media/EGHYvtjU0AAO8w1?format=jpg&name=large" class="d-block w-100" alt="...">
+                <img src="caroussel3.jpg" class="d-block w-100" alt="...">
+                  <h2 class="textPresentation">Trouvez la colocation de vos rêves<br>
+                Trouvez les locataires de vos rêves</h2>
             </div>
           
         </div>
@@ -62,19 +126,20 @@
 
  <section class="search-sec">
    
-                            
-                            <button class="button" type="button" >Trouver une colocation</button>
+                            <!-- Le bouton mènera sur la page "liste" -->
+                            <a href="recherchelocation.html" class="button" type="button" style="text-decoration: none;color:black;" >Trouver une colocation</a>
                       
                     
-                            <button class="button" type="button" >G�rer mes colocations</button>
+                            <a href="gestionColoc"><button class="button" type="button" style="color: black">Gérer mes colocations</button></a>
 </section>
 
 
 
+  <footer class="footerAcc" style="position: relative;padding-bottom: 0;">
+<p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
 
-</body>
-<footer>
-    <p class="text-center">Site d�vellop� par M�lissa Maerten, R�my Deprez et Nicolas Beauvois, sur une id�e originale de Yahya Abdellaoui</p>
 </footer>
+</body>
+
 </body>
 </html>

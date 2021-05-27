@@ -1,0 +1,16 @@
+.form{
+background-color:rgba(0, 0, 0, 0.5);
+float :left;
+}
+
+.form2{
+background-color: #f2f0f0;
+}
+
+footer{
+	background-color : #f06347;
+	position : absolute;
+	bottom : 0; left : 0; right : 0;
+	width : 100%;
+	text-align: center;
+}
