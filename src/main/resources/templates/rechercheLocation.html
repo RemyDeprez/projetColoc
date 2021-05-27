@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -10,8 +10,9 @@
   <title>Fiche coloc</title>
 
 <meta charset="ISO-8859-1">
-  <link href="styleAccueil3.css"  rel="stylesheet" type="text/css"/>
-  <link href="styleFiche2.css"  rel="stylesheet" type="text/css"/>
+  <link href="/css/styleAccueil3.css"  rel="stylesheet" type="text/css"/>
+    <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
+  <link href="/css/styleFiche2.css"  rel="stylesheet" type="text/css"/>
 
 
   <!-- Bootstrap core CSS -->
@@ -19,113 +20,20 @@
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+
+
 </head>
 <body>
 
-  <header >
-<style>
-.navbar-default .navbar-brand{
-        background-color:#f06347;
-        font-size:30px;
-        font-weight:bold;
-    }
-    
-    @media (min-width: 992px){
-    .aDroite{
-        margin-left : 55em;
-     
-    }
-    
-    .aDroite:hover{
-    background-color: #f06347; 
-    }
-    @media all and (min-width: 992px) {
-    .navbar .nav-item .dropdown-menu{  display:block; opacity: 0;  visibility: hidden; transition:.3s; margin-top:0;  }
-    .navbar .nav-item:hover .nav-link{ background-color: #f06347;  }
-    .navbar .dropdown-menu.fade-down{ top:80%; transform: rotateX(-75deg); transform-origin: 0% 0%; }
-    .navbar .dropdown-menu.fade-up{ top:180%;  }
-    .navbar .nav-item:hover .dropdown-menu{ transition: .3s; opacity:1; visibility:visible; top:100%; transform: rotateX(0deg); }
-}   
-}
-</style>
+
+<header th:insert="fragment/header.html :: header"> </header>
 
 
-
-
-
-</head>
-
-<nav class="navbar navbar-expand-md navbar-light bg-light"  aria-label="Third navbar example">
-    <div class="container-fluid">
-      <a class="navbar-brand " style="background-color: #f06347" href="accueil">GTColocRP</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExample03">
-        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-        
-          
-          <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que locataire -->
-          <li class="nav-item">
-          <!-- le lien renverra vers la page "liste" -->
-            <a class="nav-link" href="rechercheLocation.html">Chercher une colocation</a>
-          </li>
-          
-           
-         
-          <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Compte
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="messagerie.html">Messagerie</a>
-          
-          <!-- Le lien renverra vers la page "Edition profil" -->
-           <a class="dropdown-item" href="modif.html">Editer le profil</a>
-          <div class="dropdown-divider"></div>
-          
-          <!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
-          <a class="dropdown-item" href="accueil.html">(De)connexion</a>
-        </div>
-        </li>
-        
-         <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que propriétaire -->
-         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-         Biens immobiliers
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="ajout.html">Ajouter un bien</a>
-          
-          <!-- Le lien renverra vers la page "Edition profil" -->
-           <a class="dropdown-item" href="modif.html">Modifier un bien</a>
-       
-          
-          <!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
- <a class="dropdown-item" href="gestionColoc.html">Gérer ses biens immobilier</a>
-        </div>
-        </li>
-        <!-- Dans l'idéal, ne doit pas apparaître si session en cours. -->
-          <li>
-            <a class="nav-link aDroite" href="inscription.html">Inscription</a>
-          </li>
-
-      
-        </ul>
-     
-      </div>
-    </div>
-  </nav>
-
-</header>
-
-
-  <div class="container">
+  <div class="container" style="margin-top : 25px; margin-bottom:10px;">
   <div class="row">
       <div class="col-sm-3">
         <section><div class="border recherche">
-          <div class="form-check"><h3>Filtres de recherche</h3>
+          <div class="form-check" style="background-color:#f2f5f3;"><h3>Filtres de recherche</h3>
             <p>Département</p>
             <form>
               <select class="mdb-select">
@@ -176,7 +84,7 @@
         
       </section>
     </div>
-    <div class="col-sm-8 border"><h1>Résultats de votre recherche</h1>
+    <div class="col-sm-8 border" style="background-color:#f2f5f3;"><h1>Résultats de votre recherche</h1>
                  <div class="item col-xs-4">
                     <div class="thumbnail card">
                         <div class="img-event">

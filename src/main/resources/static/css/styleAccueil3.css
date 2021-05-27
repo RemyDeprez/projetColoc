@@ -35,6 +35,9 @@ list-style-type: none;
 margin: 100px;
 }
 */
+body {
+	background : linear-gradient(#f5937f,#f5937f);
+}
 
 
 .background{
