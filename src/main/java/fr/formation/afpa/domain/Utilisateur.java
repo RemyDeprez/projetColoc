@@ -1,5 +1,7 @@
 package fr.formation.afpa.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,6 +34,9 @@ public class Utilisateur {
 
 	@Column(name = "mail", nullable = false)
 	private String mail;
+	
+	@Column(name = "date", nullable = false)
+	private Date date;
 
 	@Column(name = "motDePasse", nullable = false)
 	private String motDePasse;
@@ -134,5 +139,14 @@ public class Utilisateur {
 	public void setColocataire(Colocataire colocataire) {
 		this.colocataire = colocataire;
 	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 
 }
