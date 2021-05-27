@@ -13,6 +13,12 @@ public class NavigationController {
 	public String index(Model model) {
 		return "index";
 	}
+	
+	//	Methode de redirection à l'acceuil depuis un lien
+	@RequestMapping(value = "/index")
+	public String getIndex(Model model) {
+		return "index";
+	}
 //	Methode qui est lancée pour l'obtention du formulaire d'inscription
 	@RequestMapping(value = "/getform")
 	public String getForm(Model model) {
@@ -52,6 +58,11 @@ public class NavigationController {
 	@RequestMapping(path = "/messagerie", method  = RequestMethod.GET)
 	public String getMessagerie() {
 		return "messagerie";
+	}
+	
+	@RequestMapping(path = "/rechercheLocation", method  = RequestMethod.GET)
+	public String getRechercheLocation() {
+		return "rechercheLocation";
 	}
 
 
