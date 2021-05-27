@@ -3,6 +3,7 @@ package fr.formation.afpa.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class NavigationController {
@@ -21,6 +22,36 @@ public class NavigationController {
 	@RequestMapping(value = "/getgestion")
 	public String getGestion(Model model) {
 		return "gestionColoc";
+	}
+	
+
+
+	
+	@RequestMapping(path = "/fiche", method  = RequestMethod.GET)
+	public String getFiche() {
+		return "fiche";
+	}
+	
+
+	
+	@RequestMapping(path = "/connexion", method  = RequestMethod.GET)
+	public String getConnexion() {
+		return "connexion";
+	}
+	
+	@RequestMapping(path = "/ajout", method  = RequestMethod.GET)
+	public String getAjout() {
+		return "ajout";
+	}
+	
+	@RequestMapping(path = "/modif", method  = RequestMethod.GET)
+	public String getModif() {
+		return "modif";
+	}
+	
+	@RequestMapping(path = "/messagerie", method  = RequestMethod.GET)
+	public String getMessagerie() {
+		return "messagerie";
 	}
 
 
