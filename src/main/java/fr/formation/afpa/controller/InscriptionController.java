@@ -1,7 +1,5 @@
 package fr.formation.afpa.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +15,9 @@ public class InscriptionController {
 	IUtilisateurService service ;
 	
 //	Methode lancée lorsque le formulaire est envoyé
+	
 	@RequestMapping(value = "/createaccount")
-	public String index(Model model, Utilisateur utilisateur) {
-		utilisateur.setDate(new Date());
+	public String index(Model model,Utilisateur utilisateur) {
 		model.addAttribute("utilisateur", utilisateur );
 		service.saveOrUpdate(utilisateur);
 		return "index";

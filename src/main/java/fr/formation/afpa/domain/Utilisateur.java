@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * The persistent class for the utilisateur database table.
@@ -35,6 +37,7 @@ public class Utilisateur {
 	@Column(name = "mail", nullable = false)
 	private String mail;
 	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	@Column(name = "date", nullable = false)
 	private Date date;
 

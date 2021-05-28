@@ -1,7 +1,14 @@
 package fr.formation.afpa.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -9,6 +16,8 @@ import fr.formation.afpa.domain.Utilisateur;
 
 @Controller
 public class NavigationController {
+	
+
 	
 //	Methode de redirection à l'acceuil par défaut
 	@RequestMapping(value = "/")
