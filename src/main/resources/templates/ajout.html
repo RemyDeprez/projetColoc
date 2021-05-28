@@ -30,16 +30,16 @@
                     <h2 class="champ">Ajouter une colocation</h2>
                     
                         
-                            <input type="text" name="name" value="" class="form-control input-lg" placeholder="Intitulé"  />                        
+                            <input type="text" name="titre" value="" class="form-control input-lg" placeholder="Intitulé"  />                        
     
                             <input type="text" name="address" value="" class="form-control input-lg" placeholder="Adresse"  />                        
                         
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="text" name="postalCode" value="" class="form-control input-lg" placeholder="Code postal"  />                        
+                            <input type="number" name="codePostal" value="" class="form-control input-lg" placeholder="Code postal"  />                        
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="text" name="city" value="" class="form-control input-lg" placeholder="Ville"  />                        
+                            <input type="text" name="ville" value="" class="form-control input-lg" placeholder="Ville"  />                        
                             </div>
                     </div>
                    <div class="row">
@@ -55,17 +55,17 @@
                      
                     <div class="champ" style="margin-bottom:10px">
                      <label >Meublé ? : </label>                    <label class=" radio-inline">
-                        <input type="radio" name="type" value="equipped" id=equipped />                       Oui
+                        <input type="radio" name="meuble" value="1" id=equipped />                       Oui
                     </label>
                     <label class="radio-inline ">
-                        <input type="radio" name="type" value="notEquipped" id=notEquipedd />                      Non
+                        <input type="radio" name="meuble" value="0" id=notEquipedd />                      Non
                     </label>
                     <br />
                     </div>
                     
                     <div class="champ">
                     <label>Décrivez votre bien de manière succinte</label>
-                    <textarea name="desc"  class="form-control input-lg"  > </textarea>
+                    <textarea id="description" name="description"  class="form-control input-lg"  > </textarea>
                     </div>
                     
                     <div class="champ">
