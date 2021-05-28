@@ -18,9 +18,7 @@ import fr.formation.afpa.service.LocationService;
 @Controller
 public class NavigationController {
 	
-	@Autowired
-	LocationService service;
-	
+
 //	********************** NAVIGATION GENERALE ********************************************
 	
 //	Methode de redirection à l'acceuil par défaut
@@ -76,23 +74,9 @@ public class NavigationController {
 	public String getRechercheLocation() {
 		return "rechercheLocation";
 	}
+
 	
-	//****************************** ACTIONS VIA FORMULAIRES **********************************************
-	
-	@RequestMapping(value = "/ajoutbien")
-	public String emp(Model model, Location location, String address, Integer superfice, Integer placeOccupe, Integer loyer) {
 
-
-location.setAdress(address);
-location.setSuperfice(superfice);
-location.setMaxColocataire(placeOccupe);
-location.setLoyer(loyer);
-
-
-			service.saveOrUpdate(location);
-
-		return "index";
-	}
 
 
 }
