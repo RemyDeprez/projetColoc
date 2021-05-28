@@ -46,6 +46,8 @@ public class NavigationController {
 	//	Methode qui est lancée pour l'obtention du formulaire d'inscription
 	@RequestMapping(value = "/getform")
 	public String getForm(Model model) {
+		Utilisateur utilisateur = new Utilisateur();
+		model.addAttribute("utilisateur", utilisateur);
 		return "inscription";
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
