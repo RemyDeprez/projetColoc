@@ -8,7 +8,7 @@
 
   <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
   <link href="/css/resources/styleConnexion.css"  rel="stylesheet" type="text/css"/>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Connexion</title>
 
 <style>
@@ -34,22 +34,22 @@ body{
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login"  name="login" placeholder="login">
-      <input type="text" id="password"  name="login" placeholder="password">
+    <form th:action="@{/j_spring_security_check}" method="post">
+      <input type="text" id="login"  name="username" placeholder="login">
+      <input type="password" id="password"  name="password" placeholder="password">
       <input type="submit" value="Log In">
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a href="#">Mot de passe oublié ?</a>
+      <a href="#">Mot de passe oubliÃ© ?</a>
     </div>
 
   </div>
   </div>
   
    <footer class="footerAcc">
-<p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
+<p class="text-center">Site dÃ©vellopÃ© par MÃ©lissa Maerten, RÃ©my Deprez et Nicolas Beauvois, sur une idÃ©e originale de Yahya Abdellaoui</p>
 
 </footer>
 </body>
