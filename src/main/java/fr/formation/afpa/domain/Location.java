@@ -33,6 +33,16 @@ public class Location {
 	private int placeOccupe;
 
 	private int superfice;
+	
+	private String ville;
+	
+	private int codePostal;
+	
+	private String titre;
+	
+	private boolean meuble;
+	
+	private String description;
 
 	//bi-directional many-to-one association to Colocataire
 	@OneToMany(mappedBy="location")
@@ -47,8 +57,9 @@ public class Location {
 	@JoinColumn(name="PropriétaireUtilisateurID")
 	private Proprietaire proprietaire;
 
-	//bi-directional many-to-one association to Reservation
+//	//bi-directional many-to-one association to Reservation
 	@ManyToOne
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JoinColumn(name="ReservationID")
 	private Reservation reservation;
 
@@ -194,5 +205,47 @@ public class Location {
 	public void setReservation(Reservation reservation) {
 		this.reservation = reservation;
 	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public int getCodePostal() {
+		return codePostal;
+	}
+
+	public void setCodePostal(int codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public boolean isMeuble() {
+		return meuble;
+	}
+
+	public void setMeuble(boolean meuble) {
+		this.meuble = meuble;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 
 }
