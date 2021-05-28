@@ -1,12 +1,27 @@
 package fr.formation.afpa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import fr.formation.afpa.domain.Location;
+import fr.formation.afpa.domain.Reservation;
+import fr.formation.afpa.service.LocationService;
 
 @Controller
 public class NavigationController {
+	
+	@Autowired
+	LocationService service;
+	
+//	********************** NAVIGATION GENERALE ********************************************
 	
 //	Methode de redirection à l'acceuil par défaut
 	@RequestMapping(value = "/")
@@ -29,9 +44,6 @@ public class NavigationController {
 	public String getGestion(Model model) {
 		return "gestionColoc";
 	}
-	
-
-
 	
 	@RequestMapping(path = "/fiche", method  = RequestMethod.GET)
 	public String getFiche() {
@@ -63,6 +75,23 @@ public class NavigationController {
 	@RequestMapping(path = "/rechercheLocation", method  = RequestMethod.GET)
 	public String getRechercheLocation() {
 		return "rechercheLocation";
+	}
+	
+	//****************************** ACTIONS VIA FORMULAIRES **********************************************
+	
+	@RequestMapping(value = "/ajoutbien")
+	public String emp(Model model, Location location, String address, Integer superfice, Integer placeOccupe, Integer loyer) {
+
+
+location.setAdress(address);
+location.setSuperfice(superfice);
+location.setMaxColocataire(placeOccupe);
+location.setLoyer(loyer);
+
+
+			service.saveOrUpdate(location);
+
+		return "index";
 	}
 
 

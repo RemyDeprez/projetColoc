@@ -47,8 +47,9 @@ public class Location {
 	@JoinColumn(name="PropriétaireUtilisateurID")
 	private Proprietaire proprietaire;
 
-	//bi-directional many-to-one association to Reservation
+//	//bi-directional many-to-one association to Reservation
 	@ManyToOne
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JoinColumn(name="ReservationID")
 	private Reservation reservation;
 

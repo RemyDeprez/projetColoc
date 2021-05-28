@@ -20,11 +20,13 @@
 <body>
 
    <header th:insert="fragment/header.html :: header"> </header>
+   
+   <!-- Formulaire pour ajouter un bien -->
 
  <div class="container" id="wrap">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
-            <form action="r" method="post" accept-charset="utf-8" class="form" role="form">  
+            <form action="ajoutbien" th:object="${location}" accept-charset="utf-8" class="form" role="form">  
                     <h2 class="champ">Ajouter une colocation</h2>
                     
                         
@@ -42,13 +44,13 @@
                     </div>
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="size" value="" class="form-control input-lg" placeholder="Superficie"  />                        
+                            <input type="number" name="superfice" value="" class="form-control input-lg" placeholder="Superficie"  />                        
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="roomateMax" value="" class="form-control input-lg" placeholder="Occupants max"  />                        
+                            <input type="number" name="placeOccupe" value="" class="form-control input-lg" placeholder="Occupants max"  />                        
                             </div>
                     </div>               
-                    <input type="text" name="rent" value="" class="form-control input-lg" placeholder="Loyer"  /> 
+                    <input type="number" name="loyer" value="" class="form-control input-lg" placeholder="Loyer"  /> 
                 
                      
                     <div class="champ" style="margin-bottom:10px">
@@ -63,15 +65,15 @@
                     
                     <div class="champ">
                     <label>Décrivez votre bien de manière succinte</label>
-                    <textarea name="rent"  class="form-control input-lg"  > </textarea>
+                    <textarea name="desc"  class="form-control input-lg"  > </textarea>
                     </div>
                     
                     <div class="champ">
                     <label>Ajoutez des photos de votre bien</label>
-                   <input type="file" name="photo" value="" class="form-control input-lg" /> 
+                   <input type="file" name="photos" value="" class="form-control input-lg" /> 
             	</div>
             
-                    <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                 <button type=submit class="btn btn-lg btn-primary btn-block signup-btn">
                         Ajouter le bien</button>
             </form>          
           </div>
