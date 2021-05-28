@@ -46,6 +46,9 @@ public class Utilisateur {
 
 	@Column(name = "nom", nullable = false)
 	private String nom;
+	
+	@Column(name = "status", nullable = false)
+	private String status;
 
 	@Column(name = "telephone", nullable = false)
 	private int telephone;
@@ -150,6 +153,11 @@ public class Utilisateur {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public String getStatus() {
+		return status;
+	}
 
-
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
