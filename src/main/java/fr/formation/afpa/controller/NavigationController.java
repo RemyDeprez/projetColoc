@@ -1,9 +1,6 @@
 package fr.formation.afpa.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import fr.formation.afpa.domain.Location;
-import fr.formation.afpa.domain.Reservation;
 import fr.formation.afpa.service.LocationService;
+
+
 
 @Controller
 public class NavigationController {
+	@Autowired
+	LocationService service;
 	
-
+	private List<Location> listLoc = new ArrayList<Location>();
 //	********************** NAVIGATION GENERALE ********************************************
 	
 //	Methode de redirection à l'acceuil par défaut
@@ -40,6 +41,9 @@ public class NavigationController {
 //	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
 	@RequestMapping(value = "/getgestion")
 	public String getGestion(Model model) {
+		
+		listLoc = service.findAll();
+		model.addAttribute("listLoc", listLoc);
 		return "gestionColoc";
 	}
 	
