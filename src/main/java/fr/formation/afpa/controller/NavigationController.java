@@ -10,7 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fr.formation.afpa.domain.Location;
+import fr.formation.afpa.domain.AppUser;
+import fr.formation.afpa.domain.Utilisateur;
 import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.utils.WebUtils;
 
@@ -46,8 +47,8 @@ public class NavigationController {
 	//	Methode qui est lancée pour l'obtention du formulaire d'inscription
 	@RequestMapping(value = "/getform")
 	public String getForm(Model model) {
-		Utilisateur utilisateur = new Utilisateur();
-		model.addAttribute("utilisateur", utilisateur);
+		AppUser appuser = new AppUser();
+		model.addAttribute("appuser", appuser);
 		return "inscription";
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation

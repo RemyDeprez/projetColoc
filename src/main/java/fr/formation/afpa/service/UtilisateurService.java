@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.afpa.dao.IUtilisateurDao;
+import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Utilisateur;
 
 @Service
@@ -22,17 +23,17 @@ public class UtilisateurService implements IUtilisateurService {
 	}
 
 	@Override
-	public List<Utilisateur> findAll() {
+	public List<AppUser> findAll() {
 		return dao.findAll();
 	}
 
 	@Override
-	public void saveOrUpdate(Utilisateur u) {
+	public void saveOrUpdate(AppUser u) {
 		dao.save(u);
 	}
 
 	@Override
-	public void delete(Utilisateur u) {
+	public void delete(AppUser u) {
 		dao.delete(u);
 		
 	}
@@ -41,6 +42,11 @@ public class UtilisateurService implements IUtilisateurService {
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
 		
+	}
+	@Override
+	public AppUser findByLogin(String login) {
+		
+		return dao.findByUserName(login);
 	}
 
 }

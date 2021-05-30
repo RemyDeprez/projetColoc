@@ -38,7 +38,7 @@
 		<div class="row">
 			<div style="margin-left: 25%" class="col-md-6 col-md-offset-3">
 				<form th:action="createaccount" method="post"
-					th:object="${utilisateur}" class="form" role="form">
+					th:object="${appuser}" class="form" role="form">
 					<h4 class="champ">Créez votre compte</h4>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
@@ -53,16 +53,16 @@
 					</div>
 					<input type="text" name="login" value=""
 						class="form-control input-lg" placeholder="Votre Login"
-						th:field="*{login}" /> <input type="text" name="mail" value=""
+						th:field="*{userName}" /> <input type="text" name="mail" value=""
 						class="form-control input-lg" placeholder="Votre Email"
 						th:field="*{mail}" /> <input type="password" name="password"
 						value="" class="form-control input-lg" placeholder="Mot de passe"
-						th:field="*{motDePasse}" /> <input type="password"
+						th:field="*{encrytedPassword}" /> <input type="password"
 						name="confirm_password" value="" class="form-control input-lg"
 						placeholder="Confirmer le mot de passe" /> <input type="date"
 						class="form-control input-lg" th:field="*{date}"> <input
 						type="text" class="form-control input-lg" th:field="*{telephone}"
-						placeholder="Numéro de Te">
+						placeholder="Numéro de Telephone">
 
 					<div class="champ">
 						<label>Je suis : </label>

@@ -2,15 +2,17 @@ package fr.formation.afpa.service;
 
 import java.util.List;
 
-import fr.formation.afpa.domain.Utilisateur;
+import fr.formation.afpa.domain.AppUser;
 
 public interface IUtilisateurService {
 
-	List<Utilisateur> findAll();
+	List<AppUser> findAll();
 
-	void saveOrUpdate(Utilisateur u);
+	void saveOrUpdate(AppUser u);
 
-	void delete(Utilisateur u);
+	void delete(AppUser u);
 
 	void deleteById(Integer id);
+
+	AppUser findByLogin(String login);
 }
