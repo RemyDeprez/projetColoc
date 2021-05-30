@@ -37,30 +37,30 @@
 		<div class="row">
 			<div style="margin-left: 25%" class="col-md-6 col-md-offset-3">
 				<form th:action="updateaccount" method="post"
-					th:object="${utilisateur}" class="form" role="form">
+					th:object="${appuser}" class="form" role="form">
 					<h4 class="champ">Modifiez votre compte</h4>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
-							<input type="text" name="firstname" value=""
+							<input type="text" name="firstname" value="${appuser.attributeprenom}"
 								th:field="*{attributeprenom}" class="form-control input-lg"
 								placeholder="Prénom" />
 						</div>
 						<div class="col-xs-6 col-md-6">
-							<input type="text" name="lastname" value="" th:field="*{nom}"
+							<input type="text" name="lastname" value="${appuser.nom}" th:field="*{nom}"
 								class="form-control input-lg" placeholder="Nom de famille" />
 						</div>
 					</div>
-					<input type="text" name="login" value=""
-						class="form-control input-lg" placeholder="Votre Login"
-						th:field="*{login}" /> <input type="text" name="mail" value=""
+					<input type="text" name="login" value="${appuser.userName}"
+						class="form-control input-lg" 
+						th:field="*{userName}" /> <input type="text" name="mail" value="${appuser.mail}"
 						class="form-control input-lg" placeholder="Votre Email"
 						th:field="*{mail}" /> <input type="password" name="password"
-						value="" class="form-control input-lg" placeholder="Mot de passe"
-						th:field="*{motDePasse}" /> <input type="password"
-						name="confirm_password" value="" class="form-control input-lg"
-						placeholder="Confirmer le mot de passe" /> <input type="date"
+						value="${appuser.encrytedPassword}" class="form-control input-lg" placeholder="Nouveau Mot de passe"
+						th:field="*{encrytedPassword}" /> <input type="password"
+						name="confirm_password" value="${appuser.mail}" class="form-control input-lg"
+						placeholder="Confirmer le Nouveau mot de passe" /> <input type="date"
 						class="form-control input-lg" th:field="*{date}"> <input
-						type="text" class="form-control input-lg" th:field="*{telephone}"
+						type="text" class="form-control input-lg" th:field="*{telephone}" value="${appuser.telephone}"
 						placeholder="Numéro de Te">
 
 					<div class="champ">
