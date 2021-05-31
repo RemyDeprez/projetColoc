@@ -1,9 +1,6 @@
 package fr.formation.afpa.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import fr.formation.afpa.domain.Location;
 
@@ -16,8 +13,4 @@ public interface ILocationService {
 	void delete(Location u);
 
 	void deleteById(Integer id);
-
-	Optional<Location> findById(Integer id);
-	
-	public void savePhoto(MultipartFile photo) throws Exception;
 }

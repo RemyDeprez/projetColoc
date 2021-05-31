@@ -90,16 +90,13 @@ $(document).ready(function() {
                                <li th:utext="${location.placeOccupe}">..</li>
                                 <li th:utext="${location.maxColocataire}">..</li>
                                  <li th:utext="${location.loyer}">..</li>
-                                   <li th:utext="${location.codePostal}">..</li> 
+                                   <li th:utext="${location.getCodePostal()}">..</li> 
                                    <li th:utext="${location.meuble}">..</li>  
-                                    <li > <img style="height:200px; width:200px;"  
-                                    th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" /></li>  
-                                       <li th:utext="${location.description}">..</li>  
+                                    <li th:utext="${location.photos}">..</li>  
                                 </ul>
                             <div class="row">
                             <div class="col-xs-12 col-md-6">
-                                    <a href="#" th:href="@{'/modif/'} + ${location.LocationID}">
- 									 <input value="Editer informations" type="submit"/></a>
+                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
