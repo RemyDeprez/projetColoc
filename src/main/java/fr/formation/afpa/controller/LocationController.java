@@ -68,8 +68,8 @@ ImageController.saveFile(uploadDir, fileName, photos);
 		return "modif";
 	}
 	
-	@RequestMapping(value = "/modifbien/{locationID}")
-	public String update(Model model, Location location, String adress, Integer superfice, Integer placeOccupe, Integer loyer,
+	@PostMapping(value = "/modifbien/{locationID}")
+	public String update(Model model, Location location, BindingResult bindingResult, String adress, Integer superfice, Integer placeOccupe, Integer loyer,
 			String ville, Integer codePostal, String titre, String description, Boolean meuble, @RequestParam("photos") MultipartFile photos) throws IOException {
 
 		   String fileName = StringUtils.cleanPath(photos.getOriginalFilename());    
@@ -97,6 +97,13 @@ ImageController.saveFile(uploadDir, fileName, photos);
 
 			listLoc = service.findAll();
 			model.addAttribute("listLoc", listLoc);
+		return "redirect:/index";
+	}
+	
+	@GetMapping("/supprbien/{locationID}")
+	public String delete(@PathVariable("locationID") Integer id, Model model) {
+		service.deleteById(id);
+
 		return "redirect:/index";
 	}
 	
