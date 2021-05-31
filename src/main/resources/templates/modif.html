@@ -29,51 +29,52 @@
  <div class="container" id="wrap">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
-            <form action="r" method="post" accept-charset="utf-8" class="form" role="form"> 
+            <form th:action="@{'/modifbien/'} + ${location.locationID}" th:object="${location}" class="form" role="form"> 
                     <h2 class="champ">Modifier une colocation</h2>
                     
                         
-                            <input type="text" name="name" value="" class="form-control input-lg" placeholder="Intitulé"  />                        
+                            <input type="text" name="titre" th:value="${location.titre}" class="form-control input-lg" placeholder="Intitulé"  />                        
     
-                            <input type="text" name="address" value="" class="form-control input-lg" placeholder="Adresse"  />                        
+                            <input type="text" name="adress" th:value="${location.adress}" class="form-control input-lg" placeholder="Adresse"  />                        
                         
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="text" name="postalCode" value="" class="form-control input-lg" placeholder="Code postal"  />                        
+                            <input type="number" name="codePostal" th:value="${location.codePostal}" class="form-control input-lg" placeholder="Code postal"  />                        
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="text" name="city" value="" class="form-control input-lg" placeholder="Ville"  />                        
+                            <input type="text" name="ville" th:value="${location.ville}" class="form-control input-lg" placeholder="Ville"  />                        
                             </div>
                     </div>
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="size" value="" class="form-control input-lg" placeholder="Superficie"  />                        
+                            <input type="number" name="superfice" th:value="${location.superfice}" class="form-control input-lg" placeholder="Superficie"  />                        
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="roomateMax" value="" class="form-control input-lg" placeholder="Occupants max"  />                        
+                            <input type="number" name="placeOccupe" th:value="${location.placeOccupe}" class="form-control input-lg" placeholder="Occupants max"  />                        
                             </div>
                     </div>               
-                    <input type="text" name="rent" value="" class="form-control input-lg" placeholder="Loyer"  /> 
+                    <input type="number" name="loyer" th:value="${location.loyer}" class="form-control input-lg" placeholder="Loyer"  /> 
                 
                      
-                    <div class="champ">
+                    <div class="champ"  >
                      <label >Meublé ? : </label>                    <label class=" radio-inline">
-                        <input type="radio" name="type" value="equipped" id=equipped />                       Oui
+                        <input type="radio"  th:checked="${location.meuble}" name="meuble" value="1" id=equipped />                       Oui
                     </label>
                     <label class="radio-inline ">
-                        <input type="radio" name="type" value="notEquipped" id=notEquipedd />                      Non
+                        <input type="radio"  th:checked="${location.meuble}"   name="meuble" value="0" id=notEquipedd />                      Non
                     </label>
                     <br />
                     </div>
                     
                     <div class="champ">
                     <label>Décrivez votre bien de manière succinte</label>
-                    <textarea name="rent"  class="form-control input-lg"  > </textarea>
+                    <textarea name="description" th:text="${location.description}"  class="form-control input-lg"  > </textarea>
                     </div>
                     
+                  
                     <div class="champ">
                     <label>Ajoutez des photos de votre bien</label>
-                   <input type="file" name="photo" value="" class="form-control input-lg" /> 
+                   <input type="file" name="photos" th:value="${location.photos}" class="form-control input-lg" /> 
             	</div>
             
                     <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">

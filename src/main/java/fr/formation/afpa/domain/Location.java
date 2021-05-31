@@ -22,13 +22,17 @@ public class Location {
 
 	private byte isComplet;
 
-	private double loyer;
+	private Integer loyer;
 
 	private int maxColocataire;
 
 	private float note;
 
+	
+	@Column(length = 64, nullable = true)
 	private String photos;
+	
+
 
 	private Integer placeOccupe;
 
@@ -68,7 +72,9 @@ public class Location {
 	
 	
 
-	public Location(int locationID, String adress, int idProprietaire, byte isComplet, double loyer, int maxColocataire,
+
+
+	public Location(int locationID, String adress, int idProprietaire, byte isComplet, Integer loyer, int maxColocataire,
 			float note, String photos, Integer placeOccupe, Integer superfice, String ville, Integer codePostal,
 			String titre, Boolean meuble, String description, List<Colocataire> colocataires,
 			List<Evaluation> evaluations, Proprietaire proprietaire, Reservation reservation) {
@@ -132,7 +138,7 @@ public class Location {
 		return this.loyer;
 	}
 
-	public void setLoyer(double loyer) {
+	public void setLoyer(Integer loyer) {
 		this.loyer = loyer;
 	}
 
@@ -275,6 +281,17 @@ public class Location {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
+
+
+	
+	  @Transient
+	    public String getPhotosImagePath() {
+	        if (photos == null || locationID <= 0) return null;
+	         
+	        return "/photos/" + locationID + "/" + photos;
+	    }
 	
 	
 
