@@ -72,6 +72,7 @@ ImageController.saveFile(uploadDir, fileName, photos);
 	public String update(Model model, Location location, String adress, Integer superfice, Integer placeOccupe, Integer loyer,
 			String ville, Integer codePostal, String titre, String description, Boolean meuble, @RequestParam("photos") MultipartFile photos) throws IOException {
 
+		   String fileName = StringUtils.cleanPath(photos.getOriginalFilename());    
 
 location.setAdress(adress);
 location.setSuperfice(superfice);
@@ -82,8 +83,15 @@ location.setCodePostal(codePostal);
 location.setTitre(titre);
 location.setDescription(description);
 location.setMeuble(meuble);
-location.setPhotos(photos);
+location.setPhotos(fileName);
 
+
+service.saveOrUpdate(location);
+String uploadDir = "photos/" + location.getLocationID();
+
+
+
+ImageController.saveFile(uploadDir, fileName, photos);
 
 			service.saveOrUpdate(location);
 
