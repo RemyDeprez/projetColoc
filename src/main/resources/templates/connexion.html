@@ -27,6 +27,7 @@ body{
 
   <div id="formContent">
     <!-- Tabs Titles -->
+    <div class="container" style="background-color:#f2f5f3;">
 <h1 style="margin-left : 100px">Connexion</h1>
     <!-- Icon -->
     <div>
@@ -35,16 +36,18 @@ body{
 
     <!-- Login Form -->
     <form th:action="@{/j_spring_security_check}" method="post">
-      <input type="text" id="login"  name="username" placeholder="login">
+      <input type="text" id="login"  name="username" class="form-control"  placeholder="login">
       <input type="password" id="password"  name="password" placeholder="password">
       <input type="submit" value="Log In">
     </form>
+    <div th:if="${#request.getParameter('error') == 'true'}">Identifiants incorrects.</div>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <a href="#">Mot de passe oublié ?</a>
     </div>
 
+</div>
   </div>
   </div>
   
