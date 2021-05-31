@@ -30,131 +30,107 @@
 
 <body>
 
-	<header>
-		<nav class="navbar navbar-expand-md navbar-light bg-light"
-			aria-label="Third navbar example">
-			<div class="container-fluid">
-				<a class="navbar-brand " style="background-color: #f06347"
-					href="accueil">GTColocRP</a>
-				<button class="navbar-toggler" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
-					aria-controls="navbarsExample03" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarsExample03">
-					<ul class="navbar-nav me-auto mb-2 mb-sm-0">
-
-
-						<!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que locataire -->
-						<li class="nav-item">
-							<!-- le lien renverra vers la page "liste" --> <a
-							class="nav-link" href="rechercheLocation.html">Chercher une
-								colocation</a>
-						</li>
-
-
-
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="true"> Compte </a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="messagerie.html">Messagerie</a>
-
-								<!-- Le lien renverra vers la page "Edition profil" -->
-								<a class="dropdown-item" href="modif.html">Editer le profil</a>
-								<div class="dropdown-divider"></div>
-
-								<!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
-								<a class="dropdown-item" href="accueil.html">(De)connexion</a>
-							</div></li>
-
-						<!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que propriétaire -->
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="true"> Biens immobiliers </a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="ajout.html">Ajouter un bien</a>
-
-								<!-- Le lien renverra vers la page "Edition profil" -->
-								<a class="dropdown-item" href="modif.html">Modifier un bien</a>
-
-
-								<!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
-								<a class="dropdown-item" href="gestionColoc.html">Gérer ses
-									biens immobilier</a>
-							</div></li>
-						<!-- Dans l'idéal, ne doit pas apparaître si session en cours. -->
-						<li><a class="nav-link aDroite" href="/getform">Inscription</a>
-						</li>
-
-
-					</ul>
-
-				</div>
-			</div>
-		</nav>
-
-	</header>
+	<header th:insert="fragment/header.html :: header"> </header>
 
 
 	<div class="container" id="wrap">
 		<div class="row">
 			<div style="margin-left: 25%" class="col-md-6 col-md-offset-3">
-				<form th:action="updateaccount" method="post"
-					th:object="${utilisateur}" class="form" role="form">
+				<form th:action="updateaccount" method="post" th:object="${appuser}"
+					class="form" role="form">
 					<h4 class="champ">Modifiez votre compte</h4>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
-							<input type="text" name="firstname" value=""
-								th:field="*{attributeprenom}" class="form-control input-lg"
-								placeholder="Prénom" />
+							<input type="text" name="firstname"
+								value="${appuser.attributeprenom}" th:field="*{attributeprenom}"
+								class="form-control input-lg" placeholder="Prénom" />
 						</div>
 						<div class="col-xs-6 col-md-6">
-							<input type="text" name="lastname" value="" th:field="*{nom}"
-								class="form-control input-lg" placeholder="Nom de famille" />
+							<input type="text" name="lastname" value="${appuser.nom}"
+								th:field="*{nom}" class="form-control input-lg"
+								placeholder="Nom de famille" />
 						</div>
 					</div>
-					<input type="text" name="login" value=""
-						class="form-control input-lg" placeholder="Votre Login"
-						th:field="*{login}" /> <input type="text" name="mail" value=""
+					<input type="text" name="userId" value="${appuser.userId}"
+						class="form-control input-lg" th:field="*{userId}" /> <input
+						type="text" name="login" value="${appuser.userName}"
+						class="form-control input-lg" th:field="*{userName}" /> <input
+						type="text" name="mail" value="${appuser.mail}"
 						class="form-control input-lg" placeholder="Votre Email"
 						th:field="*{mail}" /> <input type="password" name="password"
-						value="" class="form-control input-lg" placeholder="Mot de passe"
-						th:field="*{motDePasse}" /> <input type="password"
-						name="confirm_password" value="" class="form-control input-lg"
-						placeholder="Confirmer le mot de passe" /> <input type="date"
-						class="form-control input-lg" th:field="*{date}"> <input
-						type="text" class="form-control input-lg" th:field="*{telephone}"
+						class="form-control input-lg" placeholder="Nouveau Mot de passe"
+						th:field="*{encrytedPassword}" /> <input type="password"
+						name="confirm_password" class="form-control input-lg"
+						placeholder="Confirmer le Nouveau mot de passe" /> <input
+						type="date" class="form-control input-lg" th:field="*{date}">
+					<input type="text" class="form-control input-lg"
+						th:field="*{telephone}" value="${appuser.telephone}"
 						placeholder="Numéro de Te">
 
 					<div class="champ">
 						<label>Je suis : </label>
-						<div th:each="status : ${T(fr.formation.afpa.domain.Status).values()}">
+						<div
+							th:each="status : ${T(fr.formation.afpa.domain.Status).values()}">
 							<div class=" radio-inline">
 								<input type="radio" th:field="*{status}" th:value="${status}"
-									class="control-input"> 
-								<label
-									 th:for="${#ids.prev('status')}"
-									th:text="${status}">Status</label>
+									class="control-input"> <label
+									th:for="${#ids.prev('status')}" th:text="${status}">Status</label>
 							</div>
 						</div>
 
 
-						 <br />
+						<br />
 					</div>
 					<span style="box-shadow: none;" class="help-block champ">By
 						clicking Modify my account, you agree to our Terms and that you
 						have read our Data Use Policy, including our Cookie Use.</span>
 					<button class="btn btn-lg btn-primary btn-block signup-btn"
 						type="submit">Modifier le compte</button>
-						
+
 				</form>
-				<button style="margin-top:2%;" th:action="deleteaccount"class="btn btn-lg btn-danger btn-block"
-						type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Supprimer le compte</button>
+				<form th:action="deleteaccount" method="post" th:object="${appuser}"
+					class="form" role="form">
+
+					<input type="text" name="firstname"
+						value="${appuser.attributeprenom}" th:field="*{attributeprenom}"
+						class="form-control input-lg" placeholder="Prénom" hidden="true" />
+
+
+					<input type="text" name="lastname" value="${appuser.nom}"
+						th:field="*{nom}" class="form-control input-lg"
+						placeholder="Nom de famille" hidden="true" /> <input type="text"
+						name="userId" value="${appuser.userId}"
+						class="form-control input-lg" th:field="*{userId}" hidden="true" />
+					<input type="text" name="login" value="${appuser.userName}"
+						class="form-control input-lg" th:field="*{userName}" hidden="true" />
+					<input type="text" name="mail" value="${appuser.mail}"
+						class="form-control input-lg" placeholder="Votre Email"
+						th:field="*{mail}" hidden="true" /> <input type="password"
+						name="password" class="form-control input-lg"
+						placeholder="Nouveau Mot de passe" th:field="*{encrytedPassword}"
+						hidden="true" /> <input type="password" name="confirm_password"
+						class="form-control input-lg"
+						placeholder="Confirmer le Nouveau mot de passe" hidden="true" />
+					<input type="date" class="form-control input-lg" th:field="*{date}"
+						hidden="true" /> <input type="text" class="form-control input-lg"
+						th:field="*{telephone}" value="${appuser.telephone}"
+						placeholder="Numéro de Te" hidden="true"> <input
+						type="radio" th:field="*{status}" th:value="${status}"
+						class="control-input" hidden="true">
+						
+						
+					
+						<div th:each="status : ${T(fr.formation.afpa.domain.Status).values()}">
+								<input type="radio" th:field="*{status}" th:value="${status}"
+									class="control-input" hidden="true"> 
+							
+						</div>
+
+					<button style="margin-top: 2%;" th:action="deleteaccount"
+						class="btn btn-lg btn-danger btn-block" type="submit"
+						onclick="return confirm('Are you sure you want to delete this item?');">Supprimer
+						le compte</button>
+				</form>
 			</div>
 		</div>
 	</div>
