@@ -276,6 +276,16 @@ public class Location {
 		this.description = description;
 	}
 	
+
+	
+	  @Transient
+	    public String getPhotosImagePath() {
+	        if (photos == null || locationID <= 0) return null;
+	         
+	        return "/photos/" + locationID + "/" + photos;
+	    }
+	
+	
 	
 
 }
