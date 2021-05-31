@@ -50,14 +50,17 @@
 								class="form-control input-lg" placeholder="Nom de famille" />
 						</div>
 					</div>
+					<input type="text" name="userId" value="${appuser.userId}"
+						class="form-control input-lg" 
+						th:field="*{userId}" hidden="true"/>
 					<input type="text" name="login" value="${appuser.userName}"
 						class="form-control input-lg" 
 						th:field="*{userName}" /> <input type="text" name="mail" value="${appuser.mail}"
 						class="form-control input-lg" placeholder="Votre Email"
 						th:field="*{mail}" /> <input type="password" name="password"
-						value="${appuser.encrytedPassword}" class="form-control input-lg" placeholder="Nouveau Mot de passe"
+						 class="form-control input-lg" placeholder="Nouveau Mot de passe"
 						th:field="*{encrytedPassword}" /> <input type="password"
-						name="confirm_password" value="${appuser.mail}" class="form-control input-lg"
+						name="confirm_password" class="form-control input-lg"
 						placeholder="Confirmer le Nouveau mot de passe" /> <input type="date"
 						class="form-control input-lg" th:field="*{date}"> <input
 						type="text" class="form-control input-lg" th:field="*{telephone}" value="${appuser.telephone}"

@@ -49,4 +49,10 @@ public class UtilisateurService implements IUtilisateurService {
 		return dao.findByUserName(login);
 	}
 
+	@Override
+	public AppUser findByUserId(Long userId) {
+		
+		return dao.findByUserId(userId);
+	}
+
 }

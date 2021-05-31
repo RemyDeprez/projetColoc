@@ -33,22 +33,24 @@ public class InscriptionController {
 		appuser.setEncrytedPassword(encrytedPassword);
 		model.addAttribute("appuser", appuser);
 		service.saveOrUpdate(appuser);
-		return "index";
+		return "connexion";
 	}
 
 //methode lancée lorsque l'on demande le formulaire d'update de profil
 	@RequestMapping(value = "/getprofile")
 	public String getProfile(Model model, Authentication auth, AppUser appuser) {
-		System.out.println(userRepo.findByUserName(auth.getName()));
+		appuser = userRepo.findByUserName(auth.getName());
+		System.out.println(appuser);
 		model.addAttribute("appuser", userRepo.findByUserName(auth.getName()));
 
 		return "modifprofile";
 	}
 
-//methpode lancée lorsque l'on appuie sur le boutton "valider" de l'update
+//methode lancée lorsque l'on appuie sur le boutton "valider" de l'update
 	@RequestMapping(value = "/updateaccount")
 	public String updateAccount(Model model, AppUser appuser) {
-		model.addAttribute("appuser", appuser);
+		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
+		appuser.setEncrytedPassword(encrytedPassword);
 		service.saveOrUpdate(appuser);
 		return "index";
 	}
