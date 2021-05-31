@@ -39,8 +39,8 @@ public class UtilisateurService implements IUtilisateurService {
 	}
 
 	@Override
-	public void deleteById(Integer id) {
-		dao.deleteById(id);
+	public void deleteByUserId(Long id) {
+		dao.deleteByUserId(id);
 		
 	}
 	@Override

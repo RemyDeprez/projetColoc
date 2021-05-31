@@ -9,4 +9,5 @@ public interface IUtilisateurDao extends JpaRepository<AppUser, Integer> {
 	
 	public AppUser findByUserName(String login);
 	public AppUser findByUserId(Long userId);
+	public void deleteByUserId (Long userId);
 }

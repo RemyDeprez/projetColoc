@@ -12,7 +12,7 @@ public interface IUtilisateurService {
 
 	void delete(AppUser u);
 
-	void deleteById(Integer id);
+	void deleteByUserId(Long long1);
 
 	AppUser findByLogin(String login);
 	

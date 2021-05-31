@@ -58,8 +58,8 @@ public class InscriptionController {
 
 	@RequestMapping(value = "/deleteaccount")
 	public String deleteAccount(Model model, AppUser appuser) {
-		model.addAttribute("appuser", appuser);
-		service.delete(appuser);
+		System.out.println("ici");
+		service.deleteByUserId(appuser.getUserId());
 		return "index";
 	}
 }
