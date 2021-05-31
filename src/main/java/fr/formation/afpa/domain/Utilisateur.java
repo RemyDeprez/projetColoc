@@ -1,5 +1,7 @@
 package fr.formation.afpa.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -32,12 +36,19 @@ public class Utilisateur {
 
 	@Column(name = "mail", nullable = false)
 	private String mail;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@Column(name = "date", nullable = false)
+	private Date date;
 
 	@Column(name = "motDePasse", nullable = false)
 	private String motDePasse;
 
 	@Column(name = "nom", nullable = false)
 	private String nom;
+	
+	@Column(name = "status", nullable = false)
+	private String status;
 
 	@Column(name = "telephone", nullable = false)
 	private int telephone;
@@ -135,4 +146,18 @@ public class Utilisateur {
 		this.colocataire = colocataire;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
