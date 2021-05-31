@@ -62,4 +62,6 @@ public class InscriptionController {
 		service.deleteByUserId(appuser.getUserId());
 		return "index";
 	}
+	
+	
 }

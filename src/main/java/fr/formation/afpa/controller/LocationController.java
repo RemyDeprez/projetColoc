@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.formation.afpa.FileUploadUtils;
@@ -29,6 +31,7 @@ public class LocationController {
 	private List<Location> listLoc = new ArrayList<Location>();
 	
 	@PostMapping(value = "/ajoutbien")
+@ResponseBody
 	public String  add(Location location, BindingResult bindingResult, String address, Integer superfice, Integer placeOccupe, Integer loyer,
 			String ville, Integer codePostal, String titre, String description, Boolean meuble, @RequestParam("photos") MultipartFile photos
 			) throws IOException {
@@ -57,7 +60,7 @@ ImageController.saveFile(uploadDir, fileName, photos);
 
 			
 
-		return "redirect:/index";
+		return "index";
 	}
 	
 	@GetMapping("/modif/{locationID}")
