@@ -20,6 +20,8 @@ public class NavigationController {
 
 	@Autowired
 	LocationService service;
+	
+	
 
 	//	********************** NAVIGATION GENERALE ********************************************
 
@@ -45,10 +47,13 @@ public class NavigationController {
 		return "index";
 	}
 	//	Methode qui est lancée pour l'obtention du formulaire d'inscription
-	@RequestMapping(value = "/getform")
+	@RequestMapping(value = "/inscription")
 	public String getForm(Model model) {
+
 		AppUser appuser = new AppUser();
 		model.addAttribute("appuser", appuser);
+
+
 		return "inscription";
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
@@ -71,27 +76,70 @@ public class NavigationController {
 
 
 	@RequestMapping(path = "/connexion", method  = RequestMethod.GET)
-	public String getConnexion() {
+	public String getConnexion(Model model, Principal principal) {
+		if(principal != null) {
+			return "redirect:/index";
+		}
 		return "connexion";
 	}
 
 	@RequestMapping(path = "/ajout", method  = RequestMethod.GET)
-	public String getAjout() {
+	public String getAjout(Model model, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		return "ajout";
 	}
 
 	@RequestMapping(path = "/modif", method  = RequestMethod.GET)
-	public String getModif() {
+	public String getModif(Model model, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		return "modif";
 	}
 
 	@RequestMapping(path = "/messagerie", method  = RequestMethod.GET)
-	public String getMessagerie() {
+	public String getMessagerie(Model model, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		return "messagerie";
 	}
 
 	@RequestMapping(path = "/rechercheLocation", method  = RequestMethod.GET)
-	public String getRechercheLocation() {
+	public String getRechercheLocation(Model model, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		return "rechercheLocation";
 	}
 
