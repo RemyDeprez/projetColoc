@@ -76,6 +76,7 @@ $(document).ready(function() {
             </div>
         </div>
     </div> 
+      <th:block th:each="location : ${listLoc}">
     <div id="products" class="row view-group">
                 <div class="item col-xs-4 col-lg-4">
                     <div class="thumbnail card">
@@ -83,12 +84,16 @@ $(document).ready(function() {
                             <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
+                            <h4 class="group card-title inner list-group-item-heading" th:utext=${location.titre}>..</h4>
                             <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
+                                <ul><li th:utext="${location.adress}"></li>
+                               <li th:utext="${location.placeOccupe}">..</li>
+                                <li th:utext="${location.maxColocataire}">..</li>
+                                 <li th:utext="${location.loyer}">..</li>
+                                   <li th:utext="${location.getCodePostal()}">..</li> 
+                                   <li th:utext="${location.meuble}">..</li>  
+                                    <li th:utext="${location.photos}">..</li>  
+                                </ul>
                             <div class="row">
                             <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
@@ -100,122 +105,9 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </div>
-                      <div class="item col-xs-4 col-lg-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                     <div class="item col-xs-4 col-lg-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                      <div class="item col-xs-4 col-lg-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                      <div class="item col-xs-4 col-lg-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item col-xs-4 col-lg-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                                 <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                 </th:block>
+            
 </div>
   <footer class="footerAcc">
 <p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
