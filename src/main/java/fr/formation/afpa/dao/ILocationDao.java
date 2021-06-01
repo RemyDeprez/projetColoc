@@ -9,6 +9,6 @@ import fr.formation.afpa.domain.Location;
 
 @Repository
 public interface ILocationDao extends JpaRepository<Location, Integer> {
-
-	public List<Location> findByProprietaireUtilisateurUtilisateurIDLike(Integer id);
+	
+	public List<Location> findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(Integer maxColocataire, Double loyer, Integer superfice);
 }

@@ -16,4 +16,6 @@ public interface ILocationService {
 	void deleteById(Integer id);
 
 	Optional<Location> findById(Integer id);
+	
+	public List<Location> findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(Integer maxColocataire, Double loyer, Integer superfice);
 }
