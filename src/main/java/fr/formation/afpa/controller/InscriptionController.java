@@ -69,8 +69,12 @@ public class InscriptionController {
 		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 		appuser.setEncrytedPassword(encrytedPassword);
 		
+<<<<<<< Updated upstream
 		service.saveOrUpdate(appuser);
 <<<<<<< Updated upstream
+=======
+		
+>>>>>>> Stashed changes
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename()); 
 =======
 		
