@@ -12,6 +12,11 @@ margin-left : 200px;
 margin-bottom : 30px;
 padding-bottom : 15px;
 
+padding-top : 5px;
+
+border-radius : 5px;
+box-shadow: 10px 5px 5px red;
+
 }
 
 .signup-btn {
@@ -54,6 +59,12 @@ padding-bottom : 15px;
 	bottom : 0;
 	width : 100%;
 
+	}
+	
+	.footerModifProfile {
+		background-color : #f06347;
+	position : relative;
+	width : 100%;
 	}
 	
 	.champ{
