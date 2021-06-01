@@ -12,25 +12,24 @@ import fr.formation.afpa.service.LocationService;
 public class LocationController {
 	@Autowired
 	LocationService service;
-	
+
 	@RequestMapping(value = "/ajoutbien")
-	public String emp(Model model, Location location, String address, Integer superfice, Integer placeOccupe, Integer loyer,
-			String ville, Integer codePostal, String titre, String description, boolean meuble, String photos) {
+	public String emp(Model model, Location location, String address, Integer superfice, Integer placeOccupe,
+			Integer loyer, String ville, Integer codePostal, String titre, String description, boolean meuble,
+			String photos) {
 
+		location.setAdress(address);
+		location.setSuperfice(superfice);
+		location.setMaxColocataire(placeOccupe);
+		location.setLoyer(loyer);
+		location.setVille(ville);
+		location.setCodePostal(codePostal);
+		location.setTitre(titre);
+		location.setDescription(description);
+		location.setMeuble(meuble);
+		location.setPhotos(photos);
 
-location.setAdress(address);
-location.setSuperfice(superfice);
-location.setMaxColocataire(placeOccupe);
-location.setLoyer(loyer);
-location.setVille(ville);
-location.setCodePostal(codePostal);
-location.setTitre(titre);
-location.setDescription(description);
-location.setMeuble(meuble);
-location.setPhotos(photos);
-
-
-			service.saveOrUpdate(location);
+		service.saveOrUpdate(location);
 
 		return "index";
 	}
