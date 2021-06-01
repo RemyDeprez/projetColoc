@@ -10,86 +10,86 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+ 
 @Entity
 @Table(name = "App_User", //
-		uniqueConstraints = { //
-				@UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
+        uniqueConstraints = { //
+                @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
 public class AppUser {
-
-	@Id
-	@GeneratedValue
-	@Column(name = "User_Id", nullable = false)
-	private Long userId;
-
-	@Column(name = "Attributeprenom", nullable = false)
+ 
+    @Id
+    @GeneratedValue
+    @Column(name = "User_Id", nullable = false)
+    private Long userId;
+    
+    @Column(name = "Attributeprenom", nullable = false)
 	private String attributeprenom;
-
-	@Column(name = "mail", nullable = false)
+    
+    @Column(name = "mail", nullable = false)
 	private String mail;
 	
-	@Column(name = "photos", nullable = false)
-	private String photos;
-
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	@Column(name = "date", nullable = false)
 	private Date date;
-
+	
 	@Column(name = "nom", nullable = false)
 	private String nom;
-
+	
 	@Column(name = "status", nullable = false)
 	private String status;
 
 	@Column(name = "telephone", nullable = false)
 	private int telephone;
+	
+	@Column(name = "photos", nullable = false)
+	private String photos;
+    
 
 	@Column(name = "User_Name", length = 36, nullable = false)
-	private String userName;
-
-	@Column(name = "Encryted_Password", length = 128, nullable = false)
-	private String encrytedPassword;
-
-	@Column(name = "Enabled", length = 1, nullable = false)
-	private boolean enabled;
-
-	public AppUser() {
-
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getEncrytedPassword() {
-		return encrytedPassword;
-	}
-
-	public void setEncrytedPassword(String encrytedPassword) {
-		this.encrytedPassword = encrytedPassword;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public String getAttributeprenom() {
+    private String userName;
+ 
+    @Column(name = "Encryted_Password", length = 128, nullable = false)
+    private String encrytedPassword;
+ 
+    @Column(name = "Enabled", length = 1, nullable = false)
+    private boolean enabled;
+    
+    public AppUser() {
+    	
+    }
+    
+    public Long getUserId() {
+        return userId;
+    }
+ 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+ 
+    public String getUserName() {
+        return userName;
+    }
+ 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+ 
+    public String getEncrytedPassword() {
+        return encrytedPassword;
+    }
+ 
+    public void setEncrytedPassword(String encrytedPassword) {
+        this.encrytedPassword = encrytedPassword;
+    }
+ 
+    public boolean isEnabled() {
+        return enabled;
+    }
+ 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    public String getAttributeprenom() {
 		return attributeprenom;
 	}
 
@@ -144,4 +144,6 @@ public class AppUser {
 	public void setPhotos(String photos) {
 		this.photos = photos;
 	}
+
+ 
 }

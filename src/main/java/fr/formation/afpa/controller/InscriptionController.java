@@ -65,7 +65,6 @@ public class InscriptionController {
 		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 		appuser.setEncrytedPassword(encrytedPassword);
 		
-		service.saveOrUpdate(appuser);
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename()); 
 		appuser.setPhotos(fileName);
 		model.addAttribute("appuser", appuser);
