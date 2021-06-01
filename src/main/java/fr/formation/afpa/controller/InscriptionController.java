@@ -1,9 +1,11 @@
 package fr.formation.afpa.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.IUtilisateurService;
+import fr.formation.afpa.utils.WebUtils;
 
 @Controller
 public class InscriptionController {
@@ -51,7 +54,17 @@ public class InscriptionController {
 
 //methode lancée lorsque l'on demande le formulaire d'update de profil
 	@RequestMapping(value = "/getprofile")
-	public String getProfile(Model model, Authentication auth, AppUser appuser) {
+	public String getProfile(Model model, Authentication auth, AppUser appuser, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		appuser = userRepo.findByUserName(auth.getName());
 		System.out.println(appuser);
 		model.addAttribute("appuser", userRepo.findByUserName(auth.getName()));

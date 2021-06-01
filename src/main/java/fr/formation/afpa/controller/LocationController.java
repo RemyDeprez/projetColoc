@@ -113,7 +113,6 @@ ImageController.saveFile(uploadDir, fileName, photos);
 		
 		Location location = service.findById(id).get();
 		model.addAttribute("location", location);
-		System.out.println(location.getIdProprietaire());
 		return "fiche";
 	}
 	
