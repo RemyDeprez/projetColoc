@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.afpa.domain.Location;
@@ -159,6 +160,25 @@ public class NavigationController {
 		}
 		
 		listLoc = service.findAll();
+		System.out.println(listLoc);
+		model.addAttribute("locations", listLoc);
+		return "rechercheLocation";
+	}
+	
+	@RequestMapping(path = "/recherche", method  = RequestMethod.GET)
+	public String recherche(Model model, Principal principal,@RequestParam("maxColocataire") Integer maxColocataire, @RequestParam("loyer") Integer loyer, @RequestParam("superfice") Integer superficie) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
+		
+		listLoc = service.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, (double) loyer, superficie);
 		System.out.println(listLoc);
 		model.addAttribute("locations", listLoc);
 		return "rechercheLocation";

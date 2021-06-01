@@ -35,7 +35,7 @@
         <section><div class="border recherche">
           <div style="background-color:#f2f5f3; padding: 25px;"><h3>Filtres de recherche</h3>
             <p>Département</p>
-            <form>
+            <form action="recherche">
               <select class="mdb-select">
               <option value="null">Aucun</option>
                 <option value="1">1</option>
@@ -70,13 +70,13 @@
               </div>
               <br>
               <p>Nombre de personnes maximum</p>
-              <input type="range" class="form-range" min="1" max="5" id="range" value="1">
+              <input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" value="1">
               <div id="demo">1</div>
               <p>Prix</p>
-              <input type="range" class="form-range" min="350" max="1500" step="50" value="350" id="range2">
+              <input type="range" class="form-range" min="350" max="1500" step="50" value="350" name="loyer" id="range2">
               <div id="demo2">350 €</div>
                <p>Superficie</p>
-              <input type="range" class="form-range" min="100" max="1500" value="100" step="50" id="range3">
+              <input type="range" class="form-range" min="100" max="1500" value="100" step="50" name="superfice" id="range3">
               <div id="demo3">100 m²</div>
               <input type="submit" value="Rechercher" class="btn btn-primary">
             </form></div>
