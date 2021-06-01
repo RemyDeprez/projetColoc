@@ -49,6 +49,14 @@ public class LocationService implements ILocationService {
 		return dao.findById(id);
 
 	}
+
+	@Override
+	public List<Location> findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(Integer maxColocataire, Double loyer,
+			Integer superfice) {
+		return dao.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, loyer, superfice);
+	}
+
+
 	
 
 }

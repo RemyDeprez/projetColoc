@@ -1,8 +1,7 @@
 package fr.formation.afpa.controller;
 
-import java.awt.Image;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,6 +10,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.internal.metadata.aggregated.ValidatableParametersMetaData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -27,17 +28,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.util.Validate;
 
-import fr.formation.afpa.FileUploadUtils;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.service.LocationService;
+
 import fr.formation.afpa.validator.LocationValidator;
+
 
 @Controller
 
@@ -46,6 +47,7 @@ public class LocationController implements WebMvcConfigurer {
 
 	@Autowired
 	LocationService service;
+
 
 	private List<Location> listLoc = new ArrayList<Location>();
 	
@@ -98,8 +100,10 @@ public class LocationController implements WebMvcConfigurer {
 
 			ImageController.saveFile(uploadDir, fileName, photos);
 
+
 			return "redirect:/index";
 	}
+
 
 	@GetMapping("/modif/{locationID}")
 	public String showUpdateForm(@PathVariable("locationID") Integer id, Model model) {
@@ -134,8 +138,11 @@ public class LocationController implements WebMvcConfigurer {
 
 		service.saveOrUpdate(location);
 
+
 		listLoc = service.findAll();
 		model.addAttribute("listLoc", listLoc);
+
+
 		return "redirect:/index";
 	}
 
@@ -145,5 +152,29 @@ public class LocationController implements WebMvcConfigurer {
 
 		return "redirect:/index";
 	}
+
+	
+	
+	@RequestMapping(path = "/fiche", method = RequestMethod.GET)
+	public String ficheColocation(Model model, @RequestParam("locationID") Integer id, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
+		
+		Location location = service.findById(id).get();
+		model.addAttribute("location", location);
+		return "fiche";
+	}
+	
+
+
+
 
 }

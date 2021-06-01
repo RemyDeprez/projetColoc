@@ -64,13 +64,13 @@ public class Location {
 
 	//bi-directional many-to-one association to Proprietaire
 	@ManyToOne
-	@JoinColumn(name="PropriétaireUtilisateurID")
+	@JoinColumn(name="proprietaire_utilisateur_id")
 	private Proprietaire proprietaire;
 
 //	//bi-directional many-to-one association to Reservation
 	@ManyToOne
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JoinColumn(name="ReservationID")
+	@JoinColumn(name="reservation_id")
 	private Reservation reservation;
 
 	public Location() {
@@ -122,6 +122,18 @@ public class Location {
 	public void setAdress(String adress) {
 		this.adress = adress;
 	}
+
+	@Override
+	public String toString() {
+		return "Location [locationID=" + locationID + ", adress=" + adress + ", idProprietaire=" + idProprietaire
+				+ ", isComplet=" + isComplet + ", loyer=" + loyer + ", maxColocataire=" + maxColocataire + ", note="
+				+ note + ", photos=" + photos + ", placeOccupe=" + placeOccupe + ", superfice=" + superfice + ", ville="
+				+ ville + ", codePostal=" + codePostal + ", titre=" + titre + ", meuble=" + meuble + ", description="
+				+ description + ", colocataires=" + colocataires + ", evaluations=" + evaluations + ", proprietaire="
+				+ proprietaire + ", reservation=" + reservation + "]";
+	}
+
+
 
 	public int getIdProprietaire() {
 		return this.idProprietaire;
