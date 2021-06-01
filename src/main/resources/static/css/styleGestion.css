@@ -51,8 +51,10 @@
 }
 .item.list-group-item .thumbnail
 {
+	margin-top : 5px;
     margin-bottom: 0px;
     display: inline-block;
+        width : 80%;
 }
 .item.list-group-item .caption
 {

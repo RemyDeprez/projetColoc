@@ -76,12 +76,16 @@ $(document).ready(function() {
             </div>
         </div>
     </div> 
-      <th:block th:each="location : ${listLoc}">
+  
     <div id="products" class="row view-group">
+       <th:block th:each="location : ${listLoc}">
                 <div class="item col-xs-4 col-lg-4">
                     <div class="thumbnail card">
+                    
                         <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="mobilier.jpg" alt="" />
+                         
+                            <img style="height:200px; width:200px;"  
+                                    th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" />  
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading" th:utext=${location.titre}>..</h4>
@@ -92,24 +96,27 @@ $(document).ready(function() {
                                  <li th:utext="${location.loyer}">..</li>
                                    <li th:utext="${location.codePostal}">..</li> 
                                    <li th:utext="${location.meuble}">..</li>  
-                                    <li > <img style="height:200px; width:200px;"  
-                                    th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" /></li>  
+                                  
                                        <li th:utext="${location.description}">..</li>  
                                 </ul>
                             <div class="row">
                             <div class="col-xs-12 col-md-6">
                                     <a href="#" th:href="@{'/modif/'} + ${location.LocationID}">
- 									 <input value="Editer informations" type="submit"/></a>
+ 									 <input class="btn btn-secondary" value="Editer informations" type="submit"/></a>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
                                 </div>
                             </div>
                         </div>
+                        
+                          
                     </div>
                 </div>
+                </th:block>
                 </div>
-                 </th:block>
+                
+               
             
 </div>
   <footer class="footerAcc">
