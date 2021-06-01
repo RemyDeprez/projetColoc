@@ -69,13 +69,13 @@
               </div>
               <br>
               <p>Nombre de personnes</p>
-              <input type="range" class="form-range" min="1" max="5" id="range">
+              <input type="range" class="form-range" min="1" max="5" id="range" value="1">
               <div id="demo">1</div>
               <p>Prix</p>
-              <input type="range" class="form-range" min="350" max="1500" step="50" id="range2">
+              <input type="range" class="form-range" min="350" max="1500" step="50" value="350" id="range2">
               <div id="demo2"></div>
                <p>Superficie</p>
-              <input type="range" class="form-range" min="100" max="1500" step="50" id="range3">
+              <input type="range" class="form-range" min="100" max="1500" value="100" step="50" id="range3">
               <div id="demo3"></div>
               <input type="submit" value="Rechercher" class="btn btn-primary">
             </form></div>
@@ -84,18 +84,19 @@
       </section>
     </div>
     <div class="col-sm-8 border recherche2" style="background-color:#f2f5f3;"><h1>Résultats de votre recherche</h1>
+                <th:block th:each="location : ${locations}">
                  <div class="item col-xs-4">
                     <div class="thumbnail card">
                         <div class="img-event">
                             <img class="group list-group-image img-fluid" src="./images/mobilier.jpg" alt="" />
                         </div>
                         <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
+                            <h4 class="group card-title inner list-group-item-heading"><a th:href="@{'fiche?locationID=' + ${location.locationID}}" th:utext="${location.titre}"></a></h4>
                             <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
+                                <ul><li th:utext="@{'Adresse : ' + ${location.adress}}"></li>
+                                <li th:utext="@{'Loyer : ' + ${location.loyer}} + '€'"></li>
+                                <li th:utext="@{'Superficie : ' + ${location.superfice}} + ' m²'"></li>
+                                </ul></p>
                             <div class="row">
                             <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
@@ -107,52 +108,9 @@
                         </div>
                     </div>
                 </div>
-                 <div class="item col-xs-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="./images/mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="item col-xs-4">
-                    <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="./images/mobilier.jpg" alt="" />
-                        </div>
-                        <div class="caption card-body">
-                            <h4 class="group card-title inner list-group-item-heading">
-                               Colocation n°1</h4>
-                            <p class="group inner list-group-item-text">
-                                <ul><li>Adresse : 3 rue du Monopoly</li>
-                                <li>Occupation : 3/4</li>
-                                <li>Intervention en cours : non</li></ul></p>
-                            <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </th:block>
+                
+                 
             </div>
         </div>
     

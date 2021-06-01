@@ -142,8 +142,14 @@ public class NavigationController {
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
+		
+		listLoc = service.findAll();
+		System.out.println(listLoc);
+		model.addAttribute("locations", listLoc);
 		return "rechercheLocation";
 	}
+	
+
 
 
 }
