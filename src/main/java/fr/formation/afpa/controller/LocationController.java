@@ -27,38 +27,26 @@ import fr.formation.afpa.service.LocationService;
 public class LocationController {
 	@Autowired
 	LocationService service;
-	
-	private List<Location> listLoc = new ArrayList<Location>();
-	
-	@PostMapping(value = "/ajoutbien")
-@ResponseBody
-	public String  add(Location location, BindingResult bindingResult, String address, Integer superfice, Integer placeOccupe, Integer loyer,
-			String ville, Integer codePostal, String titre, String description, Boolean meuble, @RequestParam("photos") MultipartFile photos
-			) throws IOException {
-
-	    String fileName = StringUtils.cleanPath(photos.getOriginalFilename());             
- 
-
-location.setAdress(address);
-location.setSuperfice(superfice);
-location.setMaxColocataire(placeOccupe);
-location.setLoyer(loyer);
-location.setVille(ville);
-location.setCodePostal(codePostal);
-location.setTitre(titre);
-location.setDescription(description);
-location.setMeuble(meuble);
-location.setPhotos(fileName);
-
-service.saveOrUpdate(location);
-String uploadDir = "photos/" + location.getLocationID();
 
 
+	@RequestMapping(value = "/ajoutbien")
+	public String emp(Model model, Location location, String address, Integer superfice, Integer placeOccupe,
+			Integer loyer, String ville, Integer codePostal, String titre, String description, boolean meuble,
+			String photos) {
 
-ImageController.saveFile(uploadDir, fileName, photos);
+		location.setAdress(address);
+		location.setSuperfice(superfice);
+		location.setMaxColocataire(placeOccupe);
+		location.setLoyer(loyer);
+		location.setVille(ville);
+		location.setCodePostal(codePostal);
+		location.setTitre(titre);
+		location.setDescription(description);
+		location.setMeuble(meuble);
+		location.setPhotos(photos);
 
+		service.saveOrUpdate(location);
 
-			
 
 		return "index";
 	}
