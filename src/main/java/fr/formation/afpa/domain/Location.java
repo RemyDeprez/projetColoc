@@ -30,17 +30,17 @@ public class Location {
 
 	private String photos;
 
-	private int placeOccupe;
+	private Integer placeOccupe;
 
-	private int superfice;
+	private Integer superfice;
 	
 	private String ville;
 	
-	private int codePostal;
+	private Integer codePostal;
 	
 	private String titre;
 	
-	private boolean meuble;
+	private Boolean meuble;
 	
 	private String description;
 
@@ -65,6 +65,36 @@ public class Location {
 
 	public Location() {
 	}
+	
+	
+
+	public Location(int locationID, String adress, int idProprietaire, byte isComplet, double loyer, int maxColocataire,
+			float note, String photos, Integer placeOccupe, Integer superfice, String ville, Integer codePostal,
+			String titre, Boolean meuble, String description, List<Colocataire> colocataires,
+			List<Evaluation> evaluations, Proprietaire proprietaire, Reservation reservation) {
+		super();
+		this.locationID = locationID;
+		this.adress = adress;
+		this.idProprietaire = idProprietaire;
+		this.isComplet = isComplet;
+		this.loyer = loyer;
+		this.maxColocataire = maxColocataire;
+		this.note = note;
+		this.photos = photos;
+		this.placeOccupe = placeOccupe;
+		this.superfice = superfice;
+		this.ville = ville;
+		this.codePostal = codePostal;
+		this.titre = titre;
+		this.meuble = meuble;
+		this.description = description;
+		this.colocataires = colocataires;
+		this.evaluations = evaluations;
+		this.proprietaire = proprietaire;
+		this.reservation = reservation;
+	}
+
+
 
 	public int getLocationID() {
 		return this.locationID;
@@ -218,7 +248,7 @@ public class Location {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(Integer codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -234,7 +264,7 @@ public class Location {
 		return meuble;
 	}
 
-	public void setMeuble(boolean meuble) {
+	public void setMeuble(Boolean meuble) {
 		this.meuble = meuble;
 	}
 
@@ -245,6 +275,16 @@ public class Location {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+
+	
+	  @Transient
+	    public String getPhotosImagePath() {
+	        if (photos == null || locationID <= 0) return null;
+	         
+	        return "/photos/" + locationID + "/" + photos;
+	    }
+	
 	
 	
 
