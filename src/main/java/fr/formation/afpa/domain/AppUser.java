@@ -136,7 +136,6 @@ public class AppUser {
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
 	}
-
 	public String getPhotos() {
 		return photos;
 	}
@@ -144,4 +143,16 @@ public class AppUser {
 	public void setPhotos(String photos) {
 		this.photos = photos;
 	}
+
+
+<<<<<<< Updated upstream
+	public String getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
+=======
+>>>>>>> Stashed changes
 }

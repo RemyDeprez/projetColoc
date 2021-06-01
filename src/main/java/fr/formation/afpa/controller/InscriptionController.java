@@ -62,11 +62,19 @@ public class InscriptionController {
 //methode lancée lorsque l'on appuie sur le boutton "valider" de l'update
 	@PostMapping(value = "/updateaccount")
 	public String updateAccount(Model model, AppUser appuser,BindingResult bindingResult,  @RequestParam("photos") MultipartFile photos) throws IOException {
+<<<<<<< Updated upstream
+=======
+		String fileName = StringUtils.cleanPath(photos.getOriginalFilename()); 
+>>>>>>> Stashed changes
 		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 		appuser.setEncrytedPassword(encrytedPassword);
 		
 		service.saveOrUpdate(appuser);
+<<<<<<< Updated upstream
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename()); 
+=======
+		
+>>>>>>> Stashed changes
 		appuser.setPhotos(fileName);
 		model.addAttribute("appuser", appuser);
 		service.saveOrUpdate(appuser);
