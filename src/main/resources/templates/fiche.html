@@ -30,19 +30,17 @@
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
          <h1>Informations</h1>
-        <div class="resizepicture"><img src="images/picture.jpg" class="img-responsive imgresize landscape" alt="Maison"></div>
+        <div class="resizepicture"><img th:src="@{'photos/' + ${location.locationID} + '/' + ${location.photos}}" class="img-responsive imgresize landscape" alt="Maison"></div>
         <div class="rounded proprietes">
-          <p value="${location.ville}"></p>
-          <p>Prix/mois</p>
-          <p>100 m²</p>
-          <p>3 chambres</p>
+          <p th:utext="${location.ville}"></p>
+          <p th:utext="${location.loyer}"></p>
+          <p th:utext="${location.superfice + 'm²'}"></p>
           <p>Du 01/04/2021 au 02/04/2021</p>
-          <p>Meublée : oui</p>
+          <p th:if="${location.meuble}">Meublée : oui</p>
+          <p th:if="${!location.meuble}">Meublée : non</p>
         </div>
-        <p class="research-result">Une petite description de la maison, 3 chambres, salle de bains équipée, description blablablablablabla.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in finibus mi, ut vehicula nisi. Suspendisse eget blandit enim. Vivamus pulvinar fermentum est non vestibulum. Suspendisse potenti. Quisque rutrum dictum tellus quis vulputate. In hac habitasse platea dictumst. Nam placerat enim a luctus mattis. Aenean vel nisl elementum enim congue porta ut eu sapien. Vestibulum mollis lectus non ex vehicula, id elementum nisi vulputate. </p>
-            
-            
+        <p class="research-result" th:utext="${location.description}"></p>
+  
           </div>
 </div>            
 </div>

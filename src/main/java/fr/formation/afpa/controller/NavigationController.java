@@ -22,6 +22,7 @@ import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Utilisateur;
 
 import fr.formation.afpa.service.LocationService;
+import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 
 
@@ -31,6 +32,9 @@ public class NavigationController {
 
 	@Autowired
 	LocationService service;
+	
+	@Autowired
+	UtilisateurService userService;
 	
 	private List<Location> listLoc = new ArrayList<Location>();
 
@@ -73,10 +77,21 @@ public class NavigationController {
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
 	@RequestMapping(value = "/getgestion")
-	public String getGestion(Model model) {
-		
-		listLoc = service.findAll();
-		model.addAttribute("listLoc", listLoc);
+	public String getGestion(Model model, Principal principal) {
+		if(principal != null) {
+			System.out.println(principal.getName());
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+			//listLoc = service.findByProprietaireUtilisateurUtilisateurIDLike(loginedUser.);
+			listLoc = service.findAll();
+			model.addAttribute("listLoc", listLoc);
+		}
 		return "gestionColoc";
 	}
 

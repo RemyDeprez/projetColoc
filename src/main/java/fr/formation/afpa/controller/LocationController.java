@@ -1,21 +1,23 @@
 package fr.formation.afpa.controller;
 
-
-
 import java.awt.Image;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.service.LocationService;
+import fr.formation.afpa.utils.WebUtils;
 
 @Controller
 public class LocationController {
@@ -79,7 +81,7 @@ ImageController.saveFile(uploadDir, fileName, photos);
 
 			service.saveOrUpdate(location);
 
-			listLoc = service.findAll();
+			List <Location> listLoc = service.findAll();
 			model.addAttribute("listLoc", listLoc);
 		return "redirect:/index";
 	}
@@ -93,9 +95,21 @@ ImageController.saveFile(uploadDir, fileName, photos);
 	
 	
 	@RequestMapping(path = "/fiche", method = RequestMethod.GET)
-	public String ficheColocation(Model model, @RequestParam("locationID") Integer id) {
+	public String ficheColocation(Model model, @RequestParam("locationID") Integer id, Principal principal) {
+		if(principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
+		
 		Location location = service.findById(id).get();
-		model.addAttribute("locationID", location);
+		model.addAttribute("location", location);
+		System.out.println(location.getIdProprietaire());
 		return "fiche";
 	}
 	
