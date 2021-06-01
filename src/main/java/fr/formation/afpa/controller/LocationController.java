@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,6 +97,14 @@ ImageController.saveFile(uploadDir, fileName, photos);
 		service.deleteById(id);
 
 		return "redirect:/index";
+	}
+	
+	
+	@RequestMapping(path = "/fiche", method = RequestMethod.GET)
+	public String ficheColocation(Model model, @RequestParam("locationID") Integer id) {
+		Location location = service.findById(id).get();
+		model.addAttribute("locationID", location);
+		return "fiche";
 	}
 	
 
