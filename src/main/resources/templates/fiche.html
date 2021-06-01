@@ -30,7 +30,7 @@
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
          <h1>Informations</h1>
-        <div class="resizepicture"><img th:src="@{'photos/' + ${location.locationID} + '/' + ${location.photos}}" class="img-responsive imgresize landscape" alt="Maison"></div>
+        <div class="resizepicture"><img th:src="@{'photos/' + ${location.locationID} + '/' + ${location.photos}}" class="img-fluid" alt="Maison"></div>
         <div class="rounded proprietes">
           <p th:utext="${location.ville}"></p>
           <p th:utext="${location.loyer}"></p>
@@ -42,7 +42,27 @@
         <p class="research-result" th:utext="${location.description}"></p>
   
           </div>
-</div>            
+          
+</div> <div class="col-md-4 border cont proprietaireformulaire">
+        <h3>Demander des informations au propriétaire</h3>
+
+        <div class="mb-3">
+          <form>
+            <label for="exampleInputEmail1" class="form-check-label" id="email">Votre adresse e-mail</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </form></div>
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+          <label class="form-check-label" for="flexCheckChecked">
+            Utiliser l'adresse e-mail de mon profil
+          </label>
+          <br><br>
+          <div class="mb-3">
+            <label for="floatingTextarea2">Votre message</label>
+            <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+          </div>
+          <button class="button buttonStyle" style="width:175px" name="Contacter">Contacter</button>
+        
+      </div>           
 </div>
 
 

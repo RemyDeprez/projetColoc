@@ -30,13 +30,13 @@
                     <h2 class="champ">Ajouter une colocation</h2>
                     
                         
-                            <input type="text" name="titre" value="" class="form-control input-lg" placeholder="Intitulé"  />                        
+                            <input type="text" name="titre" value="" class="form-control input-lg" placeholder="Intitulé" maxlength="255" />                        
     
                             <input type="text" name="address" value="" class="form-control input-lg" placeholder="Adresse"  />                        
                         
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="codePostal" value="" class="form-control input-lg" placeholder="Code postal"  />                        
+                            <input type="number" name="codePostal" min="0" max="99999" value="" class="form-control input-lg" placeholder="Code postal"  />                        
                             </div>
                         <div class="col-xs-6 col-md-6">
                             <input type="text" name="ville" value="" class="form-control input-lg" placeholder="Ville"  />                        
@@ -44,13 +44,13 @@
                     </div>
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="superfice" value="" class="form-control input-lg" placeholder="Superficie"  />                        
+                            <input type="number" name="superfice" min="1" value="" class="form-control input-lg" placeholder="Superficie"  />                        
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="placeOccupe" value="" class="form-control input-lg" placeholder="Occupants max"  />                        
+                            <input type="number" name="placeOccupe" min="1" value="" class="form-control input-lg" placeholder="Occupants max"  />                        
                             </div>
                     </div>               
-                    <input type="number" name="loyer" value="" class="form-control input-lg" placeholder="Loyer"  /> 
+                    <input type="number" name="loyer" min="1" value="" class="form-control input-lg" placeholder="Loyer"  /> 
                 
                      
                     <div class="champ" style="margin-bottom:10px">

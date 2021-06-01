@@ -37,6 +37,7 @@
             <p>Département</p>
             <form>
               <select class="mdb-select">
+              <option value="null">Aucun</option>
                 <option value="1">1</option>
                 <option value="1">2</option>
                 <option value="2">3</option>
@@ -68,15 +69,15 @@
                 <label class="form-check-label" for="appartement">Appartement</label>
               </div>
               <br>
-              <p>Nombre de personnes</p>
+              <p>Nombre de personnes maximum</p>
               <input type="range" class="form-range" min="1" max="5" id="range" value="1">
               <div id="demo">1</div>
               <p>Prix</p>
               <input type="range" class="form-range" min="350" max="1500" step="50" value="350" id="range2">
-              <div id="demo2"></div>
+              <div id="demo2">350 €</div>
                <p>Superficie</p>
               <input type="range" class="form-range" min="100" max="1500" value="100" step="50" id="range3">
-              <div id="demo3"></div>
+              <div id="demo3">100 m²</div>
               <input type="submit" value="Rechercher" class="btn btn-primary">
             </form></div>
           </div>
@@ -87,25 +88,24 @@
                 <th:block th:each="location : ${locations}">
                  <div class="item col-xs-4">
                     <div class="thumbnail card">
-                        <div class="img-event">
-                            <img class="group list-group-image img-fluid" src="./images/mobilier.jpg" alt="" />
-                        </div>
+                            <img class="group list-group-image img-fluid" th:src="@{'photos/' + ${location.locationID} + '/' + ${location.photos}}" alt="" />
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading"><a th:href="@{'fiche?locationID=' + ${location.locationID}}" th:utext="${location.titre}"></a></h4>
                             <p class="group inner list-group-item-text">
-                                <ul><li th:utext="@{'Adresse : ' + ${location.adress}}"></li>
+                                <ul><li th:utext="@{'Ville : ' + ${location.ville} + ', ' + ${location.codePostal}}"></li>
                                 <li th:utext="@{'Loyer : ' + ${location.loyer}} + '€'"></li>
                                 <li th:utext="@{'Superficie : ' + ${location.superfice}} + ' m²'"></li>
                                 </ul></p>
                             <div class="row">
-                            <div class="col-xs-12 col-md-6">
+                            <!-- <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Editer informations</a>
-                                </div>
+                                </div> -->
                                 <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 </th:block>
@@ -145,11 +145,11 @@ slider.oninput = function() {
 	} 
 	
 slider2.oninput = function() {
-	  output2.innerHTML = this.value + "€";
+	  output2.innerHTML = this.value + " €";
 	}
 
 slider3.oninput = function() {
-	  output3.innerHTML = this.value + "m²";
+	  output3.innerHTML = this.value + " m²";
 	}
 	
 </script>
