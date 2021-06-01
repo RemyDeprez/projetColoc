@@ -2,6 +2,9 @@ package fr.formation.afpa.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.*;
+
+
 import java.util.List;
 
 
@@ -16,13 +19,14 @@ public class Location {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int locationID;
 
+	
 	private String adress;
 
 	private int idProprietaire;
 
 	private byte isComplet;
 
-	private double loyer;
+	private int loyer;
 
 	private int maxColocataire;
 
@@ -30,18 +34,24 @@ public class Location {
 
 	private String photos;
 
+
 	private Integer placeOccupe;
+
 
 	private Integer superfice;
 	
+
 	private String ville;
 	
+
 	private Integer codePostal;
 	
+
 	private String titre;
 	
+
 	private Boolean meuble;
-	
+
 	private String description;
 
 	//bi-directional many-to-one association to Colocataire
@@ -68,7 +78,7 @@ public class Location {
 	
 	
 
-	public Location(int locationID, String adress, int idProprietaire, byte isComplet, double loyer, int maxColocataire,
+	public Location(int locationID, String adress, int idProprietaire, byte isComplet, int loyer, int maxColocataire,
 			float note, String photos, Integer placeOccupe, Integer superfice, String ville, Integer codePostal,
 			String titre, Boolean meuble, String description, List<Colocataire> colocataires,
 			List<Evaluation> evaluations, Proprietaire proprietaire, Reservation reservation) {
@@ -103,6 +113,7 @@ public class Location {
 	public void setLocationID(int locationID) {
 		this.locationID = locationID;
 	}
+
 
 	public String getAdress() {
 		return this.adress;
@@ -140,13 +151,18 @@ public class Location {
 		this.isComplet = isComplet;
 	}
 
-	public double getLoyer() {
-		return this.loyer;
+	
+	public Integer getLoyer() {
+		return loyer;
 	}
 
-	public void setLoyer(double loyer) {
+
+
+	public void setLoyer(int loyer) {
 		this.loyer = loyer;
 	}
+
+
 
 	public int getMaxColocataire() {
 		return this.maxColocataire;
@@ -172,7 +188,7 @@ public class Location {
 		this.photos = photos;
 	}
 
-	public int getPlaceOccupe() {
+	public Integer getPlaceOccupe() {
 		return this.placeOccupe;
 	}
 
@@ -180,7 +196,7 @@ public class Location {
 		this.placeOccupe = placeOccupe;
 	}
 
-	public int getSuperfice() {
+	public Integer getSuperfice() {
 		return this.superfice;
 	}
 
@@ -256,7 +272,7 @@ public class Location {
 		this.ville = ville;
 	}
 
-	public int getCodePostal() {
+	public Integer getCodePostal() {
 		return codePostal;
 	}
 

@@ -126,6 +126,7 @@ public class NavigationController {
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
+		model.addAttribute("location", new Location());
 		return "ajout";
 	}
 

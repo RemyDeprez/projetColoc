@@ -84,19 +84,19 @@ $(document).ready(function() {
                     
                         <div class="img-event">
                          
-                            <img style="height:200px; width:200px;"  
+                            <img style="height:200px; width:200px; border : 0.5px solid; margin-top:5px;"  
                                     th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" />  
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading" th:utext=${location.titre}>..</h4>
                             <p class="group inner list-group-item-text">
-                                <ul><li th:utext="${location.adress}"></li>
-                               <li th:utext="${location.placeOccupe}">..</li>
-                                <li th:utext="${location.maxColocataire}">..</li>
-                                 <li th:utext="${location.loyer}">..</li>
-                                   <li th:utext="${location.codePostal}">..</li> 
-                                   <li th:utext="${location.meuble}">..</li>  
-                                  
+                                <ul style="list-style : none"><li th:utext="'Adresse : ' + ${location.adress}"></li>
+                                 <li th:utext="'Code Postal : ' + ${location.codePostal}">..</li> 
+                                 <li th:utext="'Ville : ' + ${location.ville}">..</li>                                
+                               <li th:utext="'Occupants actuels : ' + ${location.placeOccupe}">..</li>
+                                <li th:utext="'Capacité : '  + ${location.maxColocataire}">..</li>
+                                 <li th:utext="' Loyer : ' + ${location.loyer}">..</li>                                 
+                                   <li th:utext="'Meublé ? ' + ${location.meuble}">..</li>                                   
                                        <li th:utext="${location.description}">..</li>  
                                 </ul>
                             <div class="row">
