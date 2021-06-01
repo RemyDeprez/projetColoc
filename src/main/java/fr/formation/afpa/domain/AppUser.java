@@ -8,14 +8,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+<<<<<<< Updated upstream
+=======
+ 
+>>>>>>> Stashed changes
 @Entity
 @Table(name = "App_User", //
 		uniqueConstraints = { //
 				@UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
 public class AppUser {
+<<<<<<< Updated upstream
 
 	@Id
 	@GeneratedValue
@@ -23,6 +30,17 @@ public class AppUser {
 	private Long userId;
 
 	@Column(name = "Attributeprenom", nullable = false)
+=======
+ 
+    @Id
+    @GeneratedValue
+    @Column(name = "User_Id", nullable = false)
+    private Long userId;
+    
+    @NotNull
+    @Size(min=2,max=30)
+    @Column(name = "Attributeprenom", nullable = false)
+>>>>>>> Stashed changes
 	private String attributeprenom;
 
 	@Column(name = "mail", nullable = false)
@@ -45,6 +63,7 @@ public class AppUser {
 	private int telephone;
 
 	@Column(name = "User_Name", length = 36, nullable = false)
+<<<<<<< Updated upstream
 	private String userName;
 
 	@Column(name = "Encryted_Password", length = 128, nullable = false)
@@ -90,6 +109,53 @@ public class AppUser {
 	}
 
 	public String getAttributeprenom() {
+=======
+    private String userName;
+ 
+    @Column(name = "Encryted_Password", length = 128, nullable = false)
+    private String encrytedPassword;
+ 
+    @Column(name = "Enabled", length = 1, nullable = false)
+    private boolean enabled;
+    
+    public AppUser() {
+    	
+    }
+    
+    public Long getUserId() {
+        return userId;
+    }
+ 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+ 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+ 
+    public String getEncrytedPassword() {
+        return encrytedPassword;
+    }
+ 
+    public void setEncrytedPassword(String encrytedPassword) {
+        this.encrytedPassword = encrytedPassword;
+    }
+ 
+    public boolean isEnabled() {
+        return enabled;
+    }
+ 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    
+    public String getAttributeprenom() {
+>>>>>>> Stashed changes
 		return attributeprenom;
 	}
 
