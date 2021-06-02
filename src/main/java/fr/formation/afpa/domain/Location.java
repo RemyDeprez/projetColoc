@@ -50,7 +50,7 @@ public class Location {
 	private String titre;
 	
 
-	private Boolean meuble;
+	private boolean meuble;
 
 	private String description;
 

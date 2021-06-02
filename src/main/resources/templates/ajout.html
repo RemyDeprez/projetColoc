@@ -30,35 +30,48 @@
                     <h2 class="champ">Ajouter une colocation</h2>
                     
                         
-
-                            <input type="text" name="titre" value="" class="form-control input-lg" placeholder="Intitulé"  />                        
-    						<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
-                            <input type="text" name="adress" value="" class="form-control input-lg" placeholder="Adresse"  />                        
-                       	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 
+							<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
+                            <input type="text" name="titre" id="titre" th:value=*{titre} class="form-control input-lg" placeholder="Intitulé"  />                        
+    					
+    						<hr th:if="${#fields.hasErrors('titre')}"/>
+    						
+    			        	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 			
+                            <input type="text" name="adress" th:value=*{adress} class="form-control input-lg" placeholder="Adresse"  />                        
+               
+                       	<hr th:if="${#fields.hasErrors('adress')}"/>
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="codePostal" value="" class="form-control input-lg" placeholder="Code postal"  /> 
-                            <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}">..</span>                        
-
+                           <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}">..</span>  
+                            <input type="number" name="codePostal" th:value=*{codePostal}  class="form-control input-lg" placeholder="Code postal" /> 
+                                               
+								<hr th:if="${#fields.hasErrors('codePostal')}"/>
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="text" name="ville" value="" class="form-control input-lg" placeholder="Ville"  />  
-                            <span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}">..</span>                       
+                            <span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}">..</span>  
+                            <input type="text" name="ville" th:value=*{ville}  class="form-control input-lg" placeholder="Ville"  />  
+                            
+                            <hr th:if="${#fields.hasErrors('ville')}"/>                     
                             </div>
                     </div>
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
-
-                            <input type="number" name="superfice" value="" class="form-control input-lg" placeholder="Superficie"  /> 
-                            <span th:if="${#fields.hasErrors('superfice')}" th:errors="*{superfice}">..</span>                        
+ 							<span th:if="${#fields.hasErrors('superfice')}" th:errors="*{superfice}">..</span> 
+                            <input type="number" name="superfice" th:value=*{superfice}  class="form-control input-lg" placeholder="Superficie (en m²)"  /> 
+                           
+                            <hr th:if="${#fields.hasErrors('superfice')}"/>                       
                             </div>
+                            
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="placeOccupe" value="" class="form-control input-lg" placeholder="Occupants max"  />  
-                            <span th:if="${#fields.hasErrors('placeOccupe')}" th:errors="*{placeOcuppe}">..</span>                       
+                            <span th:if="${#fields.hasErrors('placeOccupe')}" th:errors="*{placeOccupe}">..</span>
+                            <input type="number" name="placeOccupe" th:value=*{placeOccupe}  class="form-control input-lg" placeholder="Occupants max"  />  
+                             
+                            <hr th:if="${#fields.hasErrors('placeOccupe')}"/>                      
                             </div>
                     </div>               
-                    <input type="number" name="loyer" value="" class="form-control input-lg" placeholder="Loyer"  /> 
-                <span th:if="${#fields.hasErrors('loyer')}" th:errors="*{loyer}">..</span> 
+                <span th:if="${#fields.hasErrors('loyer')}" th:errors="*{loyer}">..</span>
+                    <input type="number" name="loyer" th:value=*{loyer} class="form-control input-lg" placeholder="Loyer"  /> 
+                
+                <hr th:if="${#fields.hasErrors('loyer')}"/> 
 
                      
                     <div class="champ" style="margin-bottom:10px">
@@ -69,18 +82,18 @@
                         <input type="radio" name="meuble" value="0" id=notEquipedd />                      Non
                     </label>
                     <br />
-                    <!-- <span th:if="${#fields.hasErrors('meuble')}" th:errors="*{meuble}">..</span>  -->
+                     <span th:field=*{description} th:if="${#fields.hasErrors('meuble')}" th:errors="*{meuble}">..</span>  
                     </div>
                     
                     <div class="champ">
-                    <label>Décrivez votre bien de manière succinte</label>
-                    <textarea id="description" name="description"  class="form-control input-lg"  > </textarea>
+                    <label>Décrivez votre bien de manière succinte (500 caractères maximum)</label>
+                    <textarea id="description" name="description"  class="form-control input-lg" th:field=*{description}  > </textarea>
                     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">..</span> 
                     </div>
                     
-                    <div class="champ">
+                    <div class="champPhoto">
                     <label>Ajoutez des photos de votre bien</label>
-                   <input type="file" accept="image/*" name="photos" class="form-control input-lg" /> 
+                   <input type="file" accept="image/*" name="photos" th:field=*{photos}  class="form-control input-lg" /> 
                   <!--  <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">..</span>  -->
             	</div>
             
