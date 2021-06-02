@@ -37,9 +37,10 @@
 		<div class="row">
 			<div style="margin-left: 25%" class="col-md-6 col-md-offset-3">
 				<form th:action="updateaccount" method="post" th:object="${appuser}"
-					class="form" role="form">
+					class="form" role="form" enctype="multipart/form-data">
 					<h4 class="champ">Modifiez votre compte</h4>
 					<div class="row">
+					<div th:if="${modifications != null}">Modifications</div>
 						<div class="col-xs-6 col-md-6">
 							<input type="text" name="firstname"
 								value="${appuser.attributeprenom}" th:field="*{attributeprenom}"
@@ -66,6 +67,12 @@
 					<input type="text" class="form-control input-lg"
 						th:field="*{telephone}" value="${appuser.telephone}"
 						placeholder="Numéro de Te">
+
+						<div class="champ">
+					<label>Ajoutez des photos de profil</label>
+                    </div>
+                   <input type="file" accept="image/*" name="photos" class="form-control input-lg" th:field="*{photos}"/> 
+					
 
 					<div class="champ">
 						<label>Je suis : </label>

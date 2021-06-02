@@ -30,6 +30,7 @@
                     <h2 class="champ">Ajouter une colocation</h2>
                     
                         
+
                             <input type="text" name="titre" value="" class="form-control input-lg" placeholder="Intitulé"  />                        
     						<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
                             <input type="text" name="adress" value="" class="form-control input-lg" placeholder="Adresse"  />                        
@@ -38,6 +39,7 @@
                         <div class="col-xs-6 col-md-6">
                             <input type="number" name="codePostal" value="" class="form-control input-lg" placeholder="Code postal"  /> 
                             <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}">..</span>                        
+
                             </div>
                         <div class="col-xs-6 col-md-6">
                             <input type="text" name="ville" value="" class="form-control input-lg" placeholder="Ville"  />  
@@ -46,6 +48,7 @@
                     </div>
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
+
                             <input type="number" name="superfice" value="" class="form-control input-lg" placeholder="Superficie"  /> 
                             <span th:if="${#fields.hasErrors('superfice')}" th:errors="*{superfice}">..</span>                        
                             </div>
@@ -56,6 +59,7 @@
                     </div>               
                     <input type="number" name="loyer" value="" class="form-control input-lg" placeholder="Loyer"  /> 
                 <span th:if="${#fields.hasErrors('loyer')}" th:errors="*{loyer}">..</span> 
+
                      
                     <div class="champ" style="margin-bottom:10px">
                      <label >Meublé ? : </label>                    <label class=" radio-inline">

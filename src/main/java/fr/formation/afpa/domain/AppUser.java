@@ -40,7 +40,11 @@ public class AppUser {
 
 	@Column(name = "telephone", nullable = false)
 	private int telephone;
+	
+	@Column(name = "photos", nullable = false)
+	private String photos;
     
+
 	@Column(name = "User_Name", length = 36, nullable = false)
     private String userName;
  
@@ -131,6 +135,14 @@ public class AppUser {
 
 	public void setTelephone(int telephone) {
 		this.telephone = telephone;
+	}
+
+	public String getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String photos) {
+		this.photos = photos;
 	}
 
  

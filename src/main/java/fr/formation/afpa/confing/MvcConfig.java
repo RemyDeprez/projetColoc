@@ -17,6 +17,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         exposeDirectory("photos", registry);
+
     }
      
     private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
@@ -26,6 +27,7 @@ public class MvcConfig implements WebMvcConfigurer {
         if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
          
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
+
     }
     
     @Bean
