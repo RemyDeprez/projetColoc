@@ -7,6 +7,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import fr.formation.afpa.domain.Location;
+import fr.formation.afpa.domain.LocationForm;
 import fr.formation.afpa.service.LocationService;
 
 @Component
@@ -16,17 +17,17 @@ public class LocationValidator implements Validator {
     @Autowired
     private LocationService service;
  
-    // The classes are supported by this validator.
+
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz == Location.class;
+        return clazz == LocationForm.class;
     }
  
     @Override
     public void validate(Object target, Errors errors) {
-        Location location = (Location) target;
+        LocationForm location = (LocationForm) target;
  
-        // Check the fields of AppUserForm.
+        // Méthode pour rejetter le formulaire si un des champs ci-dessous est nul
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titre", "titre");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "adress", "adress");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "codePostal", "codePostal");
@@ -35,10 +36,14 @@ public class LocationValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "placeOccupe", "placeOccupe");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loyer", "loyer");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "meuble", "meuble");
+       
+   
         
-        if(location.getTitre()==null) {
-        	errors.rejectValue("titre", "titre");
+        if(location.getTitre().length() <5) {
+        	errors.rejectValue("titre", "titre.lenght");
         }
+        
+ 
  
        
     }
