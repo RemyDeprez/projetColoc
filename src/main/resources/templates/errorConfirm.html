@@ -37,7 +37,7 @@
 		<div class="row">
 			<div style="margin-left: 25%" class="col-md-6 col-md-offset-3">
 				<form th:action="createaccount" method="post" th:object="${appuser}"
-					 class="form" role="form" enctype="multipart/form-data">
+					 class="form" role="form" >
 					<h4 class="champ">Erreur ! Veuillez entrer à nouveau le code reçu par mail</h4>
 					<div class="row">
 					
@@ -75,7 +75,7 @@
 						placeholder="Numéro de Te" hidden="true"> <input
 						type="radio" th:field="*{status}" th:value="${status}"
 						class="control-input" hidden="true">
-                   <input type="file" accept="image/*" class="form-control input-lg" th:field="*{photos}" th:value="${photos}"
+                   <input type="text" class="form-control input-lg" th:field="*{photos}" th:value="${photos}"
 						 hidden = "true"/>
 						 
 						 <input type="number" name="code" th:value="${appuser.code}"
