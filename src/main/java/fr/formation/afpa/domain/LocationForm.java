@@ -27,7 +27,7 @@ public class LocationForm {
 
 	private byte isComplet;
 
-	private int loyer;
+	private Integer loyer;
 
 	private int maxColocataire;
 
@@ -147,7 +147,7 @@ public class LocationForm {
 
 
 
-	public void setLoyer(int loyer) {
+	public void setLoyer(Integer loyer) {
 		this.loyer = loyer;
 	}
 
@@ -267,13 +267,19 @@ public class LocationForm {
 		this.titre = titre;
 	}
 
-	public boolean isMeuble() {
+
+
+	public Boolean getMeuble() {
 		return meuble;
 	}
+
+
 
 	public void setMeuble(Boolean meuble) {
 		this.meuble = meuble;
 	}
+
+
 
 	public String getDescription() {
 		return description;
@@ -291,6 +297,18 @@ public class LocationForm {
 	         
 	        return "/photos/" + locationID + "/" + photos;
 	    }
+
+
+
+	public void setPlaceOccupe(Integer placeOccupe) {
+		this.placeOccupe = placeOccupe;
+	}
+
+
+
+	public void setSuperfice(Integer superfice) {
+		this.superfice = superfice;
+	}
 	
 	
 	
