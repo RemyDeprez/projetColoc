@@ -2,7 +2,10 @@
 /* BASIC */
 
 
-
+input{
+   text-align:center;
+   
+}
 
 a {
   color: #92badd;
@@ -13,16 +16,14 @@ a {
 
 h1{
 	
-
+	margin-left : 670px;
 	   background-color: #f2f5f3;
-	   width : 230px;
-	   margin-left : 100px;
+	   width : 195px;
+	   
 	   margin-top : 25px;
 	   margin-bottom : -50px;
-	   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+	border-radius : 5px;
+box-shadow: 10px 5px 5px red;
 }
 
 h2 {
@@ -60,9 +61,19 @@ h2 {
   max-width: 450px;
   position: relative;
   padding: 0px;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+ 
   text-align: center;
+
+}
+
+.champPassword {
+	 width: 85%;
+  max-width: 450px;
+  margin-left : 32px;
+  text-align :center;
+ background-color: #f2f5f3;
+
+  
 }
 
 #formFooter {
@@ -85,6 +96,11 @@ h2.inactive {
 h2.active {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
+}
+
+.container{
+	border-radius : 5px;
+box-shadow: 10px 5px 5px red;
 }
 
 
@@ -277,3 +293,4 @@ input[type=text]:placeholder {
 	bottom : 0;
 	width : 100%;
 	}
+	

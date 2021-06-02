@@ -59,10 +59,12 @@
                      
                     <div class="champ"  >
                      <label >Meublé ? : </label>                    <label class=" radio-inline">
-                        <input type="radio"  th:checked="${location.meuble}" name="meuble" value="1" id=equipped />                       Oui
+                        <input type="radio"  th:if="${location.meuble == true}" name="meuble" id="equipped" checked />
+                        <input type="radio"  th:if="${location.meuble == false}" name="meuble" id="equipped" />                       Oui
                     </label>
                     <label class="radio-inline ">
-                        <input type="radio"  th:checked="${location.meuble}"   name="meuble" value="0" id=notEquipedd />                      Non
+                        <input type="radio"  th:if="${location.meuble == true}"   name="meuble" id="notEquipedd" />
+                        <input type="radio"  th:if="${location.meuble == false}"   name="meuble" id="notEquipedd" checked />                      Non
                     </label>
                     <br />
                     </div>

@@ -41,18 +41,24 @@
     border: 0;
 }
 .item.list-group-item .img-event {
+	margin-top : 5px;
     float: left;
-    width: 30%;
+    width: 202px;
+    heigth : 200px;
+    border : 0.5px solid;
 }
 
 .item.list-group-item .list-group-image
 {
     margin-right: 10px;
+    margin-top : 5px;
 }
 .item.list-group-item .thumbnail
 {
+	margin-top : 5px;
     margin-bottom: 0px;
     display: inline-block;
+        width : 80%;
 }
 .item.list-group-item .caption
 {
