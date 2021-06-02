@@ -37,6 +37,7 @@
    border : none;
     line-height: 60px;
     border-radius: 8px;
+
 }
 
 .image-heigth{
@@ -96,7 +97,7 @@
        top: 25%;
        z-index: 1000;
         padding: 5px;
-        opacity: 0.5;
+        text-shadow: 1px 1px 1px grey, 3px 3px 3px white;
 }
 
 
