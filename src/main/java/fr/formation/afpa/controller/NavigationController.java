@@ -179,14 +179,8 @@ public class NavigationController {
 			model.addAttribute("userInfo", userInfo);
 		}
 		
-		
-		listLoc = service.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, loyer, superficie);
-		System.out.println("---------------------------");
+		listLoc = service.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, (double) loyer, superficie);
 		System.out.println(listLoc);
-		System.out.println("---------------------------");
-		model.addAttribute("maxColocataire", maxColocataire);
-		model.addAttribute("loyer", loyer);
-		model.addAttribute("superfice", superficie);
 		model.addAttribute("locations", listLoc);
 		return "rechercheLocation";
 	}
