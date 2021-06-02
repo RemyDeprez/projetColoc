@@ -65,8 +65,7 @@ public class NavigationController {
 	@RequestMapping(value = "/inscription")
 	public String getForm(Model model) {
 
-		AppUser appuser = new AppUser();
-		model.addAttribute("appuser", appuser);
+		model.addAttribute("appuser", new AppUser());
 
 
 		return "inscription";

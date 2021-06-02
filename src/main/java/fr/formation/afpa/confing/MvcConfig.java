@@ -2,22 +2,22 @@ package fr.formation.afpa.confing;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
- 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
- 
- 
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         exposeDirectory("photos", registry);
-<<<<<<< HEAD
-       
-=======
->>>>>>> b07711514a4629cf64e8bdc1178b0bb650b08742
+
+
     }
      
     private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
@@ -27,9 +27,6 @@ public class MvcConfig implements WebMvcConfigurer {
         if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
          
         registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
-<<<<<<< HEAD
-        
-=======
->>>>>>> b07711514a4629cf64e8bdc1178b0bb650b08742
+
     }
 }

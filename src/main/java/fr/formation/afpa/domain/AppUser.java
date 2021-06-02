@@ -50,9 +50,13 @@ public class AppUser {
  
     @Column(name = "Encryted_Password", length = 128, nullable = false)
     private String encrytedPassword;
+    
+    @Column(name = "code", length = 4)
+    private Integer code;
  
-    @Column(name = "Enabled", length = 1, nullable = false)
-    private boolean enabled;
+
+	@Column(name = "ENABLED", length = 1, nullable = false)
+    private boolean isenabled;
     
     public AppUser() {
     	
@@ -83,11 +87,11 @@ public class AppUser {
     }
  
     public boolean isEnabled() {
-        return enabled;
+        return isenabled;
     }
  
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEnabled(boolean isenabled) {
+        this.isenabled = isenabled;
     }
     public String getAttributeprenom() {
 		return attributeprenom;
@@ -143,6 +147,13 @@ public class AppUser {
 
 	public void setPhotos(String photos) {
 		this.photos = photos;
+	}
+    public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 
  
