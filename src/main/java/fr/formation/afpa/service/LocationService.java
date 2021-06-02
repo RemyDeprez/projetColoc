@@ -51,7 +51,7 @@ public class LocationService implements ILocationService {
 	}
 
 	@Override
-	public List<Location> findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(Integer maxColocataire, Double loyer,
+	public List<Location> findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(Integer maxColocataire, Integer loyer,
 			Integer superfice) {
 		return dao.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, loyer, superfice);
 	}
