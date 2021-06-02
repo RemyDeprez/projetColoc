@@ -36,6 +36,7 @@ import org.thymeleaf.util.Validate;
 
 import fr.formation.afpa.FileUploadUtils;
 import fr.formation.afpa.domain.Location;
+import fr.formation.afpa.domain.LocationForm;
 import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.validator.LocationValidator;
 
@@ -48,25 +49,25 @@ public class LocationController implements WebMvcConfigurer {
 	LocationService service;
 
 	private List<Location> listLoc = new ArrayList<Location>();
-	
+
 	@Autowired
 	private LocationValidator locationValidator;
-	
-	//Méthode pour configurer le validator
+
+	// Méthode pour configurer le validator
 	@InitBinder
-	   protected void initBinder(WebDataBinder dataBinder) {
-	      
-	      Object target = dataBinder.getTarget();
-	      if (target == null) {
-	         return;
-	      }
-	      System.out.println("Target=" + target);
-	 
-	      if (target.getClass() == Location.class) {
-	         dataBinder.setValidator(locationValidator);
-	      }
-	   
-	   }
+	protected void initBinder(WebDataBinder dataBinder) {
+
+		Object target = dataBinder.getTarget();
+		if (target == null) {
+			return;
+		}
+		System.out.println("Target=" + target);
+
+		if (target.getClass() == LocationForm.class) {
+			dataBinder.setValidator(locationValidator);
+		}
+
+	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -74,7 +75,7 @@ public class LocationController implements WebMvcConfigurer {
 	}
 
 	@PostMapping(value = "/ajoutbien")
-	public String add( @ModelAttribute("location") @Validated Location location, BindingResult bindingResult,
+	public String add(@ModelAttribute("location") @Validated LocationForm locationForm, BindingResult bindingResult,
 			@RequestParam("photos") MultipartFile photos) throws IOException {
 
 		// Méhodes pour récupérer les erreurs dans la console
@@ -82,23 +83,30 @@ public class LocationController implements WebMvcConfigurer {
 		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
 
-//		ValidationUtils.rejectIfEmpty(bindingResult, "adress", location.getAdress());
-		
 		if (bindingResult.hasErrors()) {
 
 			return "ajout";
-	
-	}
-			String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+		}
 
-			location.setPhotos(fileName);
+		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+		Location location = new Location();
+		location.setAdress(locationForm.getAdress());
+		location.setSuperfice(locationForm.getSuperfice());
+		location.setPlaceOccupe(locationForm.getPlaceOccupe());
+		location.setLoyer(locationForm.getLoyer());
+		location.setVille(locationForm.getVille());
+		location.setCodePostal(locationForm.getCodePostal());
+		location.setTitre(locationForm.getTitre());
+		location.setDescription(locationForm.getDescription());
+		location.setMeuble(locationForm.isMeuble());
+		location.setPhotos(fileName);
 
-			service.saveOrUpdate(location);
-			String uploadDir = "photos/" + location.getLocationID();
+		service.saveOrUpdate(location);
+		String uploadDir = "photos/" + location.getLocationID();
 
-			ImageController.saveFile(uploadDir, fileName, photos);
+		ImageController.saveFile(uploadDir, fileName, photos);
 
-			return "redirect:/index";
+		return "redirect:/index";
 	}
 
 	@GetMapping("/modif/{locationID}")
