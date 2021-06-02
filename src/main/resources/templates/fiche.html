@@ -40,6 +40,7 @@
           <li>Du 01/04/2021 au 02/04/2021</li>
           <li th:if="${location.meuble}">Meublée : oui</li>
           <li th:if="${!location.meuble}">Meublée : non</li>
+          <li th:utext="@{'Nombre de colocataires maximum : ' + ${location.maxColocataire}}"></li>
           </ul>
         </div>
         <p class="research-result" th:utext="${location.description}"></p>
