@@ -46,13 +46,14 @@ public class InscriptionController {
 			String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 			appuser.setEncrytedPassword(encrytedPassword);
 			appuser.setPhotos(fileName);
+			appuser.setEnabled(1);
 			model.addAttribute("appuser", appuser);
 			service.saveOrUpdate(appuser);
 			String uploadDir = "photos/profile/" + appuser.getUserId();
 
 			ImageController.saveFile(uploadDir, fileName, photos);
 			
-			appuser.setEnabled(true);
+			
 
 			return "connexion";
 		} else {

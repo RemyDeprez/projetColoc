@@ -55,8 +55,8 @@ public class AppUser {
     private Integer code;
  
 
-	@Column(name = "ENABLED", length = 1, nullable = false)
-    private boolean isenabled;
+	@Column(name = "enabled", length = 1)
+    private Integer enabled;
     
     public AppUser() {
     	
@@ -86,12 +86,12 @@ public class AppUser {
         this.encrytedPassword = encrytedPassword;
     }
  
-    public boolean isEnabled() {
-        return isenabled;
+    public Integer enabled() {
+        return enabled;
     }
  
-    public void setEnabled(boolean isenabled) {
-        this.isenabled = isenabled;
+    public void setEnabled(Integer b) {
+        this.enabled = b;
     }
     public String getAttributeprenom() {
 		return attributeprenom;
