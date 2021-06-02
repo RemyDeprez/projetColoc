@@ -40,21 +40,22 @@ public class InscriptionController {
 
 	@PostMapping(value = "/createaccount")
 	public String index(Model model, AppUser appuser, BindingResult bindingResult,
-			@RequestParam("photos") MultipartFile photos, @RequestParam("usercode") Integer usercode)
+			@RequestParam("photos") String photos, @RequestParam("usercode") Integer usercode)
 			throws IOException {
 
 		appuser.setStatus("Colocataire");
 		if (appuser.getCode().equals(usercode)) {
-			String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+			
 			String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 			appuser.setEncrytedPassword(encrytedPassword);
-			appuser.setPhotos(fileName);
+			appuser.setPhotos(photos);
 			appuser.setEnabled(1);
+			appuser.setCode(0000);
 			model.addAttribute("appuser", appuser);
 			service.saveOrUpdate(appuser);
 			String uploadDir = "photos/profile/" + appuser.getUserId();
 
-			ImageController.saveFile(uploadDir, fileName, photos);
+			
 			
 			
 

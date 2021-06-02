@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,15 +28,15 @@ public class EnvoieMailController {
     	
     	model.setViewName("confirmregister");
     
-    	
+    	String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
     	Random random = new Random();
         int code;
-        
+        appuser.setPhotos(fileName);
         
         // Create a Simple MailMessage.
         SimpleMailMessage message = new SimpleMailMessage();
         
-        code = random.nextInt(9999);
+        code = random.nextInt(999);
         message.setTo(appuser.getMail());
         message.setSubject("Test Simple Email");
         message.setText("Hello " + appuser.getAttributeprenom()+" ! Here is your confirmation code : "+ code);

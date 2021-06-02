@@ -158,7 +158,7 @@ public class LocationController implements WebMvcConfigurer {
 		location.setMeuble(meuble);
 		location.setPhotos(fileName);
 
-
+		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
 

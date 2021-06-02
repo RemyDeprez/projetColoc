@@ -77,8 +77,8 @@
 						placeholder="Numéro de Te" hidden="true"> <input
 						type="radio" th:field="*{status}" th:value="${status}"
 						class="control-input" hidden="true">
-                   <input type="file" accept="image/*" class="form-control input-lg" th:field="*{photos}" th:value="${appuser.photos}"
-						 hidden = "true"/>
+                   <input type="text" class="form-control input-lg" th:field="*{photos}" th:value="${appuser.photos}"
+						 />
 						 
 						 <input type="number" name="code" th:value="${appuser.code}"
 						class="form-control input-lg"
