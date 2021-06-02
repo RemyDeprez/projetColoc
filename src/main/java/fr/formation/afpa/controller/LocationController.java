@@ -2,6 +2,7 @@ package fr.formation.afpa.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -37,7 +38,7 @@ import org.thymeleaf.util.Validate;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.domain.LocationForm;
 import fr.formation.afpa.service.LocationService;
-
+import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.LocationValidator;
 
 
