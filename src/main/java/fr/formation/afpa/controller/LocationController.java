@@ -124,7 +124,7 @@ public class LocationController implements WebMvcConfigurer {
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
 
 		if (bindingResult.hasErrors()) {
-			return "modif";
+			return "modifError";
 		}
 
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
