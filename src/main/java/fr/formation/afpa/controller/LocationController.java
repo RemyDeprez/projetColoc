@@ -3,6 +3,7 @@ package fr.formation.afpa.controller;
 
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,9 @@ public class LocationController implements WebMvcConfigurer {
 	@PostMapping(value = "/ajoutbien")
 	public String add(@ModelAttribute("location") @Validated LocationForm locationForm, BindingResult bindingResult,
 			@RequestParam("photos") MultipartFile photos) throws IOException {
-
+		
+		
+		
 		// Méhodes pour récupérer les erreurs dans la console
 		System.out.println("Error count : " + bindingResult.getErrorCount());
 		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
@@ -82,8 +85,11 @@ public class LocationController implements WebMvcConfigurer {
 		if (bindingResult.hasErrors()) {
 			return "ajout";
 		}
-
+		
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+	
+	
+		
 		Location location = new Location();
 		location.setAdress(locationForm.getAdress());
 		location.setSuperfice(locationForm.getSuperfice());
@@ -95,11 +101,16 @@ public class LocationController implements WebMvcConfigurer {
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
 		location.setPhotos(fileName);
+		
+	
 
 		service.saveOrUpdate(location);
+		
+		
 		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
+		
 
 		return "redirect:/index";
 
@@ -141,12 +152,14 @@ public class LocationController implements WebMvcConfigurer {
 		location.setTitre(locationForm.getTitre());
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
+		if(fileName.length() > 0 ) {
 		location.setPhotos(fileName);
+		
 
 		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
-
+		}
 		service.saveOrUpdate(location);
 
 		listLoc = service.findAll();

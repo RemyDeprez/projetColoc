@@ -15,13 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import fr.formation.afpa.domain.Location;
 
 import fr.formation.afpa.domain.AppUser;
-import fr.formation.afpa.domain.Utilisateur;
-
 import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;

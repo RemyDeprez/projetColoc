@@ -10,7 +10,10 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet"/>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+      <!-- https://cdnjs.com/libraries/stomp.js/ -->
+      <script  src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+      
     <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
     <link href="/css/styleMessagerie.css"  rel="stylesheet" type="text/css"/>
 
@@ -122,39 +125,16 @@
               <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
-                  <p>Test which is a new approach to have all
-                    solutions</p>
-                  <span class="time_date"> 11:01 AM    |    June 9</span></div>
+               <ul id="messageArea"></ul>
+                  <span class="time_date"></span></div>
               </div>
             </div>
             <div class="outgoing_msg">
               <div class="sent_msg">
-                <p>Test which is a new approach to have all
-                  solutions</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+                <p></p>
+                <span class="time_date"> </span> </div>
             </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test, which is a new approach to have</p>
-                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-              </div>
-            </div>
-            <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>Apollo University, Delhi, India Test</p>
-                <span class="time_date"> 11:01 AM    |    Today</span> </div>
-            </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>We work directly with our designers and suppliers,
-                    and sell direct to you, which means quality, exclusive
-                    products, at a price anyone can afford.</p>
-                  <span class="time_date"> 11:01 AM    |    Today</span></div>
-              </div>
+            
             </div>
           </div>
           <div class="type_msg">
@@ -168,11 +148,104 @@
       
     
       
-    </div></div>
+    </div>
     
   <footer class="footerAcc">
 <p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
 
 </footer>
+
+ <script>'use strict';
+ 
+ 
+ var messageForm = document.querySelector('#messageForm');
+ var messageInput = document.querySelector('#message');
+ var messageArea = document.querySelector('#messageArea');
+ var connectingElement = document.querySelector('#connecting');
+  
+ var stompClient = null;
+ var username = null;
+   
+  
+ function connect() {
+     username = document.querySelector('#username').innerText.trim();
+       
+     var socket = new SockJS('/ws');
+     stompClient = Stomp.over(socket);
+  
+     stompClient.connect({}, onConnected, onError);
+ }
+  
+ // Connect to WebSocket Server.
+ connect();
+  
+ function onConnected() {
+     // Subscribe to the Public Topic
+     stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
+  
+     // Tell your username to the server
+     stompClient.send("/app/chat.addUser",
+         {},
+         JSON.stringify({sender: username, type: 'JOIN'})
+     )
+  
+     connectingElement.classList.add('hidden');
+ }
+  
+  
+ function onError(error) {
+     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+     connectingElement.style.color = 'red';
+ }
+  
+  
+ function sendMessage(event) {
+     var messageContent = messageInput.value.trim();
+     if(messageContent && stompClient) {
+         var chatMessage = {
+             sender: username,
+             content: messageInput.value,
+             type: 'CHAT'
+         };
+         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+         messageInput.value = '';
+     }
+     event.preventDefault();
+ }
+  
+  
+ function onMessageReceived(payload) {
+     var message = JSON.parse(payload.body);
+  
+     var messageElement = document.createElement('li');
+  
+     if(message.type === 'JOIN') {
+         messageElement.classList.add('event-message');
+         message.content = message.sender + ' joined!';
+     } else if (message.type === 'LEAVE') {
+         messageElement.classList.add('event-message');
+         message.content = message.sender + ' left!';
+     } else {
+         messageElement.classList.add('chat-message');   
+         var usernameElement = document.createElement('strong');
+         usernameElement.classList.add('nickname');
+         var usernameText = document.createTextNode(message.sender);
+         var usernameText = document.createTextNode(message.sender);
+         usernameElement.appendChild(usernameText);
+         messageElement.appendChild(usernameElement);
+     }
+  
+     var textElement = document.createElement('span');
+     var messageText = document.createTextNode(message.content);
+     textElement.appendChild(messageText);
+  
+     messageElement.appendChild(textElement);
+  
+     messageArea.appendChild(messageElement);
+     messageArea.scrollTop = messageArea.scrollHeight;
+ }
+   
+   
+ messageForm.addEventListener('submit', sendMessage, true);</script>
     </body>
     </html>
