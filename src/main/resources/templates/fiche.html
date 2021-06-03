@@ -29,8 +29,7 @@
  <div class="container" style="background-color:#f2f5f3;">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
-         <h1>Informations</h1>
-         <div th:utext="${location.titre}"></div>
+         <h1 th:utext="@{'Informations : ' + ${location.titre}}"></h1>
         <div class="resizepicture"><img th:src="@{'photos/' + ${location.locationID} + '/' + ${location.photos}}" class="img-fluid" alt="Maison"></div>
         <div class="rounded proprietes">
         <ul>
