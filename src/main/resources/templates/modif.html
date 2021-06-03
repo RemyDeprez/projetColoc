@@ -29,62 +29,85 @@
  <div class="container" id="wrap">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
-            <form th:action="@{'/modifbien/'} + ${location.locationID}" method="post"
-            enctype="multipart/form-data" th:object="${location}" class="form" role="form"> 
+            <form th:action="@{'/modifbien/'} + ${locationForm.locationID}" method="post"
+            enctype="multipart/form-data" th:object="${locationForm}" class="form" role="form"> 
                     <h2 class="champ">Modifier une colocation</h2>
                     
                         
-                            <input type="text" name="titre" th:value="${location.titre}" class="form-control input-lg" placeholder="Intitulé"  />                        
-    
-                            <input type="text" name="adress" th:value="${location.adress}" class="form-control input-lg" placeholder="Adresse"  />                        
-                        
+                          <span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
+                            <input type="text" name="titre" id="titre" th:value=*{titre} class="form-control input-lg" placeholder="Intitulé"  />                        
+    					
+    						<hr th:if="${#fields.hasErrors('titre')}"/>
+    						
+    			        	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 			
+                            <input type="text" name="adress" th:value=*{adress} class="form-control input-lg" placeholder="Adresse"  />                        
+               
+                       	<hr th:if="${#fields.hasErrors('adress')}"/>
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="codePostal" th:value="${location.codePostal}" class="form-control input-lg" placeholder="Code postal"  />                        
+                           <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}">..</span>  
+                            <input type="number" name="codePostal" th:value=*{codePostal}  class="form-control input-lg" placeholder="Code postal" /> 
+                                               
+								<hr th:if="${#fields.hasErrors('codePostal')}"/>
                             </div>
                         <div class="col-xs-6 col-md-6">
-                            <input type="text" name="ville" th:value="${location.ville}" class="form-control input-lg" placeholder="Ville"  />                        
+                            <span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}">..</span>  
+                            <input type="text" name="ville" th:value=*{ville}  class="form-control input-lg" placeholder="Ville"  />  
+                            
+                            <hr th:if="${#fields.hasErrors('ville')}"/>                     
                             </div>
                     </div>
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="superfice" th:value="${location.superfice}" class="form-control input-lg" placeholder="Superficie"  />                        
+ 							<span th:if="${#fields.hasErrors('superfice')}" th:errors="*{superfice}">..</span> 
+                            <input type="number" name="superfice" th:value=*{superfice}  class="form-control input-lg" placeholder="Superficie (en m²)"  /> 
+                           
+                            <hr th:if="${#fields.hasErrors('superfice')}"/>                       
                             </div>
+                            
                         <div class="col-xs-6 col-md-6">
-                            <input type="number" name="placeOccupe" th:value="${location.placeOccupe}" class="form-control input-lg" placeholder="Occupants max"  />                        
+                            <span th:if="${#fields.hasErrors('placeOccupe')}" th:errors="*{placeOccupe}">..</span>
+                            <input type="number" name="placeOccupe" th:value=*{placeOccupe}  class="form-control input-lg" placeholder="Occupants max"  />  
+                             
+                            <hr th:if="${#fields.hasErrors('placeOccupe')}"/>                      
                             </div>
                     </div>               
-                    <input type="number" name="loyer" th:value="${location.loyer}" class="form-control input-lg" placeholder="Loyer"  /> 
+                <span th:if="${#fields.hasErrors('loyer')}" th:errors="*{loyer}">..</span>
+                    <input type="number" name="loyer" th:value=*{loyer} class="form-control input-lg" placeholder="Loyer"  /> 
                 
+                <hr th:if="${#fields.hasErrors('loyer')}"/> 
                      
                     <div class="champ"  >
                      <label >Meublé ? : </label>                    <label class=" radio-inline">
-                        <input type="radio"  th:if="${location.meuble == true}" name="meuble" id="equipped" checked />
-                        <input type="radio"  th:if="${location.meuble == false}" name="meuble" id="equipped" />                       Oui
+                        <input type="radio"  th:if="*{meuble == true}" name="meuble" id="equipped" checked />
+                        <input type="radio"  th:if="*{meuble == false}" name="meuble" id="equipped" />                       Oui
                     </label>
                     <label class="radio-inline ">
-                        <input type="radio"  th:if="${location.meuble == true}"   name="meuble" id="notEquipedd" />
-                        <input type="radio"  th:if="${location.meuble == false}"   name="meuble" id="notEquipedd" checked />                      Non
+                        <input type="radio"  th:if="*{meuble == true}"   name="meuble" id="notEquipedd" />
+                        <input type="radio"  th:if="*{meuble == false}"   name="meuble" id="notEquipedd" checked />                      Non
                     </label>
                     <br />
                     </div>
                     
-                    <div class="champ">
-                    <label>Décrivez votre bien de manière succinte</label>
-                    <textarea name="description" th:text="${location.description}"  class="form-control input-lg"  > </textarea>
+                      <div class="champ">
+                    <label>Décrivez votre bien de manière succinte (500 caractères maximum)</label>
+                    <textarea id="description" name="description"  class="form-control input-lg" th:field=*{description}  > </textarea>
+                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">..</span> 
                     </div>
                     
-                  
-                    <div class="champ">
-                    <label>Changez les photos de votre bien</label>
-                   <input type="file" name="photos" th:value="${location.photos}" class="form-control input-lg" /> 
+                    <div class="champPhoto">
+                    <label>Ajoutez des photos de votre bien</label>
+                   <input type="file" accept="image/*" name="photos" th:field=*{photos}  class="form-control input-lg" /> 
+                  <!--  <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">..</span>  -->
             	</div>
+            
+               
             
                     <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
                         Modifier le bien</button>
             </form> 
             
-            <form th:action="@{'/supprbien/'} + ${location.locationID}"  class="form" >
+            <form th:action="@{'/supprbien/'} + *{locationID}"  class="form" >
               <button class="btn btn-lg btn-danger btn-block signup-btn" type="submit">
                         Supprimer le bien</button>
             </form>

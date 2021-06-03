@@ -19,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 
@@ -55,7 +56,6 @@ import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.LocationValidator;
 
-
 @Controller
 
 public class LocationController implements WebMvcConfigurer {
@@ -63,7 +63,6 @@ public class LocationController implements WebMvcConfigurer {
 
 	@Autowired
 	LocationService service;
-
 
 	private List<Location> listLoc = new ArrayList<Location>();
 
@@ -101,7 +100,6 @@ public class LocationController implements WebMvcConfigurer {
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
 
 		if (bindingResult.hasErrors()) {
-
 			return "ajout";
 		}
 
@@ -115,7 +113,7 @@ public class LocationController implements WebMvcConfigurer {
 		location.setCodePostal(locationForm.getCodePostal());
 		location.setTitre(locationForm.getTitre());
 		location.setDescription(locationForm.getDescription());
-		location.setMeuble(locationForm.isMeuble());
+		location.setMeuble(locationForm.getMeuble());
 		location.setPhotos(fileName);
 
 		service.saveOrUpdate(location);
@@ -123,13 +121,9 @@ public class LocationController implements WebMvcConfigurer {
 
 		ImageController.saveFile(uploadDir, fileName, photos);
 
-
 		return "redirect:/index";
 
-
 	}
-
-
 
 
 	@GetMapping("/modif/{locationID}")
@@ -141,21 +135,32 @@ public class LocationController implements WebMvcConfigurer {
 	}
 
 	@PostMapping(value = "/modifbien/{locationID}")
-	public String update(Model model, Location location, BindingResult bindingResult, String adress, Integer superfice,
-			Integer placeOccupe, Integer loyer, String ville, Integer codePostal, String titre, String description,
-			Boolean meuble, @RequestParam("photos") MultipartFile photos) throws IOException {
+	public String update(Model model, @Validated LocationForm locationForm, BindingResult bindingResult,
+			@RequestParam("photos") MultipartFile photos ) throws IOException {
+
+		// Méhodes pour récupérer les erreurs dans la console
+		System.out.println("Error count : " + bindingResult.getErrorCount());
+		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
+		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
+
+		if (bindingResult.hasErrors()) {
+			return "modif";
+		}
 
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
 
-		location.setAdress(adress);
-		location.setSuperfice(superfice);
-		location.setMaxColocataire(placeOccupe);
-		location.setLoyer(loyer);
-		location.setVille(ville);
-		location.setCodePostal(codePostal);
-		location.setTitre(titre);
-		location.setDescription(description);
-		location.setMeuble(meuble);
+		
+		
+		Location location = service.findById(locationForm.getLocationID()).get();
+		location.setAdress(locationForm.getAdress());
+		location.setSuperfice(locationForm.getSuperfice());
+		location.setPlaceOccupe(locationForm.getPlaceOccupe());
+		location.setLoyer(locationForm.getLoyer());
+		location.setVille(locationForm.getVille());
+		location.setCodePostal(locationForm.getCodePostal());
+		location.setTitre(locationForm.getTitre());
+		location.setDescription(locationForm.getDescription());
+		location.setMeuble(locationForm.getMeuble());
 		location.setPhotos(fileName);
 
 		String uploadDir = "photos/" + location.getLocationID();
@@ -164,10 +169,8 @@ public class LocationController implements WebMvcConfigurer {
 
 		service.saveOrUpdate(location);
 
-
 		listLoc = service.findAll();
 		model.addAttribute("listLoc", listLoc);
-
 
 
 		return "redirect:/index";
@@ -180,10 +183,9 @@ public class LocationController implements WebMvcConfigurer {
 		return "redirect:/index";
 	}
 
-
 	@RequestMapping(path = "/fiche", method = RequestMethod.GET)
 	public String ficheColocation(Model model, @RequestParam("locationID") Integer id, Principal principal) {
-		if(principal != null) {
+		if (principal != null) {
 			String userName = principal.getName();
 
 			System.out.println("User Name: " + userName);
@@ -193,7 +195,7 @@ public class LocationController implements WebMvcConfigurer {
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
-		
+
 		Location location = service.findById(id).get();
 		model.addAttribute("location", location);
 		return "fiche";
