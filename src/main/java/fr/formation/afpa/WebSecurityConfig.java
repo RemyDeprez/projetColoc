@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,11 +20,12 @@ import fr.formation.afpa.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	  @Autowired
+	  	@Autowired
 	    private UserDetailsServiceImpl userDetailsService;
 	 
 	    @Autowired
 	    private DataSource dataSource;
+	    
 	 
 	    @Bean
 	    public BCryptPasswordEncoder passwordEncoder() {

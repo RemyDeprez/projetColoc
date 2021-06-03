@@ -3,6 +3,7 @@ package fr.formation.afpa.controller;
 import java.io.IOException;
 import java.security.Principal;
 
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -38,18 +39,32 @@ public class InscriptionController {
 //	Methode lancée lorsque le formulaire est envoyé
 
 	@PostMapping(value = "/createaccount")
-	public String index(Model model, AppUser appuser,BindingResult bindingResult,  @RequestParam("photos") MultipartFile photos) throws IOException {
-		String fileName = StringUtils.cleanPath(photos.getOriginalFilename()); 
-		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
-		appuser.setEncrytedPassword(encrytedPassword);
-		appuser.setPhotos(fileName);
-		model.addAttribute("appuser", appuser);
-		service.saveOrUpdate(appuser);
-		String uploadDir = "photos/profile/" + appuser.getUserId();
+	public String index(Model model, AppUser appuser, BindingResult bindingResult,
+			@RequestParam("photos") String photos, @RequestParam("usercode") Integer usercode)
+			throws IOException {
 
-		ImageController.saveFile(uploadDir, fileName, photos);
+		appuser.setStatus("Colocataire");
+		if (appuser.getCode().equals(usercode)) {
+			
+			String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
+			appuser.setEncrytedPassword(encrytedPassword);
+			appuser.setPhotos(photos);
+			appuser.setEnabled(1);
+			appuser.setCode(0000);
+			model.addAttribute("appuser", appuser);
+			service.saveOrUpdate(appuser);
+			String uploadDir = "photos/profile/" + appuser.getUserId();
+
+			
+			
+			
+
+			return "connexion";
+		} else {
+			model.addAttribute("appuser", appuser);
+			return "errorConfirm";
+		}
 		
-		return "connexion";
 	}
 
 //methode lancée lorsque l'on demande le formulaire d'update de profil
@@ -74,18 +89,19 @@ public class InscriptionController {
 
 //methode lancée lorsque l'on appuie sur le boutton "valider" de l'update
 	@PostMapping(value = "/updateaccount")
-	public String updateAccount(Model model, AppUser appuser,BindingResult bindingResult,  @RequestParam("photos") MultipartFile photos) throws IOException {
+	public String updateAccount(Model model, AppUser appuser, BindingResult bindingResult,
+			@RequestParam("photos") MultipartFile photos) throws IOException {
 		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 		appuser.setEncrytedPassword(encrytedPassword);
-		
-		String fileName = StringUtils.cleanPath(photos.getOriginalFilename()); 
+
+		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
 		appuser.setPhotos(fileName);
 		model.addAttribute("appuser", appuser);
 		service.saveOrUpdate(appuser);
 		String uploadDir = "photos/profile/" + appuser.getUserId();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
-		
+
 		return "index";
 	}
 //methode lancée lorsque l'on appuie sur le button delete de l'update
@@ -96,6 +112,5 @@ public class InscriptionController {
 		service.deleteByUserId(appuser.getUserId());
 		return "index";
 	}
-	
-	
+
 }

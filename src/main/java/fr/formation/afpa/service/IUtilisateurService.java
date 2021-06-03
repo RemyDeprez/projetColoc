@@ -15,6 +15,7 @@ public interface IUtilisateurService {
 	void deleteByUserId(Long long1);
 
 	AppUser findByLogin(String login);
-	
+
 	AppUser findByUserId(Long userId);
+
 }

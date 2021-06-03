@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.afpa.dao.IUtilisateurDao;
 import fr.formation.afpa.domain.AppUser;
-import fr.formation.afpa.domain.Utilisateur;
+
 
 @Service
 @Transactional
@@ -16,7 +16,7 @@ public class UtilisateurService implements IUtilisateurService {
 
 	@Autowired
 	IUtilisateurDao dao;
-	
+   
 		
 	public IUtilisateurDao getDao() {
 		return dao;
@@ -54,5 +54,6 @@ public class UtilisateurService implements IUtilisateurService {
 		
 		return dao.findByUserId(userId);
 	}
-
 }
+
+
