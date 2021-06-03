@@ -186,6 +186,11 @@ public class NavigationController {
 	}
 	
 
-
+	@RequestMapping(path = "/contact", method  = RequestMethod.GET)
+	public String getContact(Model model) {
+	
+		
+		return "contact";
+	}
 
 }

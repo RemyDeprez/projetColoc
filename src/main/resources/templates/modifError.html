@@ -9,28 +9,32 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-   <link th:href="@{/css/styleAccueil.css}"  rel="stylesheet" type="text/css"/>
-   <link th:href="@{/css/styleAjout.css}"   rel="stylesheet" type="text/css"/>
-   
+   <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
+    <link href="/css/styleAjout.css"  rel="stylesheet" type="text/css"/>
 
 
 
-<title>Ajout d'un bien</title>
+<title>Modifier un  bien</title>
 </head>
 <body>
-
-   <header th:insert="fragment/header.html :: header"> </header>
    
-   <!-- Formulaire pour ajouter un bien -->
+<header th:insert="fragment/header.html :: header"> </header>
+
+
+
+
+<body style="text-align : center">
+
 
  <div class="container" id="wrap">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
-            <form th:action="@{/ajoutbien}" th:object="${location}" enctype="multipart/form-data" method="post" class="form" role="form">  
-                    <h2 class="champ">Ajouter une colocation</h2>
+            <form th:action="@{'/modifbien/'} + ${locationForm.locationID}" method="post"
+            enctype="multipart/form-data" th:object="${locationForm}" class="form" role="form"> 
+                    <h2 class="champ">Modifier une colocation</h2>
                     
                         
-							<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
+                          <span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
                             <input type="text" name="titre" id="titre" th:value=*{titre} class="form-control input-lg" placeholder="Intitulé"  />                        
     					
     						<hr th:if="${#fields.hasErrors('titre')}"/>
@@ -72,20 +76,20 @@
                     <input type="number" name="loyer" th:value=*{loyer} class="form-control input-lg" placeholder="Loyer"  /> 
                 
                 <hr th:if="${#fields.hasErrors('loyer')}"/> 
-
                      
-                    <div class="champ" style="margin-bottom:10px">
+                    <div class="champ"  >
                      <label >Meublé ? : </label>                    <label class=" radio-inline">
-                        <input type="radio" name="meuble" value="1" id=equipped />                       Oui
+                        <input type="radio"  th:if="*{meuble == true}" name="meuble" id="equipped" checked />
+                        <input type="radio"  th:if="*{meuble == false}" name="meuble" id="equipped" />                       Oui
                     </label>
                     <label class="radio-inline ">
-                        <input type="radio" name="meuble" value="0" id=notEquipedd />                      Non
+                        <input type="radio"  th:if="*{meuble == true}"   name="meuble" id="notEquipedd" />
+                        <input type="radio"  th:if="*{meuble == false}"   name="meuble" id="notEquipedd" checked />                      Non
                     </label>
                     <br />
-                     <span th:field=*{description} th:if="${#fields.hasErrors('meuble')}" th:errors="*{meuble}">..</span>  
                     </div>
                     
-                    <div class="champ">
+                      <div class="champ">
                     <label>Décrivez votre bien de manière succinte (500 caractères maximum)</label>
                     <textarea id="description" name="description"  class="form-control input-lg" th:field=*{description}  > </textarea>
                     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">..</span> 
@@ -94,22 +98,28 @@
                     <div class="champPhoto">
                     <label>Ajoutez des photos de votre bien</label>
                    <input type="file" accept="image/*" name="photos" th:field=*{photos}  class="form-control input-lg" /> 
-                   <span th:if="${#fields.hasErrors('photos')}" th:errors="*{photos}">..</span>  
+                  <!--  <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">..</span>  -->
             	</div>
             
-                 <button type=submit class="btn btn-lg btn-primary btn-block signup-btn">
-                        Ajouter le bien</button>
-            </form>          
+               
+            
+                    <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                        Modifier le bien</button>
+            </form> 
+            
+            <form th:action="@{'/supprbien/'} + *{locationID}"  class="form" >
+              <button class="btn btn-lg btn-danger btn-block signup-btn" type="submit">
+                        Supprimer le bien</button>
+            </form>
           </div>
 </div>            
 </div>
 
 
-  <footer class="footer">
+  <footer class="footerAcc">
 <p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
 
 </footer>
-
 
 </body>
 </html>
