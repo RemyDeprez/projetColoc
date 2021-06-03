@@ -75,7 +75,8 @@ public class InscriptionController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -94,6 +95,7 @@ public class InscriptionController {
 		appuser.setEncrytedPassword(encrytedPassword);
 
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+		appuser.setEnabled(1);
 		appuser.setPhotos(fileName);
 		model.addAttribute("appuser", appuser);
 		service.saveOrUpdate(appuser);
@@ -101,7 +103,9 @@ public class InscriptionController {
 
 		ImageController.saveFile(uploadDir, fileName, photos);
 
-		return "index";
+		model.addAttribute("modifications", "Les modifications ont été enregistrées.");
+		
+		return "modifprofile";
 	}
 //methode lancée lorsque l'on appuie sur le button delete de l'update
 
