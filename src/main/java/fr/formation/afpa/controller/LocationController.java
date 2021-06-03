@@ -178,7 +178,9 @@ public class LocationController implements WebMvcConfigurer {
 		}
 
 		Location location = service.findById(id).get();
+		String description = location.getDescription().replace("\n", "<br>");
 		model.addAttribute("location", location);
+		model.addAttribute("description", description);
 		return "fiche";
 	}
 
