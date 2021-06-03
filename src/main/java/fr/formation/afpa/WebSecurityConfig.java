@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,11 +20,12 @@ import fr.formation.afpa.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	  @Autowired
+	  	@Autowired
 	    private UserDetailsServiceImpl userDetailsService;
 	 
 	    @Autowired
 	    private DataSource dataSource;
+	    
 	 
 	    @Bean
 	    public BCryptPasswordEncoder passwordEncoder() {
@@ -50,7 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 
 	        // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
 	        // If no login, it will redirect to /login page.
-	        http.authorizeRequests().antMatchers("/ajout","/modif", "/messagerie").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+	        http.authorizeRequests().antMatchers("/ajout","/modif", "/messagerie", "/modifprofile").access("hasAnyRole('Colocataire', 'Proprietaire')");
+	        http.authorizeRequests().antMatchers("/gestionColoc").access("hasRole('Proprietaire')");
 	 
 	        // For ADMIN only.
 	        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");

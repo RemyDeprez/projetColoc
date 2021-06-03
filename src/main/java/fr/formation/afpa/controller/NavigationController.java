@@ -60,7 +60,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -70,8 +71,7 @@ public class NavigationController {
 	@RequestMapping(value = "/inscription")
 	public String getForm(Model model) {
 
-		AppUser appuser = new AppUser();
-		model.addAttribute("appuser", appuser);
+		model.addAttribute("appuser", new AppUser());
 
 
 		return "inscription";
@@ -86,9 +86,10 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			//listLoc = service.findByProprietaireUtilisateurUtilisateurIDLike(loginedUser.);
 			listLoc = service.findAll();
 			model.addAttribute("listLoc", listLoc);
@@ -122,7 +123,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -140,7 +142,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -155,7 +158,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -174,13 +178,20 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
 		
-		listLoc = service.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, (double) loyer, superficie);
+		
+		listLoc = service.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, loyer, superficie);
+		System.out.println("---------------------------");
 		System.out.println(listLoc);
+		System.out.println("---------------------------");
+		model.addAttribute("maxColocataire", maxColocataire);
+		model.addAttribute("loyer", loyer);
+		model.addAttribute("superfice", superficie);
 		model.addAttribute("locations", listLoc);
 		return "rechercheLocation";
 	}

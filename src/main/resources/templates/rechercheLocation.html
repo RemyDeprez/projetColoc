@@ -9,7 +9,7 @@
   <meta name="generator" content="Hugo 0.82.0">
   <title>Fiche coloc</title>
 
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
   <link href="/css/styleAccueil3.css"  rel="stylesheet" type="text/css"/>
     <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
   <link href="/css/styleFiche2.css"  rel="stylesheet" type="text/css"/>
@@ -36,26 +36,26 @@
           <div style="background-color:#f2f5f3; padding: 25px;"><h3>Filtres de recherche</h3>
             <p>Département</p>
             <form action="recherche">
-              <select class="mdb-select">
+              <select class="mdb-select" name="departement">
               <option value="null">Aucun</option>
-                <option value="1">1</option>
-                <option value="1">2</option>
-                <option value="2">3</option>
-                <option value="3">4</option>
-                <option value="1">5</option>
-                <option value="2">6</option>
-                <option value="3">7</option>
-                <option value="1">8</option>
-                <option value="2">9</option>
-                <option value="3">10</option>
-                <option value="1">11</option>
-                <option value="2">12</option>
-                <option value="3">13</option>
-                <option value="1">14</option>
-                <option value="2">15</option>
-                <option value="3">16</option>
-                <option value="2">17</option>
-                <option value="3">18</option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
               </select>
               <br>
               <br>
@@ -70,14 +70,15 @@
               </div>
               <br>
               <p>Nombre de personnes maximum</p>
-              <input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" value="1">
+              1 <input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" value="1" th:if="${maxColocataire == null}"><input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" th:value="${maxColocataire}" th:if="${maxColocataire != null}"> 5
+              
               <div id="demo">1</div>
               <p>Prix</p>
-              <input type="range" class="form-range" min="350" max="1500" step="50" value="350" name="loyer" id="range2">
-              <div id="demo2">350 €</div>
+              350 <input type="range" class="form-range" min="350" max="1500" step="50" value="350" name="loyer" id="range2" th:if="${loyer == null}"><input type="range" class="form-range" min="350" max="1500" step="50" th:value="${loyer}" name="loyer" id="range2" th:if="${loyer != null}"> 1500
+              <div id="demo2"></div>
                <p>Superficie</p>
-              <input type="range" class="form-range" min="100" max="1500" value="100" step="50" name="superfice" id="range3">
-              <div id="demo3">100 m²</div>
+              100 <input type="range" class="form-range" min="100" max="1500" value="100" step="50" name="superfice" id="range3" th:if="${superfice == null}"><input type="range" class="form-range" min="100" max="1500" th:value="${superfice}" step="50" name="superfice" id="range3" th:if="${superfice != null}"> 1500
+              <div id="demo3"></div>
               <input type="submit" value="Rechercher" class="btn btn-primary">
             </form></div>
           </div>
@@ -131,26 +132,34 @@
 
 
 <script>
-var slider = document.getElementById("range");
-var output = document.getElementById("demo");
+document.addEventListener("DOMContentLoaded", function(event) {
+	var slider = document.getElementById("range");
+	var output = document.getElementById("demo");
 
-var slider2 = document.getElementById("range2");
-var output2 = document.getElementById("demo2");
+	var slider2 = document.getElementById("range2");
+	var output2 = document.getElementById("demo2");
 
-var slider3 = document.getElementById("range3");
-var output3 = document.getElementById("demo3");
-
-slider.oninput = function() {
-	  output.innerHTML = this.value;
-	} 
+	var slider3 = document.getElementById("range3");
+	var output3 = document.getElementById("demo3");
 	
-slider2.oninput = function() {
-	  output2.innerHTML = this.value + " €";
-	}
+	output.innerHTML = slider.value;
+	output2.innerHTML = slider2.value + " €";
+	output3.innerHTML = slider3.value + " m²";
 
-slider3.oninput = function() {
-	  output3.innerHTML = this.value + " m²";
-	}
+	slider.oninput = function() {
+		  output.innerHTML = this.value;
+		} 
+		
+	slider2.oninput = function() {
+		  output2.innerHTML = this.value + " €";
+		}
+
+	slider3.oninput = function() {
+		  output3.innerHTML = this.value + " m²";
+		}
+});
+
+
 	
 </script>
 

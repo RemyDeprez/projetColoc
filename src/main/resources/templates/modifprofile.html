@@ -35,12 +35,12 @@
 
 	<div class="container" id="wrap">
 		<div class="row">
-			<div style="margin-left: 25%" class="col-md-6 col-md-offset-3">
+			<div style="margin: auto" class="col-md-6 col-md-offset-3">
 				<form th:action="updateaccount" method="post" th:object="${appuser}"
 					class="form" role="form" enctype="multipart/form-data">
 					<h4 class="champ">Modifiez votre compte</h4>
+					<div th:if="${modifications != null}" class="">Les modifications ont été enregistrées.</div>
 					<div class="row">
-					<div th:if="${modifications != null}">Modifications</div>
 						<div class="col-xs-6 col-md-6">
 							<input type="text" name="firstname"
 								value="${appuser.attributeprenom}" th:field="*{attributeprenom}"
