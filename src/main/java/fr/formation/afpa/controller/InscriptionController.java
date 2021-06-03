@@ -3,7 +3,6 @@ package fr.formation.afpa.controller;
 import java.io.IOException;
 import java.security.Principal;
 
-import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
