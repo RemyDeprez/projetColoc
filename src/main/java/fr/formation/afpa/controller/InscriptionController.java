@@ -41,11 +41,12 @@ public class InscriptionController {
 	public String index(Model model, AppUser appuser, BindingResult bindingResult,
 			@RequestParam("photos") String photos, @RequestParam("usercode") Integer usercode)
 			throws IOException {
-
+		System.out.println ("password avant setStatus : " + appuser.getEncrytedPassword());
 		appuser.setStatus("Colocataire");
 		if (appuser.getCode().equals(usercode)) {
-			
+			System.out.println ("password : " + appuser.getEncrytedPassword());
 			String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
+		System.out.println(encrytedPassword);
 			appuser.setEncrytedPassword(encrytedPassword);
 			appuser.setPhotos(photos);
 			appuser.setEnabled(1);

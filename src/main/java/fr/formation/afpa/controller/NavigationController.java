@@ -116,6 +116,7 @@ if(principal != null) {
 		if(principal != null) {
 			return "redirect:/index";
 		}
+	
 		return "connexion";
 	}
 
@@ -149,7 +150,10 @@ if(principal != null) {
 			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
 			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
-			model.addAttribute("userInfo", userInfo);
+		
+			model.addAttribute("username", userInfo);
+			
+			
 		}
 		return "messagerie";
 	}

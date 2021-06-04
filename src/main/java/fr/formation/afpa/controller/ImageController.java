@@ -31,26 +31,7 @@ public class ImageController {
 	@Autowired
 	LocationService service;
 	
-//	@GetMapping("/getphoto/{locationID}")
-//	public void showImage(@PathVariable("locationID") Integer id,
-//	                               HttpServletResponse response) throws IOException {
-//		System.out.println("in the show image");
-//	response.setContentType("image/jpg"); 
-//
-//	Location loc = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-//
-//	InputStream is = new ByteArrayInputStream(loc.getPhotos());
-//	
-//	IOUtils.copy(is, response.getOutputStream());
-//	}
-//	
-//	@PostMapping("/uploadImage")
-//	public String uploadImage(@RequestParam("photo") MultipartFile photo) throws Exception{
-//		
-//		String returnValue=" ";
-//		service.savePhoto(photo);
-//		return returnValue;
-//		}
+
 	
 
 	public static void saveFile(String uploadDir, String fileName,
