@@ -26,6 +26,8 @@ public class EnvoieMailController {
     @PostMapping("/sendEmail")
     public ModelAndView sendSimpleEmail(ModelAndView model, AppUser appuser,BindingResult bindingResult,  @RequestParam("photos") MultipartFile photos) {
     	
+    	System.out.println(appuser.getEncrytedPassword());
+    	
     	model.setViewName("confirmregister");
     
     	String fileName = StringUtils.cleanPath(photos.getOriginalFilename());

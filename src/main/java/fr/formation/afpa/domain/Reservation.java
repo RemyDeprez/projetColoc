@@ -25,12 +25,19 @@ public class Reservation {
 	private byte isPermutable;
 
 	//bi-directional many-to-one association to Location
-	@OneToMany(mappedBy="reservation")
-	private List<Location> locations;
+	@ManyToOne
+	@JoinColumn(name="LocationID")
+	private Location location;
+
+	@Override
+	public String toString() {
+		return "Reservation [reservationID=" + reservationID + ", isPermutable=" + isPermutable + ", location="
+				+ location + ", colocataire=" + colocataire + "]";
+	}
 
 	//bi-directional many-to-one association to Colocataire
 	@ManyToOne
-	@JoinColumn(name="LocationID")
+	@JoinColumn(name="utilisateur_id")
 	private Colocataire colocataire;
 
 	public Reservation() {
@@ -52,28 +59,14 @@ public class Reservation {
 		this.isPermutable = isPermutable;
 	}
 
-	public List<Location> getLocations() {
-		return this.locations;
+	public Location getLocation() {
+		return this.location;
 	}
 
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
-
-	public Location addLocation(Location location) {
-		getLocations().add(location);
-		location.setReservation(this);
-
-		return location;
-	}
-
-	public Location removeLocation(Location location) {
-		getLocations().remove(location);
-		location.setReservation(null);
-
-		return location;
-	}
-
+	
 	public Colocataire getColocataire() {
 		return this.colocataire;
 	}

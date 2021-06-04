@@ -49,7 +49,7 @@ public class InscriptionController {
 			appuser.setEncrytedPassword(encrytedPassword);
 			appuser.setPhotos(photos);
 			appuser.setEnabled(1);
-			appuser.setCode(0000);
+			appuser.setCode(1111);
 			model.addAttribute("appuser", appuser);
 			service.saveOrUpdate(appuser);
 			String uploadDir = "photos/profile/" + appuser.getUserId();
