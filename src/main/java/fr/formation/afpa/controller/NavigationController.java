@@ -108,6 +108,7 @@ public class NavigationController {
 		if(principal != null) {
 			return "redirect:/index";
 		}
+	
 		return "connexion";
 	}
 
@@ -141,7 +142,10 @@ public class NavigationController {
 			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
 			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
-			model.addAttribute("userInfo", userInfo);
+		
+			model.addAttribute("username", userInfo);
+			
+			
 		}
 		return "messagerie";
 	}

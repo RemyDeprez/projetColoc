@@ -32,7 +32,7 @@ public class EnvoieMailController {
     	Random random = new Random();
         int code;
         appuser.setPhotos(fileName);
-        
+      System.out.println("password in the send mail : " + appuser.getEncrytedPassword());
         // Create a Simple MailMessage.
         SimpleMailMessage message = new SimpleMailMessage();
         
@@ -41,6 +41,7 @@ public class EnvoieMailController {
         message.setSubject("Test Simple Email");
         message.setText("Hello " + appuser.getAttributeprenom()+" ! Here is your confirmation code : "+ code);
         appuser.setCode(code);
+        System.out.println("password in the send mail after code: " + appuser.getEncrytedPassword());
         model.addObject("appuser", appuser);
         model.addObject("photos", photos);
  

@@ -28,16 +28,9 @@ public class LocationValidator implements Validator {
 		LocationForm location = (LocationForm) target;
 
 		// Méthode pour rejetter le formulaire si un des champs ci-dessous est nul
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "titre", "titre");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "adress", "adress");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "codePostal", "codePostal");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "ville", "ville");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "superfice", "superfice");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "placeOccupe", "placeOccupe");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "loyer", "loyer");
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "meuble", "meuble");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "photos", "photos");
-//        
+       
 
 		//Pour chaque champ du formulaire, une méthode if pour checker chaque condition et renvoyer le message d'erreur approprié.
 		
@@ -111,7 +104,7 @@ public class LocationValidator implements Validator {
 			}
 			
 			try {
-				if (location.getPhotos().getBytes().length > 1048576) {
+				if (location.getPhotos().getBytes().length > 2000000) {
 					errors.rejectValue("photos", "photos.size");
 				}
 			} catch (IOException e) {
