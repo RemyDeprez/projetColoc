@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Test de Localisation de l'utilisateur</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<link rel="stylesheet" type="text/css" href="/css/map.css" />
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<script th:inline="javascript">
+	const mylist = /[[${listloc}]]/ 'default';
+</script>
+
+</head>
+<body>
+	<header th:insert="fragment/header.html :: header"> </header>
+	<div id="map"></div>
+
+	<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+	<script th:inline="javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFj401UN0kIVPN9GCOWLO9eyxJDAyURaQ&callback=initMap&libraries=&v=weekly"
+		async>
+		
+	</script>
+	<script src="/js/map.js"></script>
+	<p th:text="${listloc}">Test :</p>
+
+</body>
+
+</html>

@@ -190,6 +190,13 @@ public class NavigationController {
 		return "rechercheLocation";
 	}
 	
+	//methode de redirection pour les tests de google map
+	@RequestMapping(value = "/getMap")
+	public String getMap(Model model) {
+		model.addAttribute("listloc" , service.findAll());
+		return "maptest";
+	}
+	
 
 
 
