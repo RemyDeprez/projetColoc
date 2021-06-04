@@ -3,7 +3,6 @@ package fr.formation.afpa.controller;
 
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +30,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.domain.LocationForm;
+import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.LocationService;
+import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.LocationValidator;
 
@@ -49,6 +51,9 @@ public class LocationController implements WebMvcConfigurer {
 
 	@Autowired
 	private LocationValidator locationValidator;
+	
+	@Autowired
+	private UserRepository utilisateurService;
 
 	// Méthode pour configurer le validator
 	@InitBinder
@@ -73,7 +78,7 @@ public class LocationController implements WebMvcConfigurer {
 
 	@PostMapping(value = "/ajoutbien")
 	public String add(@ModelAttribute("location") @Validated LocationForm locationForm, BindingResult bindingResult,
-			@RequestParam("photos") MultipartFile photos) throws IOException {
+			@RequestParam("photos") MultipartFile photos, Principal principal, Model model, Authentication auth) throws IOException {
 		
 		
 		
@@ -87,8 +92,17 @@ public class LocationController implements WebMvcConfigurer {
 		}
 		
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
-	
-	
+		
+		AppUser user = utilisateurService.findByUserName(auth.getName());
+		
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		System.out.println(loginedUser.getUsername());
+		String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+		model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
+
+		user = utilisateurService.findByUserName(auth.getName());
 		
 		Location location = new Location();
 		location.setAdress(locationForm.getAdress());
@@ -101,9 +115,8 @@ public class LocationController implements WebMvcConfigurer {
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
 		location.setPhotos(fileName);
+		location.setProprietaire(user);
 		
-	
-
 		service.saveOrUpdate(location);
 		
 		
@@ -112,17 +125,26 @@ public class LocationController implements WebMvcConfigurer {
 		ImageController.saveFile(uploadDir, fileName, photos);
 		
 
-		return "redirect:/index";
+		return "redirect:/getgestion";
 
 	}
 
 
 	@GetMapping("/modif/{locationID}")
-	public String showUpdateForm(@PathVariable("locationID") Integer id, Model model) {
+	public String showUpdateForm(@PathVariable("locationID") Integer id, Model model, Principal principal) {
 		Location loc = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		if(loc.getProprietaire() != utilisateurService.findByUserName(principal.getName())) {
+			return "redirect:/index";
+		} else {
 
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+		model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("location", loc);
 		return "modif";
+		}
 	}
 
 	@PostMapping(value = "/modifbien/{locationID}")

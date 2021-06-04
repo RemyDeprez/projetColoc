@@ -39,7 +39,7 @@ public class UtilisateurService implements IUtilisateurService {
 	}
 
 	@Override
-	public void deleteByUserId(Long id) {
+	public void deleteByUserId(int id) {
 		dao.deleteByUserId(id);
 		
 	}
@@ -50,7 +50,7 @@ public class UtilisateurService implements IUtilisateurService {
 	}
 
 	@Override
-	public AppUser findByUserId(Long userId) {
+	public AppUser findByUserId(int userId) {
 		
 		return dao.findByUserId(userId);
 	}

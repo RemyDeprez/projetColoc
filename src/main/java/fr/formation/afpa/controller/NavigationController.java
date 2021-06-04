@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import fr.formation.afpa.domain.Location;
-
+import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.service.UtilisateurService;
@@ -31,7 +31,7 @@ public class NavigationController {
 	LocationService service;
 	
 	@Autowired
-	UtilisateurService userService;
+	UserRepository utilisateurService;
 	
 	private List<Location> listLoc = new ArrayList<Location>();
 
@@ -74,20 +74,21 @@ public class NavigationController {
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
 	@RequestMapping(value = "/getgestion")
-	public String getGestion(Model model, Principal principal) {
+	public String getGestion(Model model, Principal principal, Authentication auth) {
 		if(principal != null) {
 			System.out.println(principal.getName());
 			String userName = principal.getName();
 
 			System.out.println("User Name: " + userName);
+			
+			AppUser user = utilisateurService.findByUserName(auth.getName());
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
 			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
-			//listLoc = service.findByProprietaireUtilisateurUtilisateurIDLike(loginedUser.);
-			listLoc = service.findAll();
+			listLoc = service.findByProprietaireUserIdLike(user.getUserId());
 			model.addAttribute("listLoc", listLoc);
 		}
 		return "gestionColoc";
