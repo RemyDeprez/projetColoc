@@ -18,4 +18,6 @@ public interface ILocationService {
 	Optional<Location> findById(Integer id);
 	
 	public List<Location> findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(Integer maxColocataire, Integer loyer, Integer superfice);
+	
+	public List<Location> findByProprietaireUserIdLike(int id);
 }

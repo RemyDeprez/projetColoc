@@ -15,13 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import fr.formation.afpa.domain.Location;
-
+import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.domain.AppUser;
-import fr.formation.afpa.domain.Utilisateur;
-
 import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
@@ -35,7 +31,7 @@ public class NavigationController {
 	LocationService service;
 	
 	@Autowired
-	UtilisateurService userService;
+	UserRepository utilisateurService;
 	
 	private List<Location> listLoc = new ArrayList<Location>();
 
@@ -60,7 +56,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -77,19 +74,21 @@ public class NavigationController {
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
 	@RequestMapping(value = "/getgestion")
-	public String getGestion(Model model, Principal principal) {
+	public String getGestion(Model model, Principal principal, Authentication auth) {
 		if(principal != null) {
 			System.out.println(principal.getName());
 			String userName = principal.getName();
 
 			System.out.println("User Name: " + userName);
+			
+			AppUser user = utilisateurService.findByUserName(auth.getName());
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
-			//listLoc = service.findByProprietaireUtilisateurUtilisateurIDLike(loginedUser.);
-			listLoc = service.findAll();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			listLoc = service.findByProprietaireUserIdLike(user.getUserId());
 			model.addAttribute("listLoc", listLoc);
 		}
 		return "gestionColoc";
@@ -121,7 +120,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -139,7 +139,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -154,7 +155,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -173,7 +175,8 @@ public class NavigationController {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
@@ -198,6 +201,11 @@ public class NavigationController {
 	}
 	
 
-
+	@RequestMapping(path = "/contact", method  = RequestMethod.GET)
+	public String getContact(Model model) {
+	
+		
+		return "contact";
+	}
 
 }

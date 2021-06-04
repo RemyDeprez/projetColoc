@@ -7,31 +7,15 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import javax.validation.Valid;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.validator.internal.metadata.aggregated.ValidatableParametersMetaData;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,20 +23,19 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.thymeleaf.util.Validate;
 
-
+import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.domain.LocationForm;
+import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.LocationService;
+import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.LocationValidator;
 
@@ -68,6 +51,9 @@ public class LocationController implements WebMvcConfigurer {
 
 	@Autowired
 	private LocationValidator locationValidator;
+	
+	@Autowired
+	private UserRepository utilisateurService;
 
 	// Méthode pour configurer le validator
 	@InitBinder
@@ -92,8 +78,10 @@ public class LocationController implements WebMvcConfigurer {
 
 	@PostMapping(value = "/ajoutbien")
 	public String add(@ModelAttribute("location") @Validated LocationForm locationForm, BindingResult bindingResult,
-			@RequestParam("photos") MultipartFile photos) throws IOException {
-
+			@RequestParam("photos") MultipartFile photos, Principal principal, Model model, Authentication auth) throws IOException {
+		
+		
+		
 		// Méhodes pour récupérer les erreurs dans la console
 		System.out.println("Error count : " + bindingResult.getErrorCount());
 		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
@@ -102,8 +90,20 @@ public class LocationController implements WebMvcConfigurer {
 		if (bindingResult.hasErrors()) {
 			return "ajout";
 		}
-
+		
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+		
+		AppUser user = utilisateurService.findByUserName(auth.getName());
+		
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		System.out.println(loginedUser.getUsername());
+		String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+		model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
+
+		user = utilisateurService.findByUserName(auth.getName());
+		
 		Location location = new Location();
 		location.setAdress(locationForm.getAdress());
 		location.setSuperfice(locationForm.getSuperfice());
@@ -115,23 +115,36 @@ public class LocationController implements WebMvcConfigurer {
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
 		location.setPhotos(fileName);
-
+		location.setProprietaire(user);
+		
 		service.saveOrUpdate(location);
+		
+		
 		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
+		
 
-		return "redirect:/index";
+		return "redirect:/getgestion";
 
 	}
 
 
 	@GetMapping("/modif/{locationID}")
-	public String showUpdateForm(@PathVariable("locationID") Integer id, Model model) {
+	public String showUpdateForm(@PathVariable("locationID") Integer id, Model model, Principal principal) {
 		Location loc = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		if(loc.getProprietaire() != utilisateurService.findByUserName(principal.getName())) {
+			return "redirect:/index";
+		} else {
 
+		User loginedUser = (User) ((Authentication) principal).getPrincipal();
+		String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+		model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+		String userInfo = WebUtils.toString(loginedUser);
+		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("location", loc);
 		return "modif";
+		}
 	}
 
 	@PostMapping(value = "/modifbien/{locationID}")
@@ -144,7 +157,7 @@ public class LocationController implements WebMvcConfigurer {
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
 
 		if (bindingResult.hasErrors()) {
-			return "modif";
+			return "modifError";
 		}
 
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
@@ -161,12 +174,14 @@ public class LocationController implements WebMvcConfigurer {
 		location.setTitre(locationForm.getTitre());
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
+		if(fileName.length() > 0 ) {
 		location.setPhotos(fileName);
+		
 
 		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
-
+		}
 		service.saveOrUpdate(location);
 
 		listLoc = service.findAll();
@@ -191,13 +206,16 @@ public class LocationController implements WebMvcConfigurer {
 			System.out.println("User Name: " + userName);
 
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
 		}
 
 		Location location = service.findById(id).get();
+		String description = location.getDescription().replace("\n", "<br>");
 		model.addAttribute("location", location);
+		model.addAttribute("description", description);
 		return "fiche";
 	}
 

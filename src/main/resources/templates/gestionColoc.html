@@ -19,37 +19,6 @@ $(document).ready(function() {
 <!------ Include the above in your HEAD tag ---------->
 </head>
 
-<!-- <style>
-.navbar-default .navbar-brand{
-        background-color:#f06347;
-        font-size:30px;
-        font-weight:bold;
-    }
-    
-    @media (min-width: 992px){
-    .aDroite{
-        margin-left : 55em;
-     
-    }
-    
-    .aDroite:hover{
-    background-color: #f06347; 
-    }
-    @media all and (min-width: 992px) {
-    .navbar .nav-item .dropdown-menu{  display:block; opacity: 0;  visibility: hidden; transition:.3s; margin-top:0;  }
-    .navbar .nav-item:hover .nav-link{ background-color: #f06347;  }
-    .navbar .dropdown-menu.fade-down{ top:80%; transform: rotateX(-75deg); transform-origin: 0% 0%; }
-    .navbar .dropdown-menu.fade-up{ top:180%;  }
-    .navbar .nav-item:hover .dropdown-menu{ transition: .3s; opacity:1; visibility:visible; top:100%; transform: rotateX(0deg); }
-}   
-}
-</style>
- -->
-
-
-
-
-</head>
 
    <header th:insert="fragment/header.html :: header"> </header>
 
@@ -83,30 +52,35 @@ $(document).ready(function() {
                     <div class="thumbnail card">
                     
                         <div class="img-event">
-                         
+                         <span th:if="${location.photos == ''}">
+                          <img style="height:200px; width:200px; border : 0.5px solid; margin-top:5px;"  
+                                    src="/images/nophoto.jpg" 
+                                    alt="alt image"/>  
+                         </span>
+                         <span th:unless="${location.photos == ''}">
                             <img style="height:200px; width:200px; border : 0.5px solid; margin-top:5px;"  
                                     th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" 
                                     alt="alt image"/>  
+                                    </span>
+                                 
                         </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading" th:utext=${location.titre}>..</h4>
                             <p class="group inner list-group-item-text">
-                                <ul style="list-style : none"><li th:utext="'Adresse : ' + ${location.adress}"></li>
+                                <ul style="list-style : none; text-align: justify;"><li th:utext="'Adresse : ' + ${location.adress}"></li>
                                  <li th:utext="'Code Postal : ' + ${location.codePostal}">..</li> 
                                  <li th:utext="'Ville : ' + ${location.ville}">..</li>                                
                                <li th:utext="'Occupants actuels : ' + ${location.placeOccupe}">..</li>
                                 <li th:utext="'Capacité : '  + ${location.maxColocataire}">..</li>
                                  <li th:utext="' Loyer : ' + ${location.loyer}">..</li>                                 
-                                   <li th:utext="'Meublé ? ' + ${location.meuble}">..</li>                                   
-                                       <li th:utext="${location.description}">..</li>  
+                                   <li th:utext="'Meublé ? ' + ${location.meuble}">..</li> 
                                 </ul>
                             <div class="row">
                             <div class="col-xs-12 col-md-6">
-                                    <a href="#" th:href="@{'/modif/'} + ${location.LocationID}">
- 									 <input class="btn btn-secondary" value="Editer informations" type="submit"/></a>
+                                    <a href="#" th:href="@{'/modif/'} + ${location.LocationID}" class="btn btn-secondary">Editer informations</a>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
+                                    <a class="btn btn-danger" href="http://www.jquery2dotnet.com">Supprimer</a>
                                 </div>
                             </div>
                         </div>

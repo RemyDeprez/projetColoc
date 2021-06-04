@@ -64,7 +64,7 @@
         </div>
         </li>
         
-         <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que propriétaire -->
+        <div th:if="${userInfoAuthorities == 'Proprietaire'}">         
          <li class="nav-item dropdown" th:if="${userInfo != null}">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
          Biens immobiliers
@@ -78,10 +78,19 @@
  <a class="dropdown-item" href="getgestion">Gérer ses biens immobiliers</a>
         </div>
         </li>
+        </div>
+        
+               <li class="nav-item">
+          <!-- le lien renverra vers la page "liste" -->
+            <a class="nav-link" href="contact">Contact</a>
+          </li>
         
         <li class="nav-item">            <a class="nav-link" href="connexion" th:if="${userInfo == null}" >Connexion</a>
             <a class="nav-link" href="deconnexion" th:if="${userInfo != null}" >Déconnexion</a>
             </li>
+            
+         
+          
       
         <!-- Dans l'idéal, ne doit pas apparaître si session en cours. -->
           <li class="nav-item">

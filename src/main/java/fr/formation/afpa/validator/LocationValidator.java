@@ -1,5 +1,7 @@
 package fr.formation.afpa.validator;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -67,6 +69,7 @@ public class LocationValidator implements Validator {
 				errors.rejectValue("ville", "ville.lenght");
 
 			}
+		}
 
 			if (location.getCodePostal() == null || location.getCodePostal() < 10000
 					|| location.getCodePostal() > 99999) {
@@ -97,16 +100,25 @@ public class LocationValidator implements Validator {
 			if (location.getPlaceOccupe() == null || location.getPlaceOccupe() < 0) {
 				if (location.getPlaceOccupe() == null) {
 					errors.rejectValue("placeOccupe", "placeOccupe");
-				} else {
+				} else{
 					errors.rejectValue("placeOccupe", "occupant.negative");
 				}
 			}
 
-			if (location.getDescription().length() > 5) {
+			if (location.getDescription().length() > 500) {
 
 				errors.rejectValue("description", "description.length");
 			}
+			
+			try {
+				if (location.getPhotos().getBytes().length > 1048576) {
+					errors.rejectValue("photos", "photos.size");
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		}
+		
 	}
 }
