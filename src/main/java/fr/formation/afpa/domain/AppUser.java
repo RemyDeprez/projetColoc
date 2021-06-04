@@ -20,7 +20,7 @@ public class AppUser {
     @Id
     @GeneratedValue
     @Column(name = "User_Id", nullable = false)
-    private Long userId;
+    private int userId;
     
     @Column(name = "Attributeprenom", nullable = false)
 	private String attributeprenom;
@@ -62,11 +62,11 @@ public class AppUser {
     	
     }
     
-    public Long getUserId() {
+    public int getUserId() {
         return userId;
     }
  
-    public void setUserId(Long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
  

@@ -56,6 +56,11 @@ public class LocationService implements ILocationService {
 		return dao.findBymaxColocataireLessThanEqualAndLoyerLessThanEqualAndSuperficeLessThanEqual(maxColocataire, loyer, superfice);
 	}
 
+	@Override
+	public List<Location> findByProprietaireUserIdLike(int id) {
+		return dao.findByProprietaireUserIdLike(id);
+	}
+
 
 	
 
