@@ -80,7 +80,7 @@ $(document).ready(function() {
                                     <a href="#" th:href="@{'/modif/'} + ${location.LocationID}" class="btn btn-secondary">Editer informations</a>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-danger" href="http://www.jquery2dotnet.com">Supprimer</a>
+                                    <a class="btn btn-danger" th:href="${'supprbien?locationID=' + location.locationID}">Supprimer</a>
                                 </div>
                             </div>
                         </div>

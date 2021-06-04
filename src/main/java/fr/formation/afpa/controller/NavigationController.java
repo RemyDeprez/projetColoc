@@ -43,7 +43,14 @@ public class NavigationController {
 
 	//	Methode de redirection à l'acceuil par défaut
 	@RequestMapping(value = "/")
-	public String index(Model model) {
+	public String index(Model model, Principal principal) {
+if(principal != null) {
+	User loginedUser = (User) ((Authentication) principal).getPrincipal();
+	String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+	model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+	String userInfo = WebUtils.toString(loginedUser);
+	model.addAttribute("userInfo", userInfo);
+}
 		return "index";
 	}
 

@@ -33,8 +33,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.domain.LocationForm;
+import fr.formation.afpa.domain.Reservation;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.LocationService;
+import fr.formation.afpa.service.ReservationService;
 import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.LocationValidator;
@@ -55,6 +57,9 @@ public class LocationController implements WebMvcConfigurer {
 	@Autowired
 	private UserRepository utilisateurService;
 
+	@Autowired
+	private ReservationService reservationService;
+	
 	// Méthode pour configurer le validator
 	@InitBinder
 	protected void initBinder(WebDataBinder dataBinder) {
@@ -129,6 +134,26 @@ public class LocationController implements WebMvcConfigurer {
 
 	}
 
+	@RequestMapping(value = "reservation", method = RequestMethod.GET)
+	public String reservation(@RequestParam("locationID") Integer id, Model model) {
+		Reservation res = new Reservation();
+		Location loc = service.findById(id).get();
+		System.out.println("-------------------------------------");
+		System.out.println(loc);
+		res.setLocation(loc);
+		System.out.println(res);
+		res.setIsPermutable((byte) 1);
+		System.out.println("-------------------------------------");
+		reservationService.saveOrUpdate(res);
+		return "redirect:/rechercheLocation";
+	}
+	
+	@RequestMapping(value = "reservations", method = RequestMethod.GET)
+	public String reservations(Model model) {
+		List <Reservation> reservations = reservationService.findAll();
+		model.addAttribute("reservations", reservations);
+		return "reservations";
+	}
 
 	@GetMapping("/modif/{locationID}")
 	public String showUpdateForm(@PathVariable("locationID") Integer id, Model model, Principal principal) {
@@ -191,8 +216,8 @@ public class LocationController implements WebMvcConfigurer {
 		return "redirect:/index";
 	}
 
-	@GetMapping("/supprbien/{locationID}")
-	public String delete(@PathVariable("locationID") Integer id, Model model) {
+	@GetMapping("/supprbien")
+	public String delete(@RequestParam("locationID") Integer id, Model model) {
 		service.deleteById(id);
 
 		return "redirect:/index";
