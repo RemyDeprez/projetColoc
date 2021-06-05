@@ -27,7 +27,7 @@ function initMap() {
         	    title: "locations",
         	    icon: image,
         	  });
-          console.log(mylist);
+          
           const contentString =
         	
         	  
