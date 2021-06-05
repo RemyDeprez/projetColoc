@@ -65,7 +65,7 @@ public class Location {
 	//bi-directional many-to-one association to Proprietaire
 	@ManyToOne
 	@JoinColumn(name="proprietaire_utilisateur_id")
-	private Proprietaire proprietaire;
+	private AppUser proprietaire;
 
 //	//bi-directional many-to-one association to Reservation
 	@ManyToOne
@@ -81,7 +81,7 @@ public class Location {
 	public Location(int locationID, String adress, int idProprietaire, byte isComplet, int loyer, int maxColocataire,
 			float note, String photos, Integer placeOccupe, Integer superfice, String ville, Integer codePostal,
 			String titre, Boolean meuble, String description, List<Colocataire> colocataires,
-			List<Evaluation> evaluations, Proprietaire proprietaire, Reservation reservation) {
+			List<Evaluation> evaluations, AppUser proprietaire, Reservation reservation) {
 		super();
 		this.locationID = locationID;
 		this.adress = adress;
@@ -248,11 +248,11 @@ public class Location {
 		return evaluation;
 	}
 
-	public Proprietaire getProprietaire() {
+	public AppUser getProprietaire() {
 		return this.proprietaire;
 	}
 
-	public void setProprietaire(Proprietaire proprietaire) {
+	public void setProprietaire(AppUser proprietaire) {
 		this.proprietaire = proprietaire;
 	}
 
