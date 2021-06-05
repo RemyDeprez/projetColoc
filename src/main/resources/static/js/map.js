@@ -28,10 +28,7 @@ function initMap() {
         	    icon: image,
         	  });
           
-          const contentString =
-        	
-        	  
-        	  ' ';
+          const contentString =' ';
           	const infowindow2 = new google.maps.InfoWindow({
                   content: contentString,
                   
