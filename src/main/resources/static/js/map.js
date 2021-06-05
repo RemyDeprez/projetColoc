@@ -1,6 +1,6 @@
 let map, infoWindow;
 
-function initMap() {
+function initMap(nommap) {
 	
 	  map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 50.630, lng: 3.057 },
@@ -27,29 +27,25 @@ function initMap() {
         	    title: "locations",
         	    icon: image,
         	  });
-          console.log(mylist);
-          const contentString =
-        	
-        	  
-        	  ' ';
           	const infowindow2 = new google.maps.InfoWindow({
-                  content: contentString,
+                  content: '<h1>' + mylist[0].titre + '</h1><br>' + mylist[0].description,
                   
               });
           	 marker.addListener("click", () => {
           		    infowindow2.open(map, marker);
+                            console.log(mylist[0]);
           		  });
-          infoWindow.open(map);
+          infowindow2.open(map);
           map.setCenter(pos);
          
         },
         () => {
-          handleLocationError(true, infoWindow, map.getCenter());
+          handleLocationError(true, infowindow2, map.getCenter());
         }
       );
     } else {
       // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
+      handleLocationError(false, infowindow2, map.getCenter());
     }
 
    

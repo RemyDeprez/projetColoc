@@ -11,9 +11,10 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <script th:inline="javascript">
-	const mylist = /[[${listloc}]]/ 'default';
+	var mylist = [[${listloc}]];
 </script>
-
+<script src="/js/map.js"></script>
+<script>initMap(mylist);</script>
 </head>
 <body>
 	<header th:insert="fragment/header.html :: header"> </header>
@@ -25,8 +26,8 @@
 		async>
 		
 	</script>
-	<script src="/js/map.js"></script>
-	<p th:text="${listloc}">Test :</p>
+	
+	<!-- <p th:text="${listloc}">Test :</p> -->
 
 </body>
 
