@@ -10,57 +10,54 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
  
-@Entity
-@Table(name = "App_User", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_USER_UK", columnNames = "User_Name") })
-public class AppUser {
+
+public class AppUserForm {
  
     @Id
     @GeneratedValue
-    @Column(name = "User_Id", nullable = false)
+
     private int userId;
     
-    @Column(name = "Attributeprenom", nullable = false)
 	private String attributeprenom;
     
-    @Column(name = "mail", nullable = false)
+
 	private String mail;
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@Column(name = "date", nullable = false)
+
 	private Date date;
 	
-	@Column(name = "nom", nullable = false)
+
 	private String nom;
 	
-	@Column(name = "status", nullable = false)
+
 	private String status;
 
-	@Column(name = "telephone", nullable = false)
+
 	private String telephone;
 	
-	@Column(name = "photos", nullable = false)
-	private String photos;
+
+	private MultipartFile photos;
     
 
-	@Column(name = "User_Name", length = 36, nullable = false)
+
     private String userName;
  
-    @Column(name = "Encryted_Password", length = 128, nullable = false)
+
     private String encrytedPassword;
     
-    @Column(name = "code", length = 4)
+
     private Integer code;
  
 
-	@Column(name = "enabled", length = 1)
+
     private Integer enabled;
 	
 	private String confirmPassword;
     
-    public AppUser() {
+    public AppUserForm() {
     	
     }
     
@@ -143,11 +140,11 @@ public class AppUser {
 		this.telephone = telephone;
 	}
 
-	public String getPhotos() {
+	public MultipartFile getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(String photos) {
+	public void setPhotos(MultipartFile photos) {
 		this.photos = photos;
 	}
     public Integer getCode() {

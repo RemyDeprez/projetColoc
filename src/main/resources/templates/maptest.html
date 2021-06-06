@@ -11,6 +11,11 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 
+<script th:inline="javascript">
+	var mylist = [[${listloc}]];
+</script>
+<script src="/js/map.js"></script>
+<script>initMap(mylist);</script>
 
 </head>
 <body>
@@ -30,7 +35,9 @@
 		async>
 		
 	</script>
+
 	<script src="/js/map.js"></script>
+
 
 
 	
@@ -46,7 +53,7 @@
 
 function geocode(adress){
 	
-	//axios est un outil qui permet de générer des requêtes
+	//axios est un outil qui permet de gï¿½nï¿½rer des requï¿½tes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 			params:{
 				address:adress,

@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 
 	    @Bean
 	    public BCryptPasswordEncoder passwordEncoder() {
-	        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
 	        return bCryptPasswordEncoder;
 	    }
 	 
@@ -39,7 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        // Setting Service to find User in the database.
 	        // And Setting PassswordEncoder
 	        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	 
 	    }
 	 
 	    @Override

@@ -17,8 +17,8 @@ public class Location {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JoinColumn(name="LocationID")
 	private int locationID;
-
 	
 	private String adress;
 

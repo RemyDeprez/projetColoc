@@ -100,7 +100,7 @@
                     <div class="champPhoto">
                     <label>Ajoutez des photos de votre bien</label>
                    <input type="file" accept="image/*" name="photos" th:field=*{photos}  class="form-control input-lg" /> 
-                  <!--  <span th:if="${#fields.hasErrors('photo')}" th:errors="*{photo}">..</span>  -->
+                    <span th:if="${#fields.hasErrors('photos')}" th:errors="*{photos}">..</span>  
             	</div>
             
                

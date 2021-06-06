@@ -11,23 +11,49 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.formation.afpa.domain.AppUser;
+import fr.formation.afpa.domain.AppUserForm;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.IUtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 
+import fr.formation.afpa.validator.UserValidator;
+
 @Controller
 public class InscriptionController {
+	
+	@Autowired
+	private UserValidator userValidator;
 
 	@Autowired
 	UserRepository userRepo;
 	@Autowired
 	IUtilisateurService service;
+	
+	// Méthode pour configurer le validator
+	@InitBinder
+	protected void initBinder(WebDataBinder dataBinder) {
+
+		Object target = dataBinder.getTarget();
+		if (target == null) {
+			return;
+		}
+		System.out.println("Target=" + target);
+
+		if (target.getClass() == AppUserForm.class) {
+			dataBinder.setValidator(userValidator);
+		}
+
+	}
 
 	// Encryte Password with BCryptPasswordEncoder
 	public static String encrytePassword(String password) {
@@ -38,18 +64,22 @@ public class InscriptionController {
 //	Methode lancée lorsque le formulaire est envoyé
 
 	@PostMapping(value = "/createaccount")
-	public String index(Model model, AppUser appuser, BindingResult bindingResult,
+	public String index( Model model, AppUser appuser, BindingResult bindingResult,
 			@RequestParam("photos") String photos, @RequestParam("usercode") Integer usercode)
 			throws IOException {
+		
+		
+		
 
 		appuser.setStatus("Colocataire");
 		if (appuser.getCode().equals(usercode)) {
-			
+			System.out.println ("password : " + appuser.getEncrytedPassword());
 			String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
+	
 			appuser.setEncrytedPassword(encrytedPassword);
 			appuser.setPhotos(photos);
 			appuser.setEnabled(1);
-			appuser.setCode(0000);
+			appuser.setCode(1111);
 			model.addAttribute("appuser", appuser);
 			service.saveOrUpdate(appuser);
 			String uploadDir = "photos/profile/" + appuser.getUserId();
@@ -89,19 +119,37 @@ public class InscriptionController {
 
 //methode lancée lorsque l'on appuie sur le boutton "valider" de l'update
 	@PostMapping(value = "/updateaccount")
-	public String updateAccount(Model model, AppUser appuser, BindingResult bindingResult,
+	public String updateAccount(Model model, @ModelAttribute("appuser") @Validated AppUserForm appuserForm, BindingResult bindingResult,
 			@RequestParam("photos") MultipartFile photos) throws IOException {
-		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
-		appuser.setEncrytedPassword(encrytedPassword);
-
+		System.out.println("Error count : " + bindingResult.getErrorCount());
+		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
+		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
+		
+		if(bindingResult.hasErrors()) {
+		
+			return "modifprofile";
+		}
+		
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
-		appuser.setEnabled(1);
-		appuser.setPhotos(fileName);
+		String encryptedPassword = encrytePassword(appuserForm.getEncrytedPassword());
+		AppUser appuser = service.findByUserId(appuserForm.getUserId());
+		  appuser.setAttributeprenom(appuserForm.getAttributeprenom());
+	        appuser.setNom(appuserForm.getNom());
+	        appuser.setUserName(appuserForm.getUserName());
+	        appuser.setMail(appuserForm.getMail());
+	        appuser.setEncrytedPassword(encryptedPassword);
+	        appuser.setDate(appuserForm.getDate());
+	        appuser.setTelephone(appuserForm.getTelephone());
+	        if(fileName.length() > 0) {
+	        appuser.setPhotos(fileName);
+	    	String uploadDir = "photos/profile/" + appuser.getUserId();
+
+			ImageController.saveFile(uploadDir, fileName, photos);
+	        }
+	
 		model.addAttribute("appuser", appuser);
 		service.saveOrUpdate(appuser);
-		String uploadDir = "photos/profile/" + appuser.getUserId();
-
-		ImageController.saveFile(uploadDir, fileName, photos);
+	
 
 		model.addAttribute("modifications", "Les modifications ont été enregistrées.");
 		
