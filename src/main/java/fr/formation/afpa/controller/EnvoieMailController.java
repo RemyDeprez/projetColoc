@@ -54,31 +54,8 @@ public class EnvoieMailController {
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
     	
     	if (bindingResult.hasErrors()) {
-    		if(bindingResult.hasFieldErrors("photos")) {
-    			model.setViewName("confirmregister");
-    		    
-    	    	String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
-    	    	Random random = new Random();
-    	        int code;
-    	        appuser.setPhotos(fileName);
-    	      System.out.println("password in the send mail : " + appuser.getEncrytedPassword());
-    	        // Create a Simple MailMessage.
-    	        SimpleMailMessage message = new SimpleMailMessage();
-    	        
-    	        code = random.nextInt(999);
-    	        message.setTo(appuser.getMail());
-    	        message.setSubject("Test Simple Email");
-    	        message.setText("Hello " + appuser.getAttributeprenom()+" ! Here is your confirmation code : "+ code);
-    	        appuser.setCode(code);
-    	        System.out.println("password in the send mail after code: " + appuser.getEncrytedPassword());
-    	        model.addObject("appuser", appuser);
-    	        model.addObject("photos", photos);
-    	 
-    	        // Send Message!
-    	        this.emailSender.send(message);
-    	 
-    	        return model;
-    		}
+    	
+    		
     		model.setViewName("inscription");
 			return model;
 		}
@@ -107,5 +84,6 @@ public class EnvoieMailController {
  
         return model;
     }
+    }
+
  
-}

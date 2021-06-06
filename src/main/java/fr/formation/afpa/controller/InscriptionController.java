@@ -126,23 +126,7 @@ public class InscriptionController {
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
 		
 		if(bindingResult.hasErrors()) {
-			if(bindingResult.hasFieldErrors("photos")) {
-				String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
-				appuser.setEncrytedPassword(encrytedPassword);
-
-				String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
-				appuser.setEnabled(1);
-				appuser.setPhotos(fileName);
-				model.addAttribute("appuser", appuser);
-				service.saveOrUpdate(appuser);
-				String uploadDir = "photos/profile/" + appuser.getUserId();
-
-				ImageController.saveFile(uploadDir, fileName, photos);
-
-				model.addAttribute("modifications", "Les modifications ont été enregistrées.");
-				
-				return "modifprofile";
-			}
+		
 			return "modifprofile";
 		}
 		

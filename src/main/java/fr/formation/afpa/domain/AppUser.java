@@ -165,6 +165,14 @@ public class AppUser {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+
+	public Integer getEnabled() {
+		return enabled;
+	}
+
+
+	
+	
 	
 	
 
