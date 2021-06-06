@@ -12,6 +12,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
+	
+	<link rel="shortcut icon" href="/images/logocloc.ico" type="image/vnd.microsoft.icon" />
 
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -86,6 +88,11 @@
           <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->
             <a class="nav-link" href="getMap">Afficher la carte</a>
+          </li>
+          
+           <li class="nav-item">
+          <!-- le lien renverra vers la page "liste" -->
+            <a class="nav-link" href="reservations" th:if="${userInfoAuthorities == 'Colocataire'}">Mes réservations</a>
           </li>
         
                <li class="nav-item">

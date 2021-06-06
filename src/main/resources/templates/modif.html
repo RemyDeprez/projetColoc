@@ -12,6 +12,34 @@
    <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
     <link href="/css/styleAjout.css"  rel="stylesheet" type="text/css"/>
 
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFj401UN0kIVPN9GCOWLO9eyxJDAyURaQ&libraries=places&callback=initMap">
+</script>
+ <script>
+ window.onload = function() {
+	 const center = { lat: 50.064192, lng: -130.605469 };
+	//Create a bounding box with sides ~10km away from the center point
+	const defaultBounds = {
+	north: center.lat + 0.1,
+	south: center.lat - 0.1,
+	east: center.lng + 0.1,
+	west: center.lng - 0.1,
+	};
+
+
+	const input = document.getElementById("input");
+	 const options = {
+	   bounds: defaultBounds,
+	   componentRestrictions: { country: "fr" },
+	   fields: ["address_components", "geometry", "icon", "name"],
+	   origin: center,
+	   strictBounds: false,
+	   types: [],
+	 };
+	 const autocomplete = new google.maps.places.Autocomplete(input, options);	 
+ }
+ 
+ </script>
 
 
 <title>Modifier un  bien</title>
@@ -42,7 +70,11 @@
     						<hr th:if="${#fields.hasErrors('titre')}"/>
     						
     			        	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 			
+
                             <input type="text" name="adress" th:value="*{adress}" class="form-control input-lg" placeholder="Adresse"  />                        
+
+                            <input type="text" name="adress" th:value="*{adress}"" class="form-control input-lg" id="input" placeholder="Adresse"  />                        
+
                
                        	<hr th:if="${#fields.hasErrors('adress')}"/>
                     <div class="row">

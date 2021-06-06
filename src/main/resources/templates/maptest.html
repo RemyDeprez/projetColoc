@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+
 <title>Carte des locations</title>
+
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" type="text/css" href="/css/map.css" />
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -11,11 +13,6 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 
-<script th:inline="javascript">
-	var mylist = [[${listloc}]];
-</script>
-<script src="/js/map.js"></script>
-<script>initMap(mylist);</script>
 
 </head>
 <body>
@@ -35,25 +32,20 @@
 		async>
 		
 	</script>
-
 	<script src="/js/map.js"></script>
-
 
 
 	
 <script th:inline="javascript">
-    
-
-
 
 
 //call geocode
 /* geocode(); */
 
 
-function geocode(adress){
+function geocode(adress, titre, description){
 	
-	//axios est un outil qui permet de gï¿½nï¿½rer des requï¿½tes
+	//axios est un outil qui permet de générer des requêtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 			params:{
 				address:adress,
@@ -66,12 +58,21 @@ function geocode(adress){
 	            lat: response.data.results[0].geometry.location.lat,
 	            lng: response.data.results[0].geometry.location.lng
 	          };
-		marker = new google.maps.Marker({
+		const marker = new google.maps.Marker({
 		    position: pos ,
 		    map,
 		    title: "locations",
 		    
-		  }); 
+		  });
+		const infowindow2 = new google.maps.InfoWindow({
+            content: '<h1>' + titre + '</h1><br>' + description,
+            
+        });
+    	 marker.addListener("click", () => {
+    		    infowindow2.open(map, marker);
+    		  });
+		
+		
 		
 	})
 	.catch(function(error){
@@ -80,7 +81,7 @@ function geocode(adress){
 	
 }
 mylist.forEach(location => {
-	geocode(location.adress);
+	geocode(location.adress, location.titre, location.description);
 	
 })
 	
