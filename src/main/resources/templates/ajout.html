@@ -59,12 +59,12 @@
                     
                         
 							<span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
-                            <input type="text" name="titre" id="titre" th:value=*{titre} class="form-control input-lg" placeholder="Intitulé"  />                        
+                            <input type="text" name="titre" id="titre" th:value="*{titre}" class="form-control input-lg" placeholder="Intitulé"  />                        
     					
     						<hr th:if="${#fields.hasErrors('titre')}"/>
     						
     			        	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 			
-                            <input type="text" name="adress" th:value=*{adress} class="form-control input-lg" id="input" placeholder="Adresse"  />                        
+                            <input type="text" name="adress" th:value="*{adress}" class="form-control input-lg" id="input" placeholder="Adresse"  />                        
                
                        	<hr th:if="${#fields.hasErrors('adress')}"/>
                     <div class="row">

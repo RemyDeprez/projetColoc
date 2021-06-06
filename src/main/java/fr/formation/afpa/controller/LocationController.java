@@ -124,11 +124,11 @@ public class LocationController implements WebMvcConfigurer {
 		
 		service.saveOrUpdate(location);
 		
-		
+		if(fileName.length() > 0) {
 		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
-		
+		}
 
 		return "redirect:/getgestion";
 
@@ -213,6 +213,14 @@ public class LocationController implements WebMvcConfigurer {
 		String uploadDir = "photos/" + location.getLocationID();
 
 		ImageController.saveFile(uploadDir, fileName, photos);
+		
+		service.saveOrUpdate(location);
+
+		listLoc = service.findAll();
+		model.addAttribute("listLoc", listLoc);
+
+
+		return "redirect:/index";
 		}
 		service.saveOrUpdate(location);
 
