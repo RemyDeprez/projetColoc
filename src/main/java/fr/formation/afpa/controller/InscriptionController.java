@@ -25,7 +25,7 @@ import fr.formation.afpa.domain.AppUserForm;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.IUtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
-
+import fr.formation.afpa.validator.UserUpdateValidator;
 import fr.formation.afpa.validator.UserValidator;
 
 @Controller
@@ -33,6 +33,9 @@ public class InscriptionController {
 	
 	@Autowired
 	private UserValidator userValidator;
+	
+	@Autowired
+	private UserUpdateValidator updateValidator;
 
 	@Autowired
 	UserRepository userRepo;
@@ -50,7 +53,7 @@ public class InscriptionController {
 		System.out.println("Target=" + target);
 
 		if (target.getClass() == AppUserForm.class) {
-			dataBinder.setValidator(userValidator);
+			dataBinder.setValidator(updateValidator);
 		}
 
 	}
@@ -101,13 +104,14 @@ public class InscriptionController {
 	public String getProfile(Model model, Authentication auth, AppUser appuser, Principal principal) {
 		if(principal != null) {
 			String userName = principal.getName();
-
+			
 			System.out.println("User Name: " + userName);
-
+			
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
 			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
 			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
+			
 			model.addAttribute("userInfo", userInfo);
 		}
 		appuser = userRepo.findByUserName(auth.getName());
@@ -137,9 +141,13 @@ public class InscriptionController {
 	        appuser.setNom(appuserForm.getNom());
 	        appuser.setUserName(appuserForm.getUserName());
 	        appuser.setMail(appuserForm.getMail());
+	        
+	        if(appuserForm.getEncrytedPassword().length() > 0) {
 	        appuser.setEncrytedPassword(encryptedPassword);
+	        }
 	        appuser.setDate(appuserForm.getDate());
 	        appuser.setTelephone(appuserForm.getTelephone());
+	        appuser.setStatus(appuserForm.getStatus());
 	        if(fileName.length() > 0) {
 	        appuser.setPhotos(fileName);
 	    	String uploadDir = "photos/profile/" + appuser.getUserId();
