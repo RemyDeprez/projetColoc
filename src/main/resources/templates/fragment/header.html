@@ -32,7 +32,9 @@
 <body th:fragment="header">
 <nav class="navbar navbar-expand-md navbar-light bg-light"  aria-label="Third navbar example">
     <div class="container-fluid">
-      <a class="navbar-brand " style="background-color: #f06347" href="index">GTColocRP</a>
+    <a href="/">
+      <img src="/images/logocoloc.jpg" href="/" alt="Aller à l'acceuil">
+     </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -79,6 +81,12 @@
         </div>
         </li>
         </div>
+        
+                  <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que locataire -->
+          <li class="nav-item">
+          <!-- le lien renverra vers la page "liste" -->
+            <a class="nav-link" href="getMap">Afficher la carte</a>
+          </li>
         
                <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->

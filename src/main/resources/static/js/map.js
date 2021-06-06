@@ -8,7 +8,7 @@ function initMap(nommap) {
   });
   infoWindow = new google.maps.InfoWindow();
   const locationButton = document.createElement("button");
-  locationButton.textContent = "Pan to Current Location";
+  locationButton.textContent = "Centrer sur ma position";
   locationButton.classList.add("custom-map-control-button");
   const image = "/images/home.jpg";
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
@@ -27,6 +27,7 @@ function initMap(nommap) {
         	    title: "locations",
         	    icon: image,
         	  });
+
           	const infowindow2 = new google.maps.InfoWindow({
                   content: '<h1>' + mylist[0].titre + '</h1><br>' + mylist[0].description,
                   
