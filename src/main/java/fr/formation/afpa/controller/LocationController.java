@@ -141,7 +141,7 @@ public class LocationController implements WebMvcConfigurer {
 		System.out.println("-------------------------------------");
 		System.out.println(loc);
 		res.setLocation(loc);
-		System.out.println(res);
+		res.setStatut((byte) 0);
 		res.setIsPermutable((byte) 1);
 		System.out.println("-------------------------------------");
 		reservationService.saveOrUpdate(res);
@@ -149,7 +149,14 @@ public class LocationController implements WebMvcConfigurer {
 	}
 	
 	@RequestMapping(value = "reservations", method = RequestMethod.GET)
-	public String reservations(Model model) {
+	public String reservations(Model model, Principal principal) {
+		if(principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		List <Reservation> reservations = reservationService.findAll();
 		model.addAttribute("reservations", reservations);
 		return "reservations";

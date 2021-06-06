@@ -87,6 +87,11 @@
           <!-- le lien renverra vers la page "liste" -->
             <a class="nav-link" href="getMap">Afficher la carte</a>
           </li>
+          
+           <li class="nav-item">
+          <!-- le lien renverra vers la page "liste" -->
+            <a class="nav-link" href="reservations" th:if="${userInfoAuthorities == 'Colocataire'}">Mes réservations</a>
+          </li>
         
                <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->
