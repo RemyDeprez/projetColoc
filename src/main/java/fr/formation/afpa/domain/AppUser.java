@@ -39,7 +39,7 @@ public class AppUser {
 	private String status;
 
 	@Column(name = "telephone", nullable = false)
-	private int telephone;
+	private String telephone;
 	
 	@Column(name = "photos", nullable = false)
 	private String photos;
@@ -57,6 +57,8 @@ public class AppUser {
 
 	@Column(name = "enabled", length = 1)
     private Integer enabled;
+	
+	private String confirmPassword;
     
     public AppUser() {
     	
@@ -133,11 +135,11 @@ public class AppUser {
 		this.status = status;
 	}
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
@@ -155,6 +157,16 @@ public class AppUser {
 	public void setCode(Integer code) {
 		this.code = code;
 	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
+	
 
  
 }

@@ -11,23 +11,49 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.formation.afpa.domain.AppUser;
+
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.IUtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 
+import fr.formation.afpa.validator.UserValidator;
+
 @Controller
 public class InscriptionController {
+	
+	@Autowired
+	private UserValidator userValidator;
 
 	@Autowired
 	UserRepository userRepo;
 	@Autowired
 	IUtilisateurService service;
+	
+	// Méthode pour configurer le validator
+	@InitBinder
+	protected void initBinder(WebDataBinder dataBinder) {
+
+		Object target = dataBinder.getTarget();
+		if (target == null) {
+			return;
+		}
+		System.out.println("Target=" + target);
+
+		if (target.getClass() == AppUser.class) {
+			dataBinder.setValidator(userValidator);
+		}
+
+	}
 
 	// Encryte Password with BCryptPasswordEncoder
 	public static String encrytePassword(String password) {
@@ -38,15 +64,18 @@ public class InscriptionController {
 //	Methode lancée lorsque le formulaire est envoyé
 
 	@PostMapping(value = "/createaccount")
-	public String index(Model model, AppUser appuser, BindingResult bindingResult,
+	public String index( Model model, AppUser appuser, BindingResult bindingResult,
 			@RequestParam("photos") String photos, @RequestParam("usercode") Integer usercode)
 			throws IOException {
-		System.out.println ("password avant setStatus : " + appuser.getEncrytedPassword());
+		
+		
+		
+
 		appuser.setStatus("Colocataire");
 		if (appuser.getCode().equals(usercode)) {
 			System.out.println ("password : " + appuser.getEncrytedPassword());
 			String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
-		System.out.println(encrytedPassword);
+	
 			appuser.setEncrytedPassword(encrytedPassword);
 			appuser.setPhotos(photos);
 			appuser.setEnabled(1);
@@ -90,8 +119,33 @@ public class InscriptionController {
 
 //methode lancée lorsque l'on appuie sur le boutton "valider" de l'update
 	@PostMapping(value = "/updateaccount")
-	public String updateAccount(Model model, AppUser appuser, BindingResult bindingResult,
+	public String updateAccount(Model model, @ModelAttribute("appuser") @Validated AppUser appuser, BindingResult bindingResult,
 			@RequestParam("photos") MultipartFile photos) throws IOException {
+		System.out.println("Error count : " + bindingResult.getErrorCount());
+		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
+		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
+		
+		if(bindingResult.hasErrors()) {
+			if(bindingResult.hasFieldErrors("photos")) {
+				String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
+				appuser.setEncrytedPassword(encrytedPassword);
+
+				String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
+				appuser.setEnabled(1);
+				appuser.setPhotos(fileName);
+				model.addAttribute("appuser", appuser);
+				service.saveOrUpdate(appuser);
+				String uploadDir = "photos/profile/" + appuser.getUserId();
+
+				ImageController.saveFile(uploadDir, fileName, photos);
+
+				model.addAttribute("modifications", "Les modifications ont été enregistrées.");
+				
+				return "modifprofile";
+			}
+			return "modifprofile";
+		}
+		
 		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
 		appuser.setEncrytedPassword(encrytedPassword);
 
