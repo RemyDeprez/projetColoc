@@ -39,12 +39,24 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name="utilisateur_id")
 	private Colocataire colocataire;
+	
+	@JoinColumn(name="statut")
+	private byte statut;
 
 	public Reservation() {
 	}
 
 	public int getReservationID() {
 		return this.reservationID;
+	}
+
+	
+	public byte getStatut() {
+		return statut;
+	}
+
+	public void setStatut(byte statut) {
+		this.statut = statut;
 	}
 
 	public void setReservationID(int reservationID) {

@@ -35,16 +35,12 @@
 
 	
 <script th:inline="javascript">
-    
-	const mylist =[[${listloc}]] ;
-
-
 
 //call geocode
 /* geocode(); */
 
 
-function geocode(adress){
+function geocode(adress, titre, description){
 	
 	//axios est un outil qui permet de générer des requêtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
@@ -59,12 +55,21 @@ function geocode(adress){
 	            lat: response.data.results[0].geometry.location.lat,
 	            lng: response.data.results[0].geometry.location.lng
 	          };
-		marker = new google.maps.Marker({
+		const marker = new google.maps.Marker({
 		    position: pos ,
 		    map,
 		    title: "locations",
 		    
-		  }); 
+		  });
+		const infowindow2 = new google.maps.InfoWindow({
+            content: '<h1>' + titre + '</h1><br>' + description,
+            
+        });
+    	 marker.addListener("click", () => {
+    		    infowindow2.open(map, marker);
+    		  });
+		
+		
 		
 	})
 	.catch(function(error){
@@ -73,7 +78,7 @@ function geocode(adress){
 	
 }
 mylist.forEach(location => {
-	geocode(location.adress);
+	geocode(location.adress, location.titre, location.description);
 	
 })
 	
