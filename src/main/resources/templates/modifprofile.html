@@ -42,31 +42,55 @@
 					<div th:if="${modifications != null}" class="">Les modifications ont été enregistrées.</div>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
+						<span th:if="${#fields.hasErrors('attributeprenom')}" th:errors="*{attributeprenom}">..</span>
 							<input type="text" name="firstname"
 								value="${appuser.attributeprenom}" th:field="*{attributeprenom}"
 								class="form-control input-lg" placeholder="Prénom" />
+								<hr th:if="${#fields.hasErrors('attributeprenom')}"/>
 						</div>
 						<div class="col-xs-6 col-md-6">
+						<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">..</span>
 							<input type="text" name="lastname" value="${appuser.nom}"
 								th:field="*{nom}" class="form-control input-lg"
 								placeholder="Nom de famille" />
+								<hr th:if="${#fields.hasErrors('nom')}"/>
 						</div>
 					</div>
-					<input type="text" name="userId" value="${appuser.userId}"
-						class="form-control input-lg" th:field="*{userId}" /> <input
-						type="text" name="login" value="${appuser.userName}"
-						class="form-control input-lg" th:field="*{userName}" /> <input
-						type="text" name="mail" value="${appuser.mail}"
+					<input type="hidden" name="userId" value="${appuser.userId}"
+						class="form-control input-lg" th:field="*{userId}" /> 
+						
+						<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">..</span>
+						<input type="text" name="login" value="${appuser.userName}"
+						class="form-control input-lg" th:field="*{userName}" /> 
+						<hr th:if="${#fields.hasErrors('userName')}"/>
+						
+						<span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">..</span>
+						<input type="text" name="mail" value="${appuser.mail}"
 						class="form-control input-lg" placeholder="Votre Email"
-						th:field="*{mail}" /> <input type="password" name="password"
+						th:field="*{mail}" />
+						<hr th:if="${#fields.hasErrors('mail')}"/>
+						
+						<span th:if="${#fields.hasErrors('encrytedPassword')}" th:errors="*{encrytedPassword}">..</span>
+						 <input type="password" name="password"
 						class="form-control input-lg" placeholder="Nouveau Mot de passe"
-						th:field="*{encrytedPassword}" /> <input type="password"
+						th:field="*{encrytedPassword}" /> 
+						<hr th:if="${#fields.hasErrors('encrytedPassword')}"/>
+						
+						<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
+						<input type="password" 	 th:field="*{confirmPassword}" 
 						name="confirm_password" class="form-control input-lg"
-						placeholder="Confirmer le Nouveau mot de passe" /> <input
-						type="date" class="form-control input-lg" th:field="*{date}">
+						placeholder="Confirmer le Nouveau mot de passe" /> 
+						<hr th:if="${#fields.hasErrors('confirmPassword')}"/>
+						
+						 <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">..</span>
+						<input type="date" class="form-control input-lg" th:field="*{date}">
+						<hr th:if="${#fields.hasErrors('date')}"/>
+						
+						 <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">..</span>
 					<input type="text" class="form-control input-lg"
 						th:field="*{telephone}" value="${appuser.telephone}"
 						placeholder="Numéro de Te">
+						<hr th:if="${#fields.hasErrors('telephone')}"/>
 
 						<div class="champ">
 					<label>Ajoutez des photos de profil</label>
