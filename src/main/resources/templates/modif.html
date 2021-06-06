@@ -71,9 +71,10 @@
     						
     			        	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 			
 
-                            <input type="text" name="adress" th:value="*{adress}" class="form-control input-lg" placeholder="Adresse"  />                        
+                        
 
-                            <input type="text" name="adress" th:value="*{adress}"" class="form-control input-lg" id="input" placeholder="Adresse"  />                        
+                            <input type="text" name="adress" th:value="*{adress}" class="form-control input-lg" id="input" placeholder="Adresse"  />                        
+
 
                
                        	<hr th:if="${#fields.hasErrors('adress')}"/>
