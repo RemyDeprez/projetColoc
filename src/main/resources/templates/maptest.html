@@ -42,9 +42,10 @@
 //call geocode
 /* geocode(); */
 
+	const mylist =[[${listloc}]] ;
 
 function geocode(adress, titre, description){
-	
+	var mylist = new Array(location);
 	//axios est un outil qui permet de générer des requêtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 			params:{

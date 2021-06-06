@@ -52,7 +52,16 @@
 
 
 <body style="text-align : center">
-
+<script>
+		function confirmDelete() {
+			var del = confirm("Voulez vous vraiment supprimer ce customer ? Cette action est irréversible !");
+			if (del == true) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
 
  <div class="container" id="wrap">
 	  <div class="row">
@@ -143,7 +152,7 @@
             </form> 
             
             <form th:action="@{'/supprbien/'} + *{locationID}"  class="form" >
-              <button class="btn btn-lg btn-danger btn-block signup-btn" type="submit">
+              <button class="btn btn-lg btn-danger btn-block signup-btn" type="submit" onclick=" return confirmDelete(this.href);">
                         Supprimer le bien</button>
             </form>
           </div>
