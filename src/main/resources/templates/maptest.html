@@ -46,6 +46,7 @@
 
 function geocode(adress){
 	
+	//axios est un outil qui permet de générer des requêtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 			params:{
 				address:adress,
