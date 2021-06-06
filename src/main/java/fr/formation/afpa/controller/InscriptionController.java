@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import fr.formation.afpa.domain.AppUser;
-
+import fr.formation.afpa.domain.AppUserForm;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.IUtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
@@ -49,7 +49,7 @@ public class InscriptionController {
 		}
 		System.out.println("Target=" + target);
 
-		if (target.getClass() == AppUser.class) {
+		if (target.getClass() == AppUserForm.class) {
 			dataBinder.setValidator(userValidator);
 		}
 
@@ -119,7 +119,7 @@ public class InscriptionController {
 
 //methode lancée lorsque l'on appuie sur le boutton "valider" de l'update
 	@PostMapping(value = "/updateaccount")
-	public String updateAccount(Model model, @ModelAttribute("appuser") @Validated AppUser appuser, BindingResult bindingResult,
+	public String updateAccount(Model model, @ModelAttribute("appuser") @Validated AppUserForm appuserForm, BindingResult bindingResult,
 			@RequestParam("photos") MultipartFile photos) throws IOException {
 		System.out.println("Error count : " + bindingResult.getErrorCount());
 		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
@@ -130,17 +130,26 @@ public class InscriptionController {
 			return "modifprofile";
 		}
 		
-		String encrytedPassword = encrytePassword(appuser.getEncrytedPassword());
-		appuser.setEncrytedPassword(encrytedPassword);
-
 		String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
-		appuser.setEnabled(1);
-		appuser.setPhotos(fileName);
+		String encryptedPassword = encrytePassword(appuserForm.getEncrytedPassword());
+		AppUser appuser = service.findByUserId(appuserForm.getUserId());
+		  appuser.setAttributeprenom(appuserForm.getAttributeprenom());
+	        appuser.setNom(appuserForm.getNom());
+	        appuser.setUserName(appuserForm.getUserName());
+	        appuser.setMail(appuserForm.getMail());
+	        appuser.setEncrytedPassword(encryptedPassword);
+	        appuser.setDate(appuserForm.getDate());
+	        appuser.setTelephone(appuserForm.getTelephone());
+	        if(fileName.length() > 0) {
+	        appuser.setPhotos(fileName);
+	    	String uploadDir = "photos/profile/" + appuser.getUserId();
+
+			ImageController.saveFile(uploadDir, fileName, photos);
+	        }
+	
 		model.addAttribute("appuser", appuser);
 		service.saveOrUpdate(appuser);
-		String uploadDir = "photos/profile/" + appuser.getUserId();
-
-		ImageController.saveFile(uploadDir, fileName, photos);
+	
 
 		model.addAttribute("modifications", "Les modifications ont été enregistrées.");
 		
