@@ -54,8 +54,7 @@ box-shadow: 10px 5px 5px red;
 }
 	.footer {
 	background-color : #f06347;
-	position : absolute;
-	bottom : 0;
+	position : relative;
 	width : 100%;
 
 	}

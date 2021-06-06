@@ -26,27 +26,26 @@
 <body style="text-align : center">
 
 
- <div class="container" style="background-color:#f2f5f3;">
+ <div class="container" id="wrap">
 	  <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-left: 25%">
-         <h1 th:utext="@{'Informations : ' + ${location.titre}}"></h1>
-        <div class="resizepicture"><img th:src="@{'photos/' + ${location.LocationID} + '/' + ${location.photos}}" class="img-fluid" alt="Maison"></div>
-        <div class="rounded proprietes">
+         <h1 class="champ" th:utext="@{'Informations : ' + ${location.titre}}"></h1>
+        <div class="resizepicture"><img style="border : solid 1px;" th:src="@{'photos/' + ${location.LocationID} + '/' + ${location.photos}}" class="img-fluid" alt="Maison"></div>
+        <div class="rounded proprietes champ">
         <ul>
-          <li th:utext="${location.ville}"></li>
-          <li th:utext="${location.loyer}"></li>
-          <li th:utext="${location.superfice + 'm²'}"></li>
-          <li>Du 01/04/2021 au 02/04/2021</li>
-          <li th:if="${location.meuble}">Meublée : oui</li>
-          <li th:if="${!location.meuble}">Meublée : non</li>
+          <li th:utext="'Ville : ' + ${location.ville}"></li>
+          <li th:utext="'Loyer : ' + ${location.loyer}"></li>
+          <li th:utext="'Superficie : ' +${location.superfice + 'm²'}"></li>
+          <li th:if="'Meublé ? ' + ${location.meuble}">Meublée : oui</li>
+          <li th:if="' Meublé ? ' + ${!location.meuble}">Meublée : non</li>
           </ul>
-        </div>
+       
         <p class="research-result" th:utext="${description}"></p>
-  
+   </div>
           </div>
           </div>
           
-          <div class="border col-md-6">
+          <div class="border col-md-6" style="margin-left : 275px">
         <h3>Demander des informations au propriétaire</h3>
 
         

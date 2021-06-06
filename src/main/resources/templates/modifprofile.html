@@ -70,17 +70,17 @@
 						th:field="*{mail}" />
 						<hr th:if="${#fields.hasErrors('mail')}"/>
 						
-						<span th:if="${#fields.hasErrors('encrytedPassword')}" th:errors="*{encrytedPassword}">..</span>
+					
 						 <input type="password" name="password"
 						class="form-control input-lg" placeholder="Nouveau Mot de passe"
 						th:field="*{encrytedPassword}" /> 
-						<hr th:if="${#fields.hasErrors('encrytedPassword')}"/>
+					
 						
-						<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
+					
 						<input type="password" 	 th:field="*{confirmPassword}" 
 						name="confirm_password" class="form-control input-lg"
 						placeholder="Confirmer le Nouveau mot de passe" /> 
-						<hr th:if="${#fields.hasErrors('confirmPassword')}"/>
+					
 						
 						 <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">..</span>
 						<input type="date" class="form-control input-lg" th:field="*{date}">
@@ -136,7 +136,7 @@
 						class="form-control input-lg" th:field="*{userName}" hidden="true" />
 					<input type="text" name="mail" value="${appuser.mail}"
 						class="form-control input-lg" placeholder="Votre Email"
-						th:field="*{mail}" hidden="true" /> <input type="password"
+						th:field="*{mail}" hidden="true" /> <input type="text"
 						name="password" class="form-control input-lg"
 						placeholder="Nouveau Mot de passe" th:field="*{encrytedPassword}"
 						hidden="true" /> <input type="password" name="confirm_password"

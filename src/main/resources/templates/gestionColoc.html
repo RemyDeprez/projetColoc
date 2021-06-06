@@ -51,14 +51,15 @@ $(document).ready(function() {
                 <div class="item col-xs-4 col-lg-4">
                     <div class="thumbnail card">
                     
+                    <!-- Balise en double : une si une photo a été renseigné par l'utilisateur, une autre si non -->
                         <div class="img-event">
                          <span th:if="${location.photos == ''}">
-                          <img style="height:200px; width:200px; border : 0.5px solid; margin-top:5px;"  
+                          <img style="height:200px; width:200px; border : 0.5px solid; "  
                                     src="/images/nophoto.jpg" 
                                     alt="alt image"/>  
                          </span>
                          <span th:unless="${location.photos == ''}">
-                            <img style="height:200px; width:200px; border : 0.5px solid; margin-top:5px;"  
+                            <img style="height:200px; width:200px; border : 0.5px solid; "  
                                     th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" 
                                     alt="alt image"/>  
                                     </span>

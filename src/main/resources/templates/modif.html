@@ -37,24 +37,24 @@
                     
                         
                           <span th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}">..</span>
-                            <input type="text" name="titre" id="titre" th:value=*{titre} class="form-control input-lg" placeholder="Intitulé"  />                        
+                            <input type="text" name="titre" id="titre" th:value="*{titre}" class="form-control input-lg" placeholder="Intitulé"  />                        
     					
     						<hr th:if="${#fields.hasErrors('titre')}"/>
     						
     			        	<span th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}">..</span> 			
-                            <input type="text" name="adress" th:value=*{adress} class="form-control input-lg" placeholder="Adresse"  />                        
+                            <input type="text" name="adress" th:value="*{adress}" class="form-control input-lg" placeholder="Adresse"  />                        
                
                        	<hr th:if="${#fields.hasErrors('adress')}"/>
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                            <span th:if="${#fields.hasErrors('codePostal')}" th:errors="*{codePostal}">..</span>  
-                            <input type="number" name="codePostal" th:value=*{codePostal}  class="form-control input-lg" placeholder="Code postal" /> 
+                            <input type="number" name="codePostal" th:value="*{codePostal}"  class="form-control input-lg" placeholder="Code postal" /> 
                                                
 								<hr th:if="${#fields.hasErrors('codePostal')}"/>
                             </div>
                         <div class="col-xs-6 col-md-6">
                             <span th:if="${#fields.hasErrors('ville')}" th:errors="*{ville}">..</span>  
-                            <input type="text" name="ville" th:value=*{ville}  class="form-control input-lg" placeholder="Ville"  />  
+                            <input type="text" name="ville" th:value="*{ville}"  class="form-control input-lg" placeholder="Ville"  />  
                             
                             <hr th:if="${#fields.hasErrors('ville')}"/>                     
                             </div>
@@ -62,20 +62,20 @@
                    <div class="row">
                         <div class="col-xs-6 col-md-6">
  							<span th:if="${#fields.hasErrors('superfice')}" th:errors="*{superfice}">..</span> 
-                            <input type="number" name="superfice" th:value=*{superfice}  class="form-control input-lg" placeholder="Superficie (en m²)"  /> 
+                            <input type="number" name="superfice" th:value="*{superfice}"  class="form-control input-lg" placeholder="Superficie (en m²)"  /> 
                            
                             <hr th:if="${#fields.hasErrors('superfice')}"/>                       
                             </div>
                             
                         <div class="col-xs-6 col-md-6">
                             <span th:if="${#fields.hasErrors('placeOccupe')}" th:errors="*{placeOccupe}">..</span>
-                            <input type="number" name="placeOccupe" th:value=*{placeOccupe}  class="form-control input-lg" placeholder="Occupants max"  />  
+                            <input type="number" name="placeOccupe" th:value="*{placeOccupe}"  class="form-control input-lg" placeholder="Occupants max"  />  
                              
                             <hr th:if="${#fields.hasErrors('placeOccupe')}"/>                      
                             </div>
                     </div>               
                 <span th:if="${#fields.hasErrors('loyer')}" th:errors="*{loyer}">..</span>
-                    <input type="number" name="loyer" th:value=*{loyer} class="form-control input-lg" placeholder="Loyer"  /> 
+                    <input type="number" name="loyer" th:value="*{loyer}" class="form-control input-lg" placeholder="Loyer"  /> 
                 
                 <hr th:if="${#fields.hasErrors('loyer')}"/> 
                      
