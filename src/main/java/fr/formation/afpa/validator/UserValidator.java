@@ -45,11 +45,16 @@ public class UserValidator implements Validator {
 		}
 		
 	     ValidationUtils.rejectIfEmptyOrWhitespace(e, "userName", "login");
-	     if(service.findById(appuser.getUserId()) == null) {
+	    
+	     
 		if(service.findByUserName(appuser.getUserName()) != null) {
+			AppUser isDoublon = service.findByUserName(appuser.getUserName());
+			if(isDoublon.getUserId() != appuser.getUserId()) {
+			
 			e.rejectValue("userName", "login.doublon");
 		}
-	     }
+		}
+	     
 
         if (!this.emailValidator.isValid(appuser.getMail())) {
             e.rejectValue("mail", "mail.format");
