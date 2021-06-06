@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Test de Localisation de l'utilisateur</title>
+<title>Carte des location</title>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" type="text/css" href="/css/map.css" />
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -11,11 +11,6 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 
-<script th:inline="javascript">
-	var mylist = [[${listloc}]];
-</script>
-<script src="/js/map.js"></script>
-<script>initMap(mylist);</script>
 
 </head>
 <body>
@@ -35,9 +30,7 @@
 		async>
 		
 	</script>
-
 	<script src="/js/map.js"></script>
-
 
 
 	
@@ -53,7 +46,7 @@
 
 function geocode(adress){
 	
-	//axios est un outil qui permet de gï¿½nï¿½rer des requï¿½tes
+	//axios est un outil qui permet de générer des requêtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 			params:{
 				address:adress,
