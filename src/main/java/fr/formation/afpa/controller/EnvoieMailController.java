@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.formation.afpa.domain.AppUser;
+import fr.formation.afpa.domain.AppUserForm;
 import fr.formation.afpa.validator.UserValidator;
  
 @Controller
@@ -39,7 +40,7 @@ public class EnvoieMailController {
 		}
 		System.out.println("Target=" + target);
 
-		if (target.getClass() == AppUser.class) {
+		if (target.getClass() == AppUserForm.class) {
 			dataBinder.setValidator(userValidator);
 		}
 
@@ -47,24 +48,30 @@ public class EnvoieMailController {
  
     @ResponseBody
     @PostMapping("/sendEmail")
-    public ModelAndView sendSimpleEmail( ModelAndView model, @ModelAttribute("appuser") @Validated AppUser appuser,BindingResult bindingResult,  @RequestParam("photos") MultipartFile photos) {
+    public ModelAndView sendSimpleEmail( ModelAndView model, @ModelAttribute("appuser") @Validated AppUserForm appuserForm,BindingResult bindingResult,  @RequestParam("photos") MultipartFile photos) {
     	
     	System.out.println("Error count : " + bindingResult.getErrorCount());
 		System.out.println("Field Error count : " + bindingResult.getFieldErrorCount());
 		System.out.println(" GlobalError count : " + bindingResult.getAllErrors());
     	
     	if (bindingResult.hasErrors()) {
-    	
-    		
     		model.setViewName("inscription");
 			return model;
 		}
-    	
+    	AppUser appuser = new AppUser();
     	model.setViewName("confirmregister");
     
     	String fileName = StringUtils.cleanPath(photos.getOriginalFilename());
     	Random random = new Random();
         int code;
+        
+        appuser.setAttributeprenom(appuserForm.getAttributeprenom());
+        appuser.setNom(appuserForm.getNom());
+        appuser.setUserName(appuserForm.getUserName());
+        appuser.setMail(appuserForm.getMail());
+        appuser.setEncrytedPassword(appuserForm.getEncrytedPassword());
+        appuser.setDate(appuserForm.getDate());
+        appuser.setTelephone(appuserForm.getTelephone());
         appuser.setPhotos(fileName);
       System.out.println("password in the send mail : " + appuser.getEncrytedPassword());
         // Create a Simple MailMessage.

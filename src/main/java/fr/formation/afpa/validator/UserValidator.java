@@ -13,6 +13,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import fr.formation.afpa.domain.AppUser;
+import fr.formation.afpa.domain.AppUserForm;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.UserDetailsServiceImpl;
 import fr.formation.afpa.service.UtilisateurService;
@@ -30,7 +31,7 @@ public class UserValidator implements Validator {
 
 	public void validate(Object obj, Errors e) {
 
-		AppUser appuser = (AppUser) obj;
+		AppUserForm appuser = (AppUserForm) obj;
 
 		if (appuser.getAttributeprenom().length() < 2) {
 			e.rejectValue("attributeprenom", "attributeprenom.tooshort");
@@ -79,7 +80,7 @@ public class UserValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return AppUser.class.equals(clazz);
+		return AppUserForm.class.equals(clazz);
 	}
 
 //	//Méthode pour déterminer si le login rentré dans par l'utilisateur est déjà présent dans la base de données.
