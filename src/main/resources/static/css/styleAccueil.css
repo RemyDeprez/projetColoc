@@ -67,6 +67,9 @@ input[type="range"]::-ms-fill-lower {
     border-radius: 8px;
 
 }
+.activer{
+	background-color: #f06347; 
+}
 
 .image-heigth{
     height: 100%;

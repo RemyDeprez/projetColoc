@@ -78,6 +78,7 @@ public class Proprietaire {
 
 	public Location addLocation(Location location) {
 		getLocations().add(location);
+
 		return location;
 	}
 
