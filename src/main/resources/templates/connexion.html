@@ -48,10 +48,6 @@ body{
       <input  type="submit" value="Log In">
     </form>
     <div th:if="${#request.getParameter('error') == 'true'}">Identifiants incorrects.</div>
- <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-            th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
-                Static summary
-         </span>
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <a href="#">Mot de passe oublié ?</a>
