@@ -53,6 +53,17 @@ if(principal != null) {
 }
 		return "index";
 	}
+	
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error(Model model, Principal principal) {
+if(principal != null) {
+	User loginedUser = (User) ((Authentication) principal).getPrincipal();
+	model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+	String userInfo = WebUtils.toString(loginedUser);
+	model.addAttribute("userInfo", userInfo);
+}
+		return "error";
+	}
 
 	//	Methode de redirection à l'acceuil depuis un lien
 	@RequestMapping(value = "/index")
@@ -72,12 +83,16 @@ if(principal != null) {
 	}
 	//	Methode qui est lancée pour l'obtention du formulaire d'inscription
 	@RequestMapping(value = "/inscription")
-	public String getForm(Model model) {
+	public String getForm(Model model, Principal principal) {
 
+		if(principal != null) {
+			return "redirect:/index";
+		} else {
 		model.addAttribute("appuser", new AppUser());
 
 
 		return "inscription";
+		}
 	}
 	//	Methode qui est lancée pour l'obtention de la page de gestion de la colocation
 	@RequestMapping(value = "/getgestion")
