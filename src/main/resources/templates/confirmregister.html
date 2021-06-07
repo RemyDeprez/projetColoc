@@ -79,7 +79,10 @@
 						class="control-input" hidden="true">
                    <input hidden="true" type="text" class="form-control input-lg" th:field="*{photos}" th:value="${appuser.photos}"
 						 />
-
+						 
+						 <input type="number" name="code" th:value="${appuser.code}"
+						class="form-control input-lg"
+						hidden="true" />
 				</form>
 			</div>
 		</div>
