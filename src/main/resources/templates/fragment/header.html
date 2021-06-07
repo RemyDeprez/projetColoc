@@ -48,7 +48,7 @@
           <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que locataire -->
           <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->
-            <a class="nav-link" href="rechercheLocation">Chercher une colocation</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI() == '/rechercheLocation' ? 'activer':''}" class="nav-link" href="rechercheLocation">Chercher une colocation</a>
           </li>
           
            
@@ -58,11 +58,11 @@
           Compte
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="Messagerie">Messagerie</a>
+          <a th:classappend="${#httpServletRequest.getRequestURI() == '/Messagerie' ? 'activer':''}" class="dropdown-item" href="Messagerie">Messagerie</a>
           
           <!-- Le lien renverra vers la page "Edition profil" -->
 
-           <a class="dropdown-item" href="getprofile">Editer le profil</a>
+           <a th:classappend="${#httpServletRequest.getRequestURI() == '/rechercheLocation' ? 'getprofile':''}" class="dropdown-item" href="getprofile">Editer le profil</a>
 
 
         </div>
@@ -74,12 +74,12 @@
          Biens immobiliers
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="ajoutbien">Ajouter un bien</a>
+          <a th:classappend="${#httpServletRequest.getRequestURI() == '/rechercheLocation' ? 'ajoutbien':''}" class="dropdown-item" href="ajoutbien">Ajouter un bien</a>
           
           
           
           <!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
- <a class="dropdown-item" href="getgestion">Gérer ses biens immobiliers</a>
+ <a th:classappend="${#httpServletRequest.getRequestURI() == '/rechercheLocation' ? 'getgestion':''}" class="dropdown-item" href="getgestion">Gérer ses biens immobiliers</a>
         </div>
         </li>
         </div>
@@ -87,21 +87,21 @@
                   <!-- Dans l'idéal, ne doit pas apparaître si connecté en tant que locataire -->
           <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->
-            <a class="nav-link" href="getMap">Afficher la carte</a>
+            <a  th:classappend="${#httpServletRequest.getRequestURI() == '/getMap' ? 'activer':''}" class="nav-link" href="getMap">Afficher la carte</a>
           </li>
           
            <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->
-            <a class="nav-link" href="reservations" th:if="${userInfoAuthorities == 'Colocataire'}">Mes réservations</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI() == '/reservations' ? 'activer':''}" class="nav-link" href="reservations" th:if="${userInfoAuthorities == 'Colocataire'}">Mes réservations</a>
           </li>
         
                <li class="nav-item">
           <!-- le lien renverra vers la page "liste" -->
-            <a class="nav-link" href="contact">Contact</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI() == '/contact' ? 'activer':''}" class="nav-link" href="contact">Contact</a>
           </li>
         
-        <li class="nav-item">            <a class="nav-link" href="connexion" th:if="${userInfo == null}" >Connexion</a>
-            <a class="nav-link" href="deconnexion" th:if="${userInfo != null}" >Déconnexion</a>
+        <li class="nav-item">            <a th:classappend="${#httpServletRequest.getRequestURI() == '/connexion' ? 'activer':''}" class="nav-link" href="connexion" th:if="${userInfo == null}" >Connexion</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI() == '/deconnexion' ? 'activer':''}" class="nav-link" href="deconnexion" th:if="${userInfo != null}" >Déconnexion</a>
             </li>
             
          
@@ -109,7 +109,7 @@
       
         <!-- Dans l'idéal, ne doit pas apparaître si session en cours. -->
           <li class="nav-item">
-            <a class="nav-link" href="inscription" th:if="${userInfo == null}" >Inscription</a>
+            <a th:classappend="${#httpServletRequest.getRequestURI() == '/inscription' ? 'activer':''}" class="nav-link" href="inscription" th:if="${userInfo == null}" >Inscription</a>
           </li>
 
       
@@ -118,5 +118,6 @@
       </div>
     </div>
   </nav>
-  </html>
   </body>
+  </html>
+  
