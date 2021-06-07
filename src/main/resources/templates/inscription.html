@@ -70,7 +70,7 @@
 					 	<hr th:if="${#fields.hasErrors('mail')}"/>
 					 
 					 <span th:if="${#fields.hasErrors('encrytedPassword')}" th:errors="*{encrytedPassword}">..</span>
-					 <input type="password" name="password" value="" class="form-control input-lg" placeholder="Mot de passe" th:field="*{encrytedPassword}" /> 
+					 <input type="text" name="password" value="" class="form-control input-lg" placeholder="Mot de passe" th:field="*{encrytedPassword}" /> 
 					 <hr th:if="${#fields.hasErrors('encrytedPassword')}"/>
 					 
 					 <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">..</span>
