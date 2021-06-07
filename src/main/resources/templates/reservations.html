@@ -45,8 +45,8 @@ $(document).ready(function() {
     <tr>
       <td scope="row" th:utext="${reservation.reservationID}"></th>
       <td><a th:href="${'fiche?locationID=' + reservation.location.locationID}" th:utext="${reservation.location.titre}"></a></td>
-      <td></td>
-      <td>Bouton suppression</td>
+      <td th:if="${reservation.statut == 0}">En cours</td>
+      <td><a>Supprimer</a></td>
     </tr>
     </th:block>
     

@@ -34,7 +34,7 @@
       <div class="col-sm-3">
         <section><div class="border recherche">
           <div style="background-color:#f2f5f3; padding: 25px;"><h3>Filtres de recherche</h3>
-           
+           <form action="recherche">
               <p>Nombre de personnes maximum</p>
               1 <input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" value="1" th:if="${maxColocataire == null}"><input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" th:value="${maxColocataire}" th:if="${maxColocataire != null}"> 5
               
@@ -55,11 +55,23 @@
                 <th:block th:each="location : ${locations}">
                  <div class="item col-xs-4">
                     <div class="thumbnail card">
-                            <img class="group list-group-image img-fluid" th:src="@{'photos/' + ${location.locationID} + '/' + ${location.photos}}" alt="" />
+                             <div class="img-event">
+                         <span th:if="${location.photos == ''}">
+                          <img style="height:200px; width:200px; border : 0.5px solid; "  
+                                    src="/images/nophoto.jpg" 
+                                    alt="alt image"/>  
+                         </span>
+                         <span th:unless="${location.photos == ''}">
+                            <img style="height:200px; width:200px; border : 0.5px solid; "  
+                                    th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" 
+                                    alt="alt image"/>  
+                                    </span>
+                                 
+                        </div>
                         <div class="caption card-body">
                             <h4 class="group card-title inner list-group-item-heading"><a th:href="@{'fiche?locationID=' + ${location.locationID}}" th:utext="${location.titre}"></a></h4>
                             <p class="group inner list-group-item-text">
-                                <ul><li th:utext="@{'Ville : ' + ${location.ville} + ', ' + ${location.codePostal}}"></li>
+                                <ul style="list-style: none; text-align: justify;"><li th:utext="@{'Ville : ' + ${location.ville} + ', ' + ${location.codePostal}}"></li>
                                 <li th:utext="@{'Loyer : ' + ${location.loyer}} + '€'"></li>
                                 <li th:utext="@{'Superficie : ' + ${location.superfice}} + ' m²'"></li>
                                 </ul></p>
