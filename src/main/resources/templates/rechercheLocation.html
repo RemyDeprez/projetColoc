@@ -34,7 +34,7 @@
       <div class="col-sm-3">
         <section><div class="border recherche">
           <div style="background-color:#f2f5f3; padding: 25px;"><h3>Filtres de recherche</h3>
-           
+           <form action="recherche">
               <p>Nombre de personnes maximum</p>
               1 <input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" value="1" th:if="${maxColocataire == null}"><input type="range" class="form-range" min="1" max="5" id="range" name="maxColocataire" th:value="${maxColocataire}" th:if="${maxColocataire != null}"> 5
               
@@ -69,7 +69,7 @@
                                 </div> -->
                                 <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-secondary" href="http://www.jquery2dotnet.com">Contact</a>
-                                    <a class="btn btn-secondary" th:href="${'reservation?locationID=' + location.LocationID}" th:if="${userInfoAuthorities == 'Colocataire'}">Réserver</a>
+                                     <a class="btn btn-secondary" th:href="${'reservation?locationID=' + location.LocationID}" th:if="${userInfoAuthorities == 'Colocataire'}">Réserver</a> 
                                 </div>
                             </div>
                         </div>
