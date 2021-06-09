@@ -112,7 +112,6 @@ public class Colocataire {
 
 	public Reservation addRéservation(Reservation réservation) {
 		getRéservations().add(réservation);
-		réservation.setColocataire(this);
 
 		return réservation;
 	}
