@@ -161,3 +161,27 @@ img{ max-width:100%;}
 	.boutonEnvoi {
 	margin-top : 530px;
 	margin-right : 20px;}
+	
+	.signup-btn {
+  background: #f06347;
+
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  text-shadow: 0px 1px 0px #898a88;
+  -webkit-box-shadow: 0px 0px 0px #a4e388;
+  -moz-box-shadow: 0px 0px 0px #a4e388;
+  box-shadow: 0px 0px 0px #a4e388;
+  font-family: Arial;
+  color: black;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  border: solid #3b6e22  1px;
+  text-decoration: none;
+  
+}
+
+.listUsers{
+	overflow : scroll;
+	height : 550px;
+}
