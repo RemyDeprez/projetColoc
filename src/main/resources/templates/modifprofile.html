@@ -72,14 +72,14 @@
 						
 					
 						 <input type="password" name="password"
-						class="form-control input-lg" placeholder="Nouveau Mot de passe"
+						class="form-control input-lg" placeholder="Changer de mot de passe ?"
 						th:field="*{encrytedPassword}" /> 
 					
 						
 					
 						<input type="password" 	 th:field="*{confirmPassword}" 
 						name="confirm_password" class="form-control input-lg"
-						placeholder="Confirmer le Nouveau mot de passe" /> 
+						placeholder="Confirmer le Nouveau mot de passe)" /> 
 					
 						
 						 <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">..</span>
