@@ -31,7 +31,7 @@
 	<div id="leftinfo" >
 		<h1>Bonjour à tous et bienvenue sur la carte    D'HI-FLAGRANTS !</h1>	
 		<h3>Vous pouvez naviguer librement sur cette carte afin de rechercher de manière efficace et pertinente la location de vos rêves !</h3>
-		<img src="images/logocoloc.jpg">
+		<img src="images/logocoloc.png" id="imagecoloc">
 	</div>
 	
 
@@ -88,15 +88,15 @@ function geocode(adress, titre, description, photos,locationid){
  			 clearBox('leftinfo');
  			 console.log(photos);
  			 console.log(locationid);
- 			 div.innerHTML =  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" >' ;
+ 			 div.innerHTML =  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" style = "width :25%;height : 25%;">' ;
  		  } else {
  			  leftinfo.style.display = "block";
  			 
  			if( $('#leftinfo').is(':empty') ) {
- 			div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" >'  ;
+ 			div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" style = "width :25%;height : 25%;">'  ;
  		 	 }else{ 
  		 	clearBox('leftinfo');
- 		 	div.innerHTML =   '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" >'  ;
+ 		 	div.innerHTML =    '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" style = "width :25%;height : 25%;">'  ;
  		  }}
  		})
 	})
