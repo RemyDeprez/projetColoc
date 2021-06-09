@@ -36,8 +36,8 @@ $(document).ready(function() {
     <tr>
       <th scope="col">#</th>
       <th scope="col">Location</th>
-      <th scope="col">Utilisateur</th>
       <th scope="col">Statut</th>
+      <th scope="col">Supprimer</th>
     </tr>
   </thead>
   <tbody>
@@ -45,8 +45,8 @@ $(document).ready(function() {
     <tr>
       <td scope="row" th:utext="${reservation.reservationID}"></th>
       <td><a th:href="${'fiche?locationID=' + reservation.location.locationID}" th:utext="${reservation.location.titre}"></a></td>
-      <td th:utext="${reservation.colocataire.userName}"></td>
-      <td><select name="statut"><option value="0">En cours</option><option value="1">Refusée</option><option value="2">Validée</option></select></td>
+      <td th:if="${reservation.statut == 0}">En cours</td>
+      <td><a>Supprimer</a></td>
     </tr>
     </th:block>
     
