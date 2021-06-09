@@ -43,4 +43,9 @@ public class ReservationService implements IReservationService {
 		
 	}
 
+	@Override
+	public List<Reservation> findByColocataireUserIdLike(Integer userId) {
+		return dao.findByColocataireUserIdLike(userId);
+	}
+
 }
