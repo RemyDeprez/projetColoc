@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 
 <title>Carte des locations</title>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" type="text/css" href="/css/map.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/styleAccueil.css" />
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link rel="stylesheet"
@@ -25,7 +26,13 @@
 	
 	
 	</div>
+	
 	<div id="map"></div>
+	<div id="leftinfo" >
+		<h1>Bonjour à tous et bienvenue sur la carte    D'HI-FLAGRANTS !</h1>	
+		<h3>Vous pouvez naviguer librement sur cette carte afin de rechercher de manière efficace et pertinente la location de vos rêves !</h3>
+	</div>
+	
 
 	<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 	<script th:inline="javascript"
@@ -34,10 +41,14 @@
 		
 	</script>
 	<script src="/js/map.js"></script>
+	
 
 
 	
 <script th:inline="javascript">
+
+//methode pour clear les div à l'affichage des nouvelles infos
+
 
 
 //call geocode
@@ -45,9 +56,9 @@
 
 	const mylist =[[${listloc}]] ;
 
-function geocode(adress, titre, description){
+function geocode(adress, titre, description, photos){
 	var mylist = new Array(location);
-	//axios est un outil qui permet de générer des requêtes
+	//axios est un outil qui permet de gÃ©nÃ©rer des requÃªtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
 			params:{
 				address:adress,
@@ -66,16 +77,23 @@ function geocode(adress, titre, description){
 		    title: "locations",
 		    
 		  });
-		const infowindow2 = new google.maps.InfoWindow({
-            content: '<h1>' + titre + '</h1><br>' + description,
-            
-        });
-    	 marker.addListener("click", () => {
-    		    infowindow2.open(map, marker);
-    		  });
-		
-		
-		
+ 		//Ajout des infos location sur la gauche de l'écran
+
+ 		marker.addListener("click", () => {
+ 			var div = document.getElementById('leftinfo');
+ 		  if(getComputedStyle(leftinfo).display != "none"){
+ 			 clearBox('leftinfo');
+ 			 div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description
+ 		  } else {
+ 			  leftinfo.style.display = "block";
+ 			 
+ 			if( $('#leftinfo').is(':empty') ) {
+ 			div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description;
+ 		 	 }else{
+ 		 	clearBox('leftinfo');
+ 		 	div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description;
+ 		  }}
+ 		})
 	})
 	.catch(function(error){
 		console.log(error);
@@ -85,7 +103,15 @@ function geocode(adress, titre, description){
 mylist.forEach(location => {
 	geocode(location.adress, location.titre, location.description);
 	
+	
+	
 })
+
+function clearBox(leftinfo)
+{
+    document.getElementById(leftinfo).innerHTML = "";
+}
+
 	
 
 </script>
