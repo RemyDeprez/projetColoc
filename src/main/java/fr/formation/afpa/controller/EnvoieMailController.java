@@ -73,7 +73,6 @@ public class EnvoieMailController {
         appuser.setDate(appuserForm.getDate());
         appuser.setTelephone(appuserForm.getTelephone());
         appuser.setPhotos(fileName);
-      System.out.println("password in the send mail : " + appuser.getEncrytedPassword());
         // Create a Simple MailMessage.
         SimpleMailMessage message = new SimpleMailMessage();
         
