@@ -13,4 +13,6 @@ public interface IReservationService {
 	void delete(Reservation u);
 
 	void deleteById(Integer id);
+	
+	public List<Reservation> findByColocataireUserIdLike(Integer userId);
 }
