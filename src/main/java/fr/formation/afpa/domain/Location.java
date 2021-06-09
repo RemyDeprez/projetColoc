@@ -54,9 +54,6 @@ public class Location {
 
 	private String description;
 
-	//bi-directional many-to-one association to Colocataire
-	@OneToMany(mappedBy="location")
-	private List<Colocataire> colocataires;
 
 	//bi-directional many-to-one association to Evaluation
 	@OneToMany(mappedBy="location")
@@ -98,7 +95,6 @@ public class Location {
 		this.titre = titre;
 		this.meuble = meuble;
 		this.description = description;
-		this.colocataires = colocataires;
 		this.evaluations = evaluations;
 		this.proprietaire = proprietaire;
 		this.reservation = reservation;
@@ -129,7 +125,7 @@ public class Location {
 				+ ", isComplet=" + isComplet + ", loyer=" + loyer + ", maxColocataire=" + maxColocataire + ", note="
 				+ note + ", photos=" + photos + ", placeOccupe=" + placeOccupe + ", superfice=" + superfice + ", ville="
 				+ ville + ", codePostal=" + codePostal + ", titre=" + titre + ", meuble=" + meuble + ", description="
-				+ description + ", colocataires=" + colocataires + ", evaluations=" + evaluations + ", proprietaire="
+				+ description + ", evaluations=" + evaluations + ", proprietaire="
 				+ proprietaire + ", reservation=" + reservation + "]";
 	}
 
@@ -202,28 +198,6 @@ public class Location {
 
 	public void setSuperfice(int superfice) {
 		this.superfice = superfice;
-	}
-
-	public List<Colocataire> getColocataires() {
-		return this.colocataires;
-	}
-
-	public void setColocataires(List<Colocataire> colocataires) {
-		this.colocataires = colocataires;
-	}
-
-	public Colocataire addColocataire(Colocataire colocataire) {
-		getColocataires().add(colocataire);
-		colocataire.setLocation(this);
-
-		return colocataire;
-	}
-
-	public Colocataire removeColocataire(Colocataire colocataire) {
-		getColocataires().remove(colocataire);
-		colocataire.setLocation(null);
-
-		return colocataire;
 	}
 
 	public List<Evaluation> getEvaluations() {
