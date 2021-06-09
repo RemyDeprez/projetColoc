@@ -31,6 +31,7 @@
 	<div id="leftinfo" >
 		<h1>Bonjour à tous et bienvenue sur la carte    D'HI-FLAGRANTS !</h1>	
 		<h3>Vous pouvez naviguer librement sur cette carte afin de rechercher de manière efficace et pertinente la location de vos rêves !</h3>
+		<img src="images/logocoloc.jpg">
 	</div>
 	
 
@@ -56,7 +57,7 @@
 
 	const mylist =[[${listloc}]] ;
 
-function geocode(adress, titre, description, photos){
+function geocode(adress, titre, description, photos,locationid){
 	var mylist = new Array(location);
 	//axios est un outil qui permet de gÃ©nÃ©rer des requÃªtes
 	axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
@@ -81,17 +82,21 @@ function geocode(adress, titre, description, photos){
 
  		marker.addListener("click", () => {
  			var div = document.getElementById('leftinfo');
+ 			var image = "photos/"+locationid + "/" + photos
+ 			console.log(image);
  		  if(getComputedStyle(leftinfo).display != "none"){
  			 clearBox('leftinfo');
- 			 div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description
+ 			 console.log(photos);
+ 			 console.log(locationid);
+ 			 div.innerHTML =  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" >' ;
  		  } else {
  			  leftinfo.style.display = "block";
  			 
  			if( $('#leftinfo').is(':empty') ) {
- 			div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description;
- 		 	 }else{
+ 			div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" >'  ;
+ 		 	 }else{ 
  		 	clearBox('leftinfo');
- 		 	div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description;
+ 		 	div.innerHTML =   '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" >'  ;
  		  }}
  		})
 	})
@@ -101,7 +106,7 @@ function geocode(adress, titre, description, photos){
 	
 }
 mylist.forEach(location => {
-	geocode(location.adress, location.titre, location.description);
+	geocode(location.adress, location.titre, location.description, location.photos,location.locationID);
 	
 	
 	
