@@ -27,8 +27,9 @@
 
 
 	</div>
-
+	
 	<div id="map"></div>
+	
 	<div id="leftinfo">
 		<h1>Bonjour à tous et bienvenue sur la carte D'HI-FLAGRANTS !</h1>
 		<h3>Vous pouvez naviguer librement sur cette carte afin de
@@ -36,12 +37,7 @@
 			!</h3>
 		<img src="images/logocoloc.png" id="imagecoloc">
 	</div>
-	<div id=form2>
-	<form th:action="getMap" method="post" th:object="${location}"
-		class="form" role="form" style="display: none" id="form">
-		<button class="btn btn-lg btn-primary btn-block signup-btn"
-			type="submit">Accéder à l'offre !</button>
-	</form>
+	<div id=form>
 	</div>
 	
 
@@ -100,7 +96,9 @@ function geocode(adress, titre, description, photos,locationid){
  			 console.log(photos);
  			 console.log(locationid);
  			 div.innerHTML =  '<h1 class="champ">' + titre + '</h1><br><h6 class= "champ">' + description + '</h6><br><img src=" ' + image + '"class= "champ2">';
- 		   }
+ 			div.innerHTML += '	<a id="form" href="fiche?locationID=' +locationid+ '" class="btn btn-primary">Cliquez Ici pour voir L\'offre !</a>';
+ 			 
+ 		}
  		)
 	})
 	.catch(function(error){
