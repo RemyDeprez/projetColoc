@@ -7,7 +7,8 @@
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" type="text/css" href="/css/map.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/styleAccueil.css" />
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link rel="stylesheet"
@@ -20,20 +21,30 @@
 <body>
 
 	<header th:insert="fragment/header.html :: header"> </header>
-	<div class = "container">
-		<div class = "card-block" id=""></div>
-	
-	
-	
+	<div class="container">
+		<div class="card-block" id=""></div>
+
+
+
 	</div>
-	
+
 	<div id="map"></div>
-	<div id="leftinfo" >
-		<h1>Bonjour à tous et bienvenue sur la carte    D'HI-FLAGRANTS !</h1>	
-		<h3>Vous pouvez naviguer librement sur cette carte afin de rechercher de manière efficace et pertinente la location de vos rêves !</h3>
+	<div id="leftinfo">
+		<h1>Bonjour à tous et bienvenue sur la carte D'HI-FLAGRANTS !</h1>
+		<h3>Vous pouvez naviguer librement sur cette carte afin de
+			rechercher de manière efficace et pertinente la location de vos rêves
+			!</h3>
 		<img src="images/logocoloc.png" id="imagecoloc">
 	</div>
+	<div id=form2>
+	<form th:action="getMap" method="post" th:object="${location}"
+		class="form" role="form" style="display: none" id="form">
+		<button class="btn btn-lg btn-primary btn-block signup-btn"
+			type="submit">Accéder à l'offre !</button>
+	</form>
+	</div>
 	
+
 
 	<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
 	<script th:inline="javascript"
@@ -42,11 +53,11 @@
 		
 	</script>
 	<script src="/js/map.js"></script>
-	
 
 
-	
-<script th:inline="javascript">
+
+
+	<script th:inline="javascript">
 
 //methode pour clear les div à l'affichage des nouvelles infos
 
@@ -84,21 +95,13 @@ function geocode(adress, titre, description, photos,locationid){
  			var div = document.getElementById('leftinfo');
  			var image = "photos/"+locationid + "/" + photos
  			console.log(image);
- 		  if(getComputedStyle(leftinfo).display != "none"){
+ 			document.getElementById("form").style.display="block";
  			 clearBox('leftinfo');
  			 console.log(photos);
  			 console.log(locationid);
- 			 div.innerHTML =  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" style = "width :25%;height : 25%;">' ;
- 		  } else {
- 			  leftinfo.style.display = "block";
- 			 
- 			if( $('#leftinfo').is(':empty') ) {
- 			div.innerHTML +=  '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" style = "width :25%;height : 25%;">'  ;
- 		 	 }else{ 
- 		 	clearBox('leftinfo');
- 		 	div.innerHTML =    '<h1>' + titre + '</h1><br>' + description + '<br><img src=" ' + image + '" style = "width :25%;height : 25%;">'  ;
- 		  }}
- 		})
+ 			 div.innerHTML =  '<h1 class="champ">' + titre + '</h1><br><h6 class= "champ">' + description + '</h6><br><img src=" ' + image + '"class= "champ2">';
+ 		   }
+ 		)
 	})
 	.catch(function(error){
 		console.log(error);

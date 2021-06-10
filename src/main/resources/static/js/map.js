@@ -29,7 +29,7 @@ function initMap(nommap) {
         	  });
 
           	const infowindow2 = new google.maps.InfoWindow({
-                  content: '<h1>' + mylist[0].titre + '</h1><br>' + mylist[0].description,
+                  content: '<h1>Vous êtes Ici !</h1>'
                   
               });
           	 marker.addListener("click", () => {
