@@ -31,7 +31,7 @@
 <body>
 
 <div class="container" style="background-color: #f2f5f3">
-<h3 class="h3 text-center">Messagerie</h3>
+<h3 class="h3 text-center" th:utext="'Conversation privée avec' + ${receiver}">.. </h3>
 <div class="messaging">
       <div class="inbox_msg">
         
@@ -48,19 +48,7 @@
          
             </div>
           </div>
-          <h3 class="h3 text-center">Envoyer un message privé</h3>
-          <div class="listUsers">
-          
-          <ul th:each="users:${listUser}" style="list-style : none;">
-        
-         <li> 
-           <a th:href="@{'getMP/' + ${users.userId}}">
-         <input type="submit" th:href="${users.userId}" th:value="${users.userName}" class="signup-btn"/>
-        </a>
-         </li>
-         
-          </ul>
-          </div>
+      
           
                    <form id="messageForm" name="messageForm">
           <div class="type_msg">

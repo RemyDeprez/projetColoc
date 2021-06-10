@@ -26,39 +26,22 @@ $(document).ready(function() {
 <body>
 
 <div class="h1">
- <h1 >Gestion de vos réservations</h1>
+ <h1 >Informations sur la réservation</h1>
  </div>
 
 <div class="container">
     <div class="row"> 
-  <table class="table table-light table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Location</th>
-      <th scope="col">Utilisateur</th>
-      <th scope="col">Statut</th>
-      <th scope="col">Supprimer</th>
-    </tr>
-  </thead>
-  <tbody>
-  <th:block th:each="reservation : ${reservations}">
-    <tr>
-      <td scope="row" th:utext="${reservation.reservationID}"></th>
-      <td><a th:href="${'fiche?locationID=' + reservation.location.locationID}" th:utext="${reservation.location.titre}"></a></td>
-      <td th:utext="${reservation.colocataire.userName}"></td>
-      <td th:if="${reservation.statut == '0'}">En cours</td>
-      <td th:if="${reservation.statut == '1'}">Validée</td>
-  <td><a th:href="${'supprimerReservation?reservationID=' + reservation.reservationID}" th:if="${reservation.statut == '0'}" class="btn btn-danger">Supprimer</a></td>    
-    </tr>
-    </th:block>
-    
-  </tbody>
-</table>
-   
+  <form method="post">
+  <select name="statut">
+<option value="0">En cours</option>
+<option value="1">Validée</option>
+<option value="2">Refusée</option>
+</select>
+<input type="submit" class="btn btn-primary" name="Envoyer">
+   </form>
                 
                
-            
+  </div>          
 </div>
   <footer class="footerAcc">
 <p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
