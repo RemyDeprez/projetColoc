@@ -223,8 +223,19 @@ public class NavigationController {
 
 	// methode de redirection pour les tests de google map
 	@RequestMapping(value = "/getMap")
-	public String getMap(Model model) {
+	public String getMap(Model model, Principal principal) {
 		model.addAttribute("listloc", service.findAll());
+		if (principal != null) {
+			String userName = principal.getName();
+
+			System.out.println("User Name: " + userName);
+
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		return "maptest";
 	}
 

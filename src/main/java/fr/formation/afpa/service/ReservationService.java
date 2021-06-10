@@ -1,12 +1,14 @@
 package fr.formation.afpa.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.afpa.dao.IReservationDao;
+import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.domain.Reservation;
 
 @Service
@@ -46,6 +48,16 @@ public class ReservationService implements IReservationService {
 	@Override
 	public List<Reservation> findByColocataireUserIdLike(Integer userId) {
 		return dao.findByColocataireUserIdLike(userId);
+	}
+
+	@Override
+	public List<Reservation> reservationsProprietaire(List<Location> locations) {
+		return dao.reservationsProprietaire(locations);
+	}
+
+	@Override
+	public Optional<Reservation> findById(Integer id) {
+		return dao.findById(id);
 	}
 
 }
