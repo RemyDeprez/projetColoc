@@ -41,7 +41,7 @@ public class Reservation {
 	private AppUser colocataire;
 	
 	@JoinColumn(name="statut")
-	private byte statut;
+	private String statut;
 
 	public Reservation() {
 	}
@@ -51,11 +51,11 @@ public class Reservation {
 	}
 
 	
-	public byte getStatut() {
+	public String getStatut() {
 		return statut;
 	}
 
-	public void setStatut(byte statut) {
+	public void setStatut(String statut) {
 		this.statut = statut;
 	}
 

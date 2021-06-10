@@ -141,13 +141,13 @@ public class LocationController implements WebMvcConfigurer {
 		System.out.println("-------------------------------------");
 		AppUser user = utilisateurService.findByUserName(auth.getName());
 		res.setLocation(loc);
-		res.setStatut((byte) 0);
+		res.setStatut("0");
 		res.setIsPermutable((byte) 1);
 		res.setColocataire(user);
 		System.out.println("-------------------------------------");
 		List<Reservation> reservations = reservationService.findAll();
 		for(Reservation r : reservations) {
-			if(r.getLocation() == res.getLocation() && r.getColocataire() == res.getColocataire() && r.getStatut() == (byte) 0) {
+			if(r.getLocation() == res.getLocation() && r.getColocataire() == res.getColocataire() && r.getStatut() == "0") {
 				return "redirect:/rechercheLocation";
 			}
 		}
@@ -183,10 +183,44 @@ public class LocationController implements WebMvcConfigurer {
 			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
 			model.addAttribute("userInfo", userInfo);
-			List <Reservation> reservations = reservationService.findAll();
+			List <Reservation> reservations = reservationService.reservationsProprietaire(service.findByProprietaireUserIdLike(user.getUserId()));
 			model.addAttribute("reservations", reservations);
 		}
-		return "reservations";
+		return "reservationsproprietaire";
+	}
+	
+	@RequestMapping(value = "modifierreservation", method = RequestMethod.GET)
+	public String modifierReservation(@RequestParam("reservationID") Integer reservationId, Model model, Principal principal, Authentication auth) {
+		if(principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			
+			AppUser user = utilisateurService.findByUserName(auth.getName());
+			
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+			Reservation reservation = reservationService.findById(reservationId).get();
+			model.addAttribute("reservations", reservation);
+		}
+		return "modifierreservation";
+	}
+	
+	@RequestMapping(value = "modifierreservation", method = RequestMethod.POST)
+	public String modifReservation(@RequestParam("reservationID") Integer reservationId, @RequestParam("statut") String statut, Model model, Principal principal, Authentication auth) {
+		if(principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			
+			AppUser user = utilisateurService.findByUserName(auth.getName());
+			
+			Reservation reservation = reservationService.findById(reservationId).get();
+			reservation.setStatut(statut);
+			
+			reservationService.saveOrUpdate(reservation);
+			
+		}
+		return "redirect:/reservationsproprietaire";
 	}
 
 	@GetMapping("/modif/{locationID}")
