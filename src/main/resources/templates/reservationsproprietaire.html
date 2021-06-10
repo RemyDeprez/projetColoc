@@ -26,7 +26,7 @@ $(document).ready(function() {
 <body>
 
 <div class="h1">
- <h1 >Gestion de vos réservations</h1>
+ <h1 >Réservations reçues</h1>
  </div>
 
 <div class="container">
@@ -38,7 +38,7 @@ $(document).ready(function() {
       <th scope="col">Location</th>
       <th scope="col">Utilisateur</th>
       <th scope="col">Statut</th>
-      <th scope="col">Supprimer</th>
+      <th scope="col">Editer</th>
     </tr>
   </thead>
   <tbody>
@@ -49,7 +49,7 @@ $(document).ready(function() {
       <td th:utext="${reservation.colocataire.userName}"></td>
       <td th:if="${reservation.statut == '0'}">En cours</td>
       <td th:if="${reservation.statut == '1'}">Validée</td>
-  <td><a th:href="${'supprimerReservation?reservationID=' + reservation.reservationID}" th:if="${reservation.statut == '0'}" class="btn btn-danger">Supprimer</a></td>    
+      <td><a th:href="'modifierreservation?reservationID=' + ${reservation.reservationID}">Editer</a></td>
     </tr>
     </th:block>
     

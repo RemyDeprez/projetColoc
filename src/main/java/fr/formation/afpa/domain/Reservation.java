@@ -38,10 +38,10 @@ public class Reservation {
 	//bi-directional many-to-one association to Colocataire
 	@ManyToOne
 	@JoinColumn(name="utilisateur_id")
-	private Colocataire colocataire;
+	private AppUser colocataire;
 	
 	@JoinColumn(name="statut")
-	private byte statut;
+	private String statut;
 
 	public Reservation() {
 	}
@@ -51,11 +51,11 @@ public class Reservation {
 	}
 
 	
-	public byte getStatut() {
+	public String getStatut() {
 		return statut;
 	}
 
-	public void setStatut(byte statut) {
+	public void setStatut(String statut) {
 		this.statut = statut;
 	}
 
@@ -79,11 +79,11 @@ public class Reservation {
 		this.location = location;
 	}
 	
-	public Colocataire getColocataire() {
+	public AppUser getColocataire() {
 		return this.colocataire;
 	}
 
-	public void setColocataire(Colocataire colocataire) {
+	public void setColocataire(AppUser colocataire) {
 		this.colocataire = colocataire;
 	}
 
