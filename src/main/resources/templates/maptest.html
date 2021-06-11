@@ -37,7 +37,7 @@
 			!</h3>
 		<img src="images/logocoloc.png" id="imagecoloc">
 	</div>
-	<div id=form>
+	<div id="form">
 	</div>
 	
 
@@ -91,12 +91,13 @@ function geocode(adress, titre, description, photos,locationid){
  			var div = document.getElementById('leftinfo');
  			var image = "photos/"+locationid + "/" + photos
  			console.log(image);
- 			document.getElementById("form").style.display="block";
+ 			document.getElementById("form").style.display="none";
  			 clearBox('leftinfo');
  			 console.log(photos);
  			 console.log(locationid);
- 			 div.innerHTML =  '<h1 class="champ">' + titre + '</h1><br><h6 class= "champ">' + description + '</h6><br><img src=" ' + image + '"class= "champ2">';
- 			div.innerHTML += '	<a id="form" href="fiche?locationID=' +locationid+ '" class="btn btn-primary">Cliquez Ici pour voir L\'offre !</a>';
+ 			 var descriptionlignes = description.replace(/\n/g, "<br>");
+ 			 console.log(descriptionlignes);
+ 			 div.innerHTML =  '<div class="thumbnail card" style="padding:17px;"><h1>' + titre + '</h1><br><h6>' + descriptionlignes + '</h6><br><img src=" ' + image + '"id= "champ2"><br><a href="fiche?locationID=' +locationid+ '" class="btn btn-primary" style="width:min-content; margin-top:25px; align-self: center">Voir l\'offre !</a><\/div>';
  			 
  		}
  		)
