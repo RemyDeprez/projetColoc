@@ -189,7 +189,6 @@ public class NavigationController {
 		}
 
 		listLoc = service.findAll();
-		System.out.println(listLoc);
 		model.addAttribute("locations", listLoc);
 		return "rechercheLocation";
 	}
