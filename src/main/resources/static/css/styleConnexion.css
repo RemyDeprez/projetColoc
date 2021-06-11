@@ -16,12 +16,12 @@ a {
 
 h1{
 	
-	margin-left : 670px;
+	margin:auto;
 	   background-color: #f2f5f3;
-	   width : 195px;
+	   width : 70%;
 	   
 	   margin-top : 25px;
-	   margin-bottom : -50px;
+	   margin-bottom : 25px;
 	border-radius : 5px;
 box-shadow: 10px 5px 5px red;
 }

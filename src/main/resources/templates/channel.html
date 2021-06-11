@@ -41,7 +41,7 @@
                 <span id="username" th:utext="${username}"></span>
               <div class="received_msg">
                 <div class="received_withd_msg">
-               <ul id="messageArea"></ul>
+               <ul id="messageArea" style="list-style: none;"></ul>
                   </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
   
  function onConnected() {
      // Subscribe to the Public Topic
-     stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
+     stompClient.subscribe('/getMP/15', onMessageReceived);
   
      // Tell your username to the server
      stompClient.send("/app/chat.addUser",
@@ -145,7 +145,6 @@
          messageElement.classList.add('chat-message');   
          var usernameElement = document.createElement('strong');
          usernameElement.classList.add('nickname');
-         var usernameText = document.createTextNode(message.sender);
          var usernameText = document.createTextNode(message.sender);
          usernameElement.appendChild(usernameText);
          messageElement.appendChild(usernameElement);

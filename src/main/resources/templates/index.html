@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="/css/styleAccueil.css" rel="stylesheet" type="text/css"/>
 
 
@@ -15,9 +16,9 @@
 <title>Accueil</title>
 </head>
 <body>
-    <header th:insert="fragment/header.html :: header"> </header>
 
-
+<div style="height:100%; width:100%">
+<header th:insert="fragment/header.html :: header"> </header>
 
  <section>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -59,16 +60,15 @@
                             <a href="rechercheLocation" class="button" type="button" style="text-decoration: none;color:black;" >Trouver une colocation</a>
                       
                     
-                            <a href="getMap" class="button" type="button" style="color: black">Les cocolactions près de chez vous</button></a>
+                            <a href="getMap" class="button" type="button" style="color: black">Les colocations près de chez vous</button></a>
 </section>
 
 
 
-  <footer class="footerAcc" style="position: relative;padding-bottom: 0;">
+  <footer class="footerAcc">
 <p class="text-center">Site dévellopé par Mélissa Maerten, Rémy Deprez et Nicolas Beauvois, sur une idée originale de Yahya Abdellaoui</p>
 
 </footer>
-</body>
-
+</div>
 </body>
 </html>

@@ -10,6 +10,7 @@
   <link href="/css/styleAccueil.css"  rel="stylesheet" type="text/css"/>
   <link href="/css/styleConnexion.css"  rel="stylesheet" type="text/css"/>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Connexion</title>
 
 <style>
@@ -23,19 +24,15 @@ body{
 
  <header th:insert="fragment/header.html :: header"> </header>
 
-<h1 class="champ">Connexion</h1>
+<h1>Connexion</h1>
 <div class="wrapper">
 
 
   <div id="formContent">
     <!-- Tabs Titles -->
     
-    <div class="container" style="background-color:#f2f5f3;">
+    <div class="container text-center" style="background-color:#f2f5f3;">
 
-    <!-- Icon -->
-    <div>
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-    </div>
 
     <!-- Login Form -->
     <form th:action="@{/j_spring_security_check}" method="post">
