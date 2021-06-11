@@ -7,7 +7,7 @@
     margin-bottom: 0;
 }
  .h1{
- margin-left : 500px;
+ margin:auto;
 -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
      background-color: #f2f5f3;

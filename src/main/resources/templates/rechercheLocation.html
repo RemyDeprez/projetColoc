@@ -57,12 +57,12 @@
                     <div class="thumbnail card">
                              <div class="img-event">
                          <span th:if="${location.photos == ''}">
-                          <img style="height:200px; width:200px; border : 0.5px solid; "  
+                          <img style="max-height:200px; border : 0.5px solid; "  
                                     src="/images/nophoto.jpg" 
                                     alt="alt image"/>  
                          </span>
                          <span th:unless="${location.photos == ''}">
-                            <img style="height:200px; width:200px; border : 0.5px solid; "  
+                            <img style="max-height:200px; border : 0.5px solid; "  
                                     th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" 
                                     alt="alt image"/>  
                                     </span>
