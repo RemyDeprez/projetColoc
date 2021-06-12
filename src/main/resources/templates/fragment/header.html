@@ -70,6 +70,7 @@
           
           <!-- Dans l'idéal, le bouton affichera connexion si pas de session et déconnexion si inversement -->
  <a th:classappend="${#httpServletRequest.getRequestURI() == '/rechercheLocation' ? 'getgestion':''}" class="dropdown-item" href="getgestion">Gérer ses biens immobiliers</a>
+ <a th:classappend="${#httpServletRequest.getRequestURI() == '/reservationsproprietaire' ? 'activer':''}" class="dropdown-item" href="reservationsproprietaire">Réservations reçues</a>
         </div>
         </li>
         </div>

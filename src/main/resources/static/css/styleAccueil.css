@@ -80,8 +80,8 @@ input[type="range"]::-ms-fill-lower {
   text-align:center;
 
   /*the same margin which is every button have, it is for small screen, and if you have many buttons.*/
-  margin-left:-20px;
-  margin-right:-20px;
+/*   margin-left:-20px;
+  margin-right:-20px; */
 
 }
 
