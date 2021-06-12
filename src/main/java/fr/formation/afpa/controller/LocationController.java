@@ -239,6 +239,26 @@ public class LocationController implements WebMvcConfigurer {
 		return "modif";
 		}
 	}
+	
+	@RequestMapping(value = "/supprimerReservation")
+	public String supprimerReservation(@RequestParam Integer reservationID, Model model, Principal principal, Authentication auth) {
+		if (principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
+		Reservation reservation = reservationService.findById(reservationID).get();
+		AppUser user = utilisateurService.findByUserName(auth.getName());
+		if(reservation.getColocataire().getUserId() == user.getUserId() && reservation.getStatut() != "1") {
+			reservationService.deleteById(reservationID);
+			return "redirect:/reservations";	
+		} else {
+			return "redirect:/error";
+		}
+		
+	}
 
 	@PostMapping(value = "/modifbien/{locationID}")
 	public String update(Model model, @Validated LocationForm locationForm, BindingResult bindingResult,
