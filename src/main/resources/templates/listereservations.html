@@ -47,7 +47,7 @@ $(document).ready(function() {
       <td scope="row" th:utext="${reservation.reservationID}"></th>
       <td><a th:href="${'fiche?locationID=' + reservation.location.locationID}" th:utext="${reservation.location.titre}"></a></td>
       <td></td>
-      <td>Bouton suppression</td>
+      <td><div th:attr="onclick=|delete('${reservation.reservationID}')">Bouton suppression</div></td>
     </tr>
     </th:block>
     
@@ -63,5 +63,12 @@ $(document).ready(function() {
 
 </footer>
 </body>
-
+<script>
+function deleteReservationColocataire(colocID) {
+var deleteReservation = confirm("Voulez-vous vraiment supprimer cette réservation ? " + colocID);
+if (deleteReservation) {
+	
+}
+}
+</script>
 </html>

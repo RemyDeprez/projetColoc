@@ -50,7 +50,7 @@ $(document).ready(function() {
       <td th:utext="${reservation.colocataire.userName}"></td>
       <td th:if="${reservation.statut == '0'}">En cours</td>
       <td th:if="${reservation.statut == '1'}">Validée</td>
-  <td><a th:href="${'supprimerReservation?reservationID=' + reservation.reservationID}" th:if="${reservation.statut == '0'}" class="btn btn-danger">Supprimer</a></td>    
+  <td><button th:if="${reservation.statut == '0'}" class="btn btn-danger" th:attr="onclick=|deleteReservationColocataire('${reservation.reservationID}')|">Supprimer</button></td>    
     </tr>
     </th:block>
     
@@ -66,5 +66,13 @@ $(document).ready(function() {
 
 </footer>
 </body>
-
+<script>
+function deleteReservationColocataire(colocID) {
+var deleteReservation = confirm("Voulez-vous vraiment supprimer cette réservation ? " + colocID);
+if (deleteReservation) {
+	confirm("La réservation a été supprimée.");
+	window.location.href= 'supprimerReservation?reservationID=' + colocID;
+}
+}
+</script>
 </html>
