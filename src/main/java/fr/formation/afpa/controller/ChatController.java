@@ -1,6 +1,7 @@
 package fr.formation.afpa.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Channel;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.ChannelService;
+import fr.formation.afpa.service.UtilisateurService;
 
 @Controller
 public class ChatController {
@@ -24,25 +26,44 @@ public class ChatController {
 	@Autowired
 	private UserRepository utilisateurService;
 	
+	@Autowired
+	UtilisateurService userService;
+	
+	
+	//Méthode pour instancier les salons de discussion privés
 	@RequestMapping(path = "/getMP/{userId}", method  = RequestMethod.GET)
 	public String getPrivateMessage(Model model, Principal principal, @PathVariable("userId") int userId) {
 		String loginedUser = principal.getName();
 		AppUser actualUser = utilisateurService.findByUserName(loginedUser);
 		
-		String sendId = Integer.toString(actualUser.getUserId());
-		String receiveId = Integer.toString(userId);
-		String chanIdString = sendId+receiveId;
-		int chanId = Integer.parseInt(chanIdString);
+		//Scénario pour créer un nouveau salon
+		if(channelService.findBySenderIDAndReceiverIDLike(actualUser.getUserId(), userId) == null
+			&& channelService.findBySenderIDAndReceiverIDLike(userId, actualUser.getUserId()) == null) {
+			Channel newChannel = new Channel();
+	
+			newChannel.setReceiverID(userId);
+			newChannel.setSenderID(actualUser.getUserId());
+			channelService.saveOrUpdate(newChannel);
+	
+	
+		AppUser receiver = userService.findByUserId(userId);
 		
-		if(!channelService.findById(chanId).isPresent()) {
-			Channel channel = new Channel();
-			channel.setChannelID(chanId);
-			channel.setReceiverID(userId);
-			channel.setSenderID(actualUser.getUserId());
-			channelService.saveOrUpdate(channel);
+		model.addAttribute("channelID", newChannel.getChannelID());
+		model.addAttribute("receiver", receiver.getUserName());
+		return "channel";
+		} 
+		
+		//Scénario pour instancier un salon déjà existant
+		AppUser receiver = userService.findByUserId(userId);
+		Channel channel = channelService.findBySenderIDAndReceiverIDLike(userId, actualUser.getUserId());
+		if(channel == null) {
+			channel = channelService.findBySenderIDAndReceiverIDLike(actualUser.getUserId(), userId);
 		}
-		System.out.println(chanId);
-		model.addAttribute("receiver", userId);
+		System.out.println("channel ID chan :" + channel.getChannelID());
+		
+		model.addAttribute("username", loginedUser);
+		model.addAttribute("channelID", channel.getChannelID());
+		model.addAttribute("receiver", receiver);
 		return "channel";
 		
 	}

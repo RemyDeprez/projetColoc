@@ -51,5 +51,10 @@ public class ChannelService implements IChannelService {
 		dao.deleteById(id);
 		
 	}
+	
+	 @Override
+	 public  Channel findBySenderIDAndReceiverIDLike(Integer senderID, Integer receiverID){
+		 return dao.findBySenderIDAndReceiverIDLike(senderID, receiverID);
+	 }
 
 }

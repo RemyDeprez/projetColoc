@@ -87,10 +87,6 @@ public class InscriptionController {
 			service.saveOrUpdate(appuser);
 			String uploadDir = "photos/profile/" + appuser.getUserId();
 
-			
-			
-			
-
 			return "connexion";
 		} else {
 			model.addAttribute("appuser", appuser);

@@ -18,4 +18,6 @@ public interface IChannelService {
 	void deleteById(Integer id);
 
 	Optional<Channel> findById(int id);
+
+	Channel findBySenderIDAndReceiverIDLike(Integer senderID, Integer receiverID);
 }
