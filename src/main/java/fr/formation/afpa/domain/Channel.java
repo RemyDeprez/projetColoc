@@ -15,6 +15,7 @@ import javax.persistence.Table;
 public class Channel {
 	
     @Id
+    @GeneratedValue
     @Column(name = "channelID", nullable = false)
 	private int channelID;
     
@@ -65,13 +66,14 @@ public class Channel {
 	}
 	
 	
-//	public List<String> getMessage() {
+//	public List<String> getMessages() {
 //		return messages;
 //	}
-//	public void setMessage(List<String> message) {
-//		this.messages = message;
+//	public List<String> addMessages(String message) {
+//		messages.add(message);	
+//		return messages;
 //	}
-	
+//	
 	
 	
 
