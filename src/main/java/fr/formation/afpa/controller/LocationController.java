@@ -310,20 +310,31 @@ public class LocationController implements WebMvcConfigurer {
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
 		if(fileName.length() > 0 ) {
-		location.setPhotos(fileName);
-		
 
 		String uploadDir = "photos/" + location.getLocationID();
 
-		ImageController.saveFile(uploadDir, fileName, photos);
+		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+				"cloud_name", "dpo9zpe78",
+				"api_key", "558394821365119",
+				"api_secret", "AatWPh2rvaj3JByS6nwyR5OmdLA"));
 		
-		service.saveOrUpdate(location);
+		File file = new File(uploadDir);
+		 
+        try {
+        	byte[] photoByte = photos.getBytes();
+            OutputStream os = new FileOutputStream(file);
+            os.write(photoByte);
+            System.out.println("Write bytes to file.");
+            os.close();
+            Map upload = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            location.setPhotos((String) upload.get("url"));
+            service.saveOrUpdate(location);
+        	return "redirect:/index";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		listLoc = service.findAll();
-		model.addAttribute("listLoc", listLoc);
-
-
-		return "redirect:/index";
+	
 		}
 		service.saveOrUpdate(location);
 
