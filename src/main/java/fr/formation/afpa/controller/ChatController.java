@@ -64,6 +64,7 @@ public class ChatController {
 		model.addAttribute("username", loginedUser);
 		model.addAttribute("channelID", channel.getChannelID());
 		model.addAttribute("receiver", receiver);
+		model.addAttribute("receiverName", receiver.getUserName());
 		return "channel";
 		
 	}
