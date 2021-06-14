@@ -91,7 +91,7 @@ function geocode(adress, titre, description, photos,locationid){
 
  		marker.addListener("click", () => {
  			var div = document.getElementById('leftinfo');
- 			var image = "photos/"+locationid + "/" + photos
+ 			var image = photos
  			console.log(image);
  			document.getElementById("form").style.display="none";
  			 clearBox('leftinfo');
