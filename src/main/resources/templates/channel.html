@@ -40,7 +40,7 @@
         <div class="mesgs" >
           <div class="msg_history">
             <div class="incoming_msg">
-                <span id="name" th:value="${username}"></span>
+                <input type="text" hidden="true"  id="name" aria-describedby="exampleInputRoom" th:value="${username}">
                    <input type="text" hidden="true"  id="room" aria-describedby="exampleInputRoom" th:value="${channelID}">
               <div class="received_msg">
                 <div class="received_withd_msg">
@@ -172,7 +172,7 @@
          messageElement.classList.add('chat-message');   
          var usernameElement = document.createElement('strong');
          usernameElement.classList.add('nickname');
-         var usernameText = document.createTextNode(message.sender);
+         var usernameText = document.createTextNode(message.sender + ' : ');
          usernameElement.appendChild(usernameText);
          messageElement.appendChild(usernameElement);
      }
