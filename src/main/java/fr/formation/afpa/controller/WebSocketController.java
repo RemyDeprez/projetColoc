@@ -67,6 +67,7 @@ private SimpMessageSendingOperations simpleMessaging;
     public void addPrivateUser(@DestinationVariable String roomId, @Payload Chat chatMessage,
                         SimpMessageHeaderAccessor headerAccessor) {
         String currentRoomId = (String) headerAccessor.getSessionAttributes().put("room_id", roomId);
+      
         System.out.println("in the addPrivate");
         logger.info("Current room id is : " + roomId);
         if (currentRoomId != null) {
@@ -75,6 +76,7 @@ private SimpMessageSendingOperations simpleMessaging;
             leaveMessage.setSender(chatMessage.getSender());
             simpleMessaging.convertAndSend(format("/chat-room/%s", currentRoomId), leaveMessage);
         }
+        System.out.println("username in addPrivate : " + chatMessage.getSender());
         headerAccessor.getSessionAttributes().put("name", chatMessage.getSender());
         simpleMessaging.convertAndSend(format("/chat-room/%s", roomId), chatMessage);
     }
