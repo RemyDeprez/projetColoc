@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.formation.afpa.domain.Channel;
 import fr.formation.afpa.domain.Chat;
+import fr.formation.afpa.domain.Messages;
+import fr.formation.afpa.service.ChannelService;
+import fr.formation.afpa.service.MessageService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +27,17 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
-import static java.lang.String.format; 
+import static java.lang.String.format;
+
+import java.util.List; 
 
 @Controller
 public class WebSocketController {
+	
+	@Autowired
+	private ChannelService chanService;
+	
+	@Autowired MessageService messService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketController.class);
  
@@ -59,6 +70,15 @@ private SimpMessageSendingOperations simpleMessaging;
     	System.out.println("in the sendPrivate");
         logger.info(roomId+" Chat message recieved is "+chatMessage.getContent());
         
+        int actualRoom = Integer.parseInt(roomId);
+       Messages newMessage = new Messages();
+     
+        newMessage.setContent(chatMessage.getContent());
+        newMessage.setSender(chatMessage.getSender());
+        newMessage.setChannelID(actualRoom);
+        messService.saveOrUpdate(newMessage);
+        
+        
     	simpleMessaging.convertAndSend(format("/chat-room/%s", roomId), chatMessage);
     }
     
@@ -79,6 +99,18 @@ private SimpMessageSendingOperations simpleMessaging;
         System.out.println("username in addPrivate : " + chatMessage.getSender());
         headerAccessor.getSessionAttributes().put("name", chatMessage.getSender());
         simpleMessaging.convertAndSend(format("/chat-room/%s", roomId), chatMessage);
+        
+        int actualRoom = Integer.parseInt(roomId);
+   
+     
+       List<Messages> archive =  messService.findByChannelIDLike(actualRoom);
+      if (archive != null) {
+    	  for (Messages messages : archive) {
+    		  simpleMessaging.convertAndSend(format("/chat-room/%s", roomId), messages);
+		}
+       
+      }
+       
     }
 }
     
