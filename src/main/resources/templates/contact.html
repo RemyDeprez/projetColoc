@@ -31,6 +31,7 @@
             <form method="post" class="form" role="form">  
                     <h2 class="champ">Contactez-nous</h2>
                     
+                    <div th:if="${sendMessage != null}">Votre message a été envoyé.</div>
                         
 						<div class="row">
                         <div class="col-xs-6 col-md-6">
@@ -50,7 +51,7 @@
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                         
-                            <input type="text" name="codePostal"   class="form-control input-lg" placeholder="Votre email" /> 
+                            <input type="text" name="email"   class="form-control input-lg" placeholder="Votre email" /> 
                                                
 						
                             </div>

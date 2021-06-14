@@ -1,17 +1,22 @@
 package fr.formation.afpa.controller;
 
+import java.security.Principal;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.sql.Array;
+
 import java.util.Random;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +24,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +36,7 @@ import com.cloudinary.utils.ObjectUtils;
 
 import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.AppUserForm;
+import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.UserValidator;
  
 @Controller
@@ -126,6 +134,29 @@ public class EnvoieMailController {
  
         return model;
     }
+    
+	@RequestMapping(path = "/contact", method = RequestMethod.POST)
+	public String contact(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom, @RequestParam("email") String email, @RequestParam("description") String description, Model model, Principal principal) {
+		if (principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom(email);
+		message.setSubject("Test");
+		message.setTo("colocation.afpa@gmail.com");
+		message.setText("Message de " + nom + " " + prenom + " " + email + "\n" + description);
+		
+		this.emailSender.send(message);
+		
+		String sendMessage = "envoyé";
+		model.addAttribute("sendMessage", sendMessage);
+		return "contact";
+	}
     }
 
  

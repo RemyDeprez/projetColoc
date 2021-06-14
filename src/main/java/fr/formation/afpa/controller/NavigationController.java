@@ -6,6 +6,7 @@ import java.util.List;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -153,12 +154,14 @@ public class NavigationController {
 		if (principal != null) {
 			String userName = principal.getName();
 
-			System.out.println("User Name: " + userName);
-
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();
 			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
 			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
 			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+
+
+			System.out.println("User Name: " + userName);
 
 			listUser = userService.findAll();
 
@@ -239,9 +242,16 @@ public class NavigationController {
 	}
 
 	@RequestMapping(path = "/contact", method = RequestMethod.GET)
-	public String getContact(Model model) {
-
+	public String getContact(Model model, Principal principal) {
+		if (principal != null) {
+			User loginedUser = (User) ((Authentication) principal).getPrincipal();
+			String role = loginedUser.getAuthorities().iterator().next().getAuthority();
+			model.addAttribute("userInfoAuthorities", loginedUser.getAuthorities().iterator().next().getAuthority());
+			String userInfo = WebUtils.toString(loginedUser);
+			model.addAttribute("userInfo", userInfo);
+		}
 		return "contact";
 	}
+	
 
 }
