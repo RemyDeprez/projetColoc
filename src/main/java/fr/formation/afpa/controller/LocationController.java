@@ -2,10 +2,14 @@ package fr.formation.afpa.controller;
 
 
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,6 +34,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+
 import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.Location;
 import fr.formation.afpa.domain.LocationForm;
@@ -37,7 +44,6 @@ import fr.formation.afpa.domain.Reservation;
 import fr.formation.afpa.repository.UserRepository;
 import fr.formation.afpa.service.LocationService;
 import fr.formation.afpa.service.ReservationService;
-import fr.formation.afpa.service.UtilisateurService;
 import fr.formation.afpa.utils.WebUtils;
 import fr.formation.afpa.validator.LocationValidator;
 
@@ -119,15 +125,31 @@ public class LocationController implements WebMvcConfigurer {
 		location.setTitre(locationForm.getTitre());
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
-		location.setPhotos(fileName);
 		location.setProprietaire(user);
 		
-		service.saveOrUpdate(location);
 		
 		if(fileName.length() > 0) {
 		String uploadDir = "photos/" + location.getLocationID();
 
-		ImageController.saveFile(uploadDir, fileName, photos);
+		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+				"cloud_name", "dpo9zpe78",
+				"api_key", "558394821365119",
+				"api_secret", "AatWPh2rvaj3JByS6nwyR5OmdLA"));
+		
+		File file = new File(uploadDir);
+		 
+        try {
+        	byte[] photoByte = photos.getBytes();
+            OutputStream os = new FileOutputStream(file);
+            os.write(photoByte);
+            System.out.println("Write bytes to file.");
+            os.close();
+            Map upload = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            location.setPhotos((String) upload.get("url"));
+            service.saveOrUpdate(location);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		}
 
 		return "redirect:/getgestion";
@@ -288,20 +310,31 @@ public class LocationController implements WebMvcConfigurer {
 		location.setDescription(locationForm.getDescription());
 		location.setMeuble(locationForm.getMeuble());
 		if(fileName.length() > 0 ) {
-		location.setPhotos(fileName);
-		
 
 		String uploadDir = "photos/" + location.getLocationID();
 
-		ImageController.saveFile(uploadDir, fileName, photos);
+		Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+				"cloud_name", "dpo9zpe78",
+				"api_key", "558394821365119",
+				"api_secret", "AatWPh2rvaj3JByS6nwyR5OmdLA"));
 		
-		service.saveOrUpdate(location);
+		File file = new File(uploadDir);
+		 
+        try {
+        	byte[] photoByte = photos.getBytes();
+            OutputStream os = new FileOutputStream(file);
+            os.write(photoByte);
+            System.out.println("Write bytes to file.");
+            os.close();
+            Map upload = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+            location.setPhotos((String) upload.get("url"));
+            service.saveOrUpdate(location);
+        	return "redirect:/index";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		listLoc = service.findAll();
-		model.addAttribute("listLoc", listLoc);
-
-
-		return "redirect:/index";
+	
 		}
 		service.saveOrUpdate(location);
 
