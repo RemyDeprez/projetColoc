@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 
 	        // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
 	        // If no login, it will redirect to /login page.
-	        http.authorizeRequests().antMatchers("/ajout", "/messagerie", "/modifprofile","/reservations").access("hasAnyRole('Colocataire', 'Proprietaire')");
+	        http.authorizeRequests().antMatchers("/ajout", "/Messagerie", "/modifprofile","/reservations").access("hasAnyRole('Colocataire', 'Proprietaire')");
 	        http.authorizeRequests().antMatchers("/getgestion", "/reservationsproprietaire", "/modifierreservation").access("hasAuthority('Proprietaire')");
 	        http.authorizeRequests().antMatchers("/reservations", "/reservation", "/supprimerReservation").access("hasAuthority('Colocataire')");
 	 
