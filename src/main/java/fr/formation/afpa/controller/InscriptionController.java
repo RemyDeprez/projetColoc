@@ -1,6 +1,9 @@
 package fr.formation.afpa.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 
 import fr.formation.afpa.domain.AppUser;
 import fr.formation.afpa.domain.AppUserForm;
@@ -147,8 +153,23 @@ public class InscriptionController {
 	        if(fileName.length() > 0) {
 	        appuser.setPhotos(fileName);
 	    	String uploadDir = "photos/profile/" + appuser.getUserId();
-
-			ImageController.saveFile(uploadDir, fileName, photos);
+	    	Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+					"cloud_name", "dpo9zpe78",
+					"api_key", "558394821365119",
+					"api_secret", "AatWPh2rvaj3JByS6nwyR5OmdLA"));
+			
+			File file = new File(uploadDir);
+			 
+	        try {
+	        	byte[] photoByte = photos.getBytes();
+	            OutputStream os = new FileOutputStream(file);
+	            os.write(photoByte);
+	            System.out.println("Write bytes to file.");
+	            os.close();
+	            cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	        }
 	
 		model.addAttribute("appuser", appuser);
