@@ -73,7 +73,7 @@ $(document).ready(function() {
                          </span>
                          <span th:unless="${location.photos == ''}">
                             <img style="height:200px; width:200px; border : 0.5px solid; "  
-                                    th:src="@{'photos/' + ${location.locationID}+ '/' +${location.photos}}" 
+                                    th:src="${location.photos}" 
                                     alt="alt image"/>  
                                     </span>
                                  
