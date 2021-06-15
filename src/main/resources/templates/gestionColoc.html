@@ -28,12 +28,10 @@ $(document).ready(function() {
 <body>
 
 <script>
-		function confirmDelete() {
-			var del = confirm("Voulez vous vraiment supprimer ce customer ? Cette action est irréversible !");
-			if (del == true) {
-				return true;
-			} else {
-				return false;
+		function confirmDelete(locationID) {
+			var del = confirm("Voulez vous vraiment supprimer cette location ? Cette action est irréversible !");
+			if (del) {
+				window.location.href = "supprbien?locationID=" + locationID;
 			}
 		}
 	</script>
